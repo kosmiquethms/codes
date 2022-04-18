@@ -1,0 +1,1274 @@
+<!--
+
+    rígel by kosmique.tumblr.com
+    
+    ✧･ﾟ: *✧･ﾟ:*ﾟ✧*:･ﾟ✧
+
+	* inspiration: https://dribbble.com/shots/16384637-Smart-Dashboard-Overview-Weekly-UI
+    * phosphoricons: phosphoricons.com
+	* music player: https://blogs.perficient.com/2017/12/19/how-to-customize-your-own-html5-audio-player/
+    
+    full credits list at kosmique.tumblr.com/credits
+    
+    ------------------------------------------------------------------------
+    
+    list of fonts you can use both as main font or title font:
+    
+        > arimo
+        > barolow
+        > hind
+        > lora
+        > merrieweather
+        > pt sans
+        > pt serif
+        > roboto
+
+    ------------------------------------------------------------------------
+    
+    colors use rgb system. please, do not use hex colors.
+    
+        > numbers only
+        > if you don't know how to get rgb colors, check this website: https://htmlcolors.com/google-color-picker
+        
+    ------------------------------------------------------------------------
+    
+    if you don't know how to change the music player audio, check this tutorial: https://glenthemes.tumblr.com/post/164215965424/hosting-files-on-dropbox
+
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>{Title}</title>
+
+<link rel="shortcut icon" href="{favicon}">
+<link rel="alternate" type="application/rss+xml" href="{RSS}">
+
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!--============================== links ==============================-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;600;700&family=Barlow:wght@400;600;700&family=Hind:wght@400;600;700&family=Lora:wght@400;600;700&family=Merriweather:wght@400;700&family=PT+Sans:wght@400;700&family=PT+Serif:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_o5hd5vvqpoqiwwmi.css"/>
+
+<!--============================== scripts ==============================-->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.js"></script>
+<script src="https://static.tumblr.com/dj2anrv/ZVmq8svlk/jquery.style-my-tooltips.js"></script>
+<script src="https://unpkg.com/phosphor-icons"></script>
+
+<!--============================== css ==============================-->
+
+<style type="text/css">
+
+*{box-sizing:border-box}
+
+:root{
+    --Background:40, 40, 40; /* body background */
+    --Text:215,215,215; /* texts color */
+    --Link:255,255,255; /* links color */
+    --Title:255,255,255; /* titles color */
+    --Borders:65,65,65; /* borders color */
+    --Scrollbar:100,100,100; /* scrollbar color */
+    --Shadows:0,0,0; /* shadows color */
+    --Accent:245, 182, 81; /* accent color */
+    --Boxes:50,50,50; /* boxes background */
+    
+    --Menu-link:58,58,58; /* menu background */
+    --Menu-link-text:255,255,255; /* menu link*/
+    --Menu-link-active:245, 182, 81; /* menu link background when active */
+    --Menu-link-active-text:255, 255, 255; /* menu link color when active */
+    
+    --Skill-bar-border:255,255,255; /* skill bar border color */ 
+    --Skill-bar-1:255, 200, 112; /* first skill progress background */
+    --Skill-bar-2:255, 208, 133; /* second skill progress background */
+    --Skill-bar-3:255, 217, 156; /* third skill progress background */
+    
+    /* list of fonts that can be used above <!DOCTYPE html> */
+    
+    --Font-size:17px; /* font size */
+    --Main-font:'hind'; /* body font / keep the quotes */
+    --Title-font:'merriweather'; /* title font / keep the quotes */
+    
+    --Song-cover:url(https://dl.dropbox.com/s/hx2z90kqposi2a1/unnamed.jpg); /* song image */
+    --Audio-text:255,255,255; /* audio text */
+    --Audio-controls:255,255,255; /* audio buttons */
+}
+
+.icon {
+    speak:none;
+    line-height:1;
+    font-style:normal;
+    font-weight:normal;
+    font-variant:normal;
+    text-transform:none;
+    font-family:'feather' !important;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+}
+
+body{
+    margin:0;
+    width:100%;
+    height:100%; 
+    overflow-x:hidden;
+    word-break:break-word;
+    color:rgb(var(--Text));
+    background-color:rgb(var(--Background));
+    font:400 var(--Font-size)/1.6 var(--Main-font), sans-serif;
+}
+
+:focus{outline:0;}
+
+a, 
+a:hover{
+    cursor:pointer;
+    transition:ease .3s;
+    text-decoration:none;
+    -moz-transition:ease .3s;
+    -webkit-transition:ease .3s;
+}
+
+a{color:rgb(var(--Link))}
+
+b, 
+strong{font-weight:700;}
+
+small,
+sub,
+sup{font-size:.7em;}
+
+big{font-size:1.1em;}
+
+p {margin:.7em 0;}
+p:first-of-type {margin-top:0;}
+p:last-of-type {margin-bottom:0;}
+
+h1, 
+h2, 
+h3, 
+h4 {
+    margin:1em 0;
+    font-weight:700;
+    font-size:1.05em;
+}
+
+blockquote{
+    margin:.5em 0;
+    padding:2px 10px;
+    font-style:italic;
+    border-left:2px solid rgb(var(--Accent));
+}
+
+h1:first-of-type, 
+h2:first-of-type, 
+h3:first-of-type, 
+h4:first-of-type {margin-top:0;}
+
+ul,ol{
+    padding:0;
+    margin:0;
+    list-style:none;
+}
+
+svg{
+	width:1em;
+	height:1em;
+}
+
+img{
+    height:auto;
+    display:block;
+    max-width:100%;
+}
+
+a.credits svg{
+    width:22px;
+    height:22px;
+    transition:all .3s;
+    -moz-transition:all .3s;
+    -webkit-transition:all .3s;
+}
+
+a.credits:hover svg{
+    fill:rgb(255, 249, 64);
+    color:rgb(255, 249, 64);
+    filter:drop-shadow(0 0 4px rgb(255, 249, 64));
+}
+
+/*scrollbar*/
+ 
+::-webkit-scrollbar{
+    width:11px;
+    height:11px;
+    border:5px solid rgb(var(--Background));
+    background-color:rgba(var(--Scrollbar),.3);
+}
+
+::-webkit-scrollbar-thumb {
+    background:rgb(var(--Scrollbar));
+    border:5px solid rgb(var(--Background));
+}
+
+article::-webkit-scrollbar{border:5px solid rgb(var(--Boxes));}
+
+article::-webkit-scrollbar-thumb {border:5px solid rgb(var(--Boxes));}
+
+
+/*tooltip*/
+ 
+#s-m-t-tooltip{
+    z-index:9999999;
+    max-width:300px;
+    position:relative;
+    border-radius:5px;
+    padding:.25em 1em;
+    margin:0 14px 7px 30px;
+    -moz-border-radius:5px;
+    color:rgb(var(--Title));
+    text-transform:lowercase;
+    -webkit-border-radius:5px;
+    background:rgb(var(--Accent));
+}
+
+/*tumblr controls*/
+
+iframe.iframe-controls--desktop {
+    top:15px!important;
+    right:15px!important;
+    z-index:12!important;
+    transform:scale(0.7);
+    position:fixed!important;
+    -moz-transform:scale(0.7);
+    transform-origin:right top;
+    -webkit-transform:scale(0.7);
+    -moz-transform-origin:right top;
+    -webkit-transform-origin:right top;
+}
+ 
+ 
+.tmblr-iframe--follow-teaser, .tmblr-iframe--app-cta-button{display:none !important;}
+
+/*============================== menu ==============================*/
+
+#left{
+    top:0;
+    left:0;
+    gap:25px;
+    width:100px;
+    height:100vh;
+    display:flex;
+    position:fixed;
+    align-items:center;
+    flex-direction:column;
+    justify-content:center;
+    background:rgb(var(--Boxes));
+}
+
+#left a{
+    width:45px;
+    height:45px;
+    display:grid;
+    font-size:22px;
+    border-radius:4px;
+    place-items:center;
+    color:rgb(var(--Menu-link-text));
+    background:rgb(var(--Menu-link));
+    box-shadow:3px 3px 1px rgba(var(--Shadows),.05);
+}
+
+#left a.active{
+    color:rgb(var(--Menu-link-active-text));
+    background:rgb(var(--Menu-link-active));
+}
+
+/*============================== header ==============================*/
+
+header{
+    margin-left:100px;
+    padding:70px 70px 0;
+    width:calc(100% - 100px);
+}
+
+/*header info*/
+
+.blog{
+    gap:20px;
+    display:flex;
+    align-items:center;
+}
+
+.blog-icon{
+    width:55px;
+    height:55px;
+    border-radius:100%;
+    border:4px solid rgb(var(--Title));
+}
+
+.blog ul{line-height:1.4;}
+
+.blog-title{
+    font-weight:600;
+    font-size:1.1em;
+    color:rgb(var(--Title));
+}
+
+.section-title{font-size:.85em;}
+
+header .menu{
+    width:70%;
+    margin-top:30px;
+}
+
+header .menu a{
+    height:1.1em;
+    position:relative;
+    margin-right:20px;
+    display:inline-block;
+}
+
+header .menu a:hover{box-shadow: inset 0 -8px 0 rgba(var(--Accent),.5);}
+
+header .menu a::after{
+    left:0;
+    width:100%;
+    height:1px;
+    content:'';
+    bottom:0;
+    position:absolute;
+    background:transparent;
+    transition:background .3s;
+}
+
+header .menu a:hover::after{background:rgb(var(--Accent));}
+
+/*============================== main ==============================*/
+
+main{
+    padding:70px;
+    display:block;
+    margin-left:100px;
+    width:calc(100% - 100px);
+}
+
+main > section{
+    gap:30px;
+    width:100%;
+    display:flex;
+    flex-flow:row wrap;
+}
+
+/*rows*/
+
+article{
+    flex-grow:1;
+    padding:30px;
+    height:350px;
+    overflow-y:auto;
+    overflow-x:hidden;
+    border-radius:5px;
+    counter-increment:li;
+    background:rgb(var(--Boxes));
+}
+
+article > .title{
+    gap:25px;
+    font-size:1.15em;
+    font-weight:700;
+    margin-bottom:30px;
+    align-items:center;
+    display:inline-flex;
+    color:rgb(var(--Title));
+    font-family:var(--Title-font);
+}
+
+article > .title::before{
+    width:40px;
+    height:40px;
+    display:grid;
+    place-items:center;
+    border-radius:100%;
+    content:counter(li);
+    background:rgb(var(--Accent));
+}
+
+/*============================== about section ==============================*/
+
+.about{width:calc(60% - 30px);}
+
+/*audio player*/
+
+article.music-player{
+    width:40%;
+    position:relative;
+    overflow:hidden!important;
+    background-size:cover!important;
+    background-position:center!important;
+    background-image:var(--Song-cover)!important;
+}
+
+article.music-player::before{
+    top:0;
+    left:0;
+    width:100%;
+    content:'';
+    height:100%;
+    position:absolute;
+    background:rgba(0,0,0,.65);
+    backdrop-filter:blur(40px);
+}
+
+article.music-player > div{
+    z-index:1;
+    height:100%;
+    position:relative;
+    text-align:center;
+}
+
+.audio{
+    gap:25px;
+    height:100%;
+    display:flex;
+    align-items:center;
+    flex-flow:column wrap;
+    justify-content:space-around;
+}
+
+.song-cover{
+    width:90px;
+    height:90px;
+    object-fit:cover;
+    border-radius:5px;
+}
+
+.audio-info{
+    max-width:100%;
+    color:rgb(var(--Audio-text));
+}
+
+.audio-info > div{
+    display:block;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+
+.track{
+    font-weight:600;
+    font-size:1.15em;
+}
+
+.audio-controls{
+    gap:20px;
+    width:100%;
+    display:flex;
+    padding:0 30px;
+    align-items:center;
+    justify-content:center;
+    color:rgb(var(--Audio-controls));
+}
+
+.player{
+    width:40px;
+    height:40px;
+    display:grid;
+    flex-shrink:0;
+    font-size:1.2em;
+    place-items:center;
+    border-radius:100%;
+    background:rgb(var(--Accent));
+}
+
+.ph-repeat-fill,
+.ph-shuffle-fill{opacity:.5;}
+
+/*likes, dislikes, skills*/
+
+.likes,
+.dislikes,
+.skills{width:calc(100%/3 - 20px);}
+
+/*likes and dislikes*/
+
+.likes ul li:not(:last-of-type),
+.dislikes ul li:not(:last-of-type){margin-bottom:15px;}
+
+.likes ul li,
+.dislikes ul li{
+    gap:25px;
+    display:flex;
+    align-items:center;
+}
+
+.likes ul li::before,
+.dislikes ul li::before{
+    font-family:'phosphor';
+    color:rgb(var(--Accent));
+}
+
+.likes ul li::before{content:"\f1ca";}
+.dislikes ul li::before{content:"\f289";}
+
+/*skills*/
+.skills > div[class^="skill-"]:not(:last-of-type){margin-bottom:30px;}
+
+.skill-bar{
+    height:20px;
+    padding:3px;
+    display:flex;
+    position:relative;
+    border-radius:3px;
+    align-items:center;
+    border:1px solid rgb(var(--Skill-bar-border));
+}
+
+.skill-progress{
+    width:0;
+    height:14px;
+    display:block;
+    border-radius:3px;
+    transition:width 1s;
+}
+
+.skill-percent{
+    right:0;
+    top:-35px;
+    opacity:0;
+    line-height:1;
+    font-size:.8em;
+    padding:4px 8px;
+    position:absolute;
+    text-align:center;
+    border-radius:3px;
+    color:rgb(var(--Title));
+    transform:translatey(4px);
+    transition:opacity .4s, transform .4s;
+}
+
+.skill-bar:hover .skill-percent{
+    opacity:1;
+    transform:translatey(0);
+}
+
+.skill-percent::after{
+    width:0;
+    height:0;
+    content:'';
+    bottom:-5px;
+    position:absolute;
+    border-style:solid;
+    left:calc(50% - 5px);
+    border-width:5px 5px 0 5px;
+    border-color:transparent transparent transparent transparent;
+}
+
+.skill-1 .skill-percent::after{border-top-color:rgb(var(--Skill-bar-1));}
+.skill-2 .skill-percent::after{border-top-color:rgb(var(--Skill-bar-2));}
+.skill-3 .skill-percent::after{border-top-color:rgb(var(--Skill-bar-3));}
+
+.skill-1 .skill-progress{background:rgb(var(--Skill-bar-1));}
+.skill-2 .skill-progress{background:rgb(var(--Skill-bar-2));}
+.skill-3 .skill-progress{background:rgb(var(--Skill-bar-3));}
+
+.skill-1 .skill-percent{background:rgb(var(--Skill-bar-1));}
+.skill-2 .skill-percent{background:rgb(var(--Skill-bar-2));}
+.skill-3 .skill-percent{background:rgb(var(--Skill-bar-3));}
+
+/*============================== navigation section ==============================*/
+
+.links, .tags{width:calc(100%/2 - 15px);}
+
+.links ul li:not(:last-of-type),
+.tags ul li:not(:last-of-type){margin-bottom:15px;}
+
+.links ul li,
+.tags ul li{
+    gap:25px;
+    display:flex;
+    align-items:center;
+}
+
+.links ul li::before,
+.tags ul li::before{
+    font-family:'phosphor';
+    color:rgb(var(--Accent));
+}
+
+.links ul li::before{content:"\f1f6";}
+.tags ul li::before{content:"\f1c5";}
+
+.tags a,
+.links a{
+    height:1.1em;
+    position:relative;
+    margin-right:20px;
+    display:inline-block;
+}
+
+.tags a:hover,
+.links a:hover{box-shadow: inset 0 -8px 0 rgba(var(--Accent),.5);}
+
+.tags a::after,
+.links a::after{
+    left:0;
+    width:100%;
+    height:1px;
+    content:'';
+    bottom:0;
+    position:absolute;
+    background:transparent;
+    transition:background .3s;
+}
+
+.tags a:hover::after,
+.links a:hover::after{background:rgb(var(--Accent));}
+
+/*social media*/
+
+.social{
+    height:auto;
+    overflow:initial;
+}
+
+.social-media{
+    gap:25px;
+    display:flex;
+    flex-wrap:wrap;
+}
+
+.social-media a{
+    width:40px;
+    height:40px;
+    display:grid;
+    font-size:22px;
+    place-items:center;
+    border-radius:100%;
+    background:rgb(var(--Accent));
+}
+
+/*============================== message section ==============================*/
+
+.terms, .status{width:calc(100%/2 - 15px);}
+
+/*terms*/
+
+.terms ul li{
+    gap:25px;
+    display:flex;
+    align-items:center;
+}
+
+.terms ul li:not(:last-of-type){margin-bottom:15px;}
+
+.terms ul li::before{
+    content:"\f0c4";
+    font-family:'phosphor';
+    color:rgb(var(--Accent));
+}
+
+/*status*/
+
+li[data-status]{
+    gap:25px;
+    display:flex;
+    align-items:center;
+}
+
+li[data-status]:not(:last-of-type){margin-bottom:15px;}
+
+.switcher{
+    width:40px;
+    height:20px;
+    padding:2px;
+    display:flex;
+    align-items:center;
+    border-radius:10px;
+    border:2px solid rgb(var(--Borders));
+}
+
+.switcher-dot{
+    width:10px;
+    height:10px;
+    border-radius:100%;
+    background:rgb(var(--Borders));
+}
+
+li[data-status].active .switcher{
+    justify-content:flex-end;
+    border-color:rgb(var(--Accent));
+}
+
+li[data-status].active .switcher-dot{background:rgb(var(--Accent));}
+
+/*ask box*/
+
+.ask,
+.submit{
+    height:auto;
+    overflow:initial;
+}
+
+/*============================== blogroll section ==============================*/
+
+article.blogroll{
+    height:auto;
+    overflow:initial;
+}
+
+.blogroll > .title::before{display:none;}
+
+.blogs{margin:0 -30px -30px;}
+
+.blogs ul{
+    gap:25px;
+    padding:20px;
+    display:flex;
+    line-height:1;
+    align-items:center;
+    transition:background .4s;
+    border-top:1px solid rgb(var(--Borders));
+}
+
+.blogs ul:hover{background:rgb(var(--Borders));}
+
+.blogs ul li:first-of-type{flex:1}
+
+.blogs ul li:last-of-type{
+    width:40px;
+    flex-shrink:0;
+}
+
+a.follow{
+    width:30px;
+    height:30px;
+    display:grid;
+    place-items:center;
+    border-radius:100%;
+    background:rgb(var(--Accent));
+}
+
+.blogs-info{
+    gap:25px;
+    display:grid;
+    align-items:center;
+    grid-template-columns:40px repeat(2,1fr);
+}
+
+.blogs-info img{
+    width:40px;
+    height:40px;
+    border-radius:100%;
+}
+
+.blogs-info span {
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+
+.blogs-info .title{font-weight:600;}
+
+.blogs-info .url{
+    opacity:.65;
+    font-size:.85em;
+}
+
+/*-============================== queries ==============================-*/
+ 
+@media (max-width:1024px){
+    
+    .tmblr-iframe{display:none!important;}
+    
+    #left{
+        z-index:9;
+        width:100vw;
+        height:100px;
+        overflow:auto;
+        flex-direction:row;
+    }
+    
+    main,
+    header{
+        margin:0;
+        width:100%;
+        padding-inline:20px;
+    }
+    
+    header{margin-top:100px;}
+    
+    header .menu{width:100%;}
+    
+    section > article{
+        width:100%!important;
+        height:auto!important;
+        overflow:initial!important;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!--============================== left menu ==============================-->
+<nav id="left">
+    <a href="#" data-section="about" class="active">
+        <i class="ph-user"></i>
+    </a>
+    
+    <a href="#" data-section="navigation">
+        <i class="ph-navigation-arrow"></i>
+    </a>
+    
+    <a href="#" data-section="message">
+        <i class="ph-envelope"></i>
+    </a>
+    
+    <a href="#" data-section="blogroll">
+        <i class="ph-users"></i>
+    </a>
+    
+    <a href="//kosmique.tumblr.com" class="credits" target="_blank" title="page by kosmique">
+        <i data-feather="star"></i>
+    </a>
+
+</nav>
+
+<!--============================== header ==============================-->
+<header>
+    <!---------- blog title ---------->
+    <div class="blog">
+        <img src="{portraiturl-64}" class="blog-icon">
+        
+        <ul>
+            <li class="blog-title">{title}</li>
+            <li class="section-title">
+                <span data-section="about">about section</span>
+                <span data-section="navigation" style="display:none;">navigation section</span>
+                <span data-section="message" style="display:none;">message section</span>
+                <span data-section="blogroll" style="display:none;">blogroll section</span>
+            </li>
+        </ul>
+    </div>
+    
+    <!---------- header menu ---------->
+    <div class="menu">
+        <a href="{blogurl}">home</a>
+        <a href="{blogurl}">link title</a>
+        <a href="{blogurl}">link title</a>
+        <a href="{blogurl}">link title</a>
+        <a href="{blogurl}">link title</a>
+    </div>
+</header>
+
+<!--============================== content ==============================-->
+<main>
+
+<!-------------------------------- about section -------------------------------->
+<section id="about" class="active">
+
+    <!-------------------- about me -------------------->
+    <article class="about">
+        <div class="title">about me</div>
+        
+        <div class="about-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec facilisis faucibus quam vel iaculis. Aenean sollicitudin mi convallis blandit dignissim. Sed sem leo, laoreet at libero nec, consequat scelerisque ligula. Aliquam congue sem sit amet semper pellentesque. Phasellus viverra laoreet neque. Sed felis enim, iaculis sed neque in, sagittis bibendum ligula. Nunc eu nulla ut elit tristique auctor. Quisque id est sed tellus vehicula sagittis nec at mi. Vestibulum eu orci eget tellus consectetur porttitor at eget ipsum. Nulla eget aliquet diam.
+        </div>
+    </article>
+    
+    <!-------------------- music player -------------------->
+    <article class="music-player">
+        <div>
+            <!---------- song url ---------->
+            <audio src="https://dl.dropbox.com/s/ydfpiff79jfejsq/07.%20pit-a-pet.mp3"></audio>
+            
+            <!---------- song info ---------->
+            <div class="audio">
+                
+                <!----- song cover ----->
+                <img src="https://dl.dropbox.com/s/hx2z90kqposi2a1/unnamed.jpg" class="song-cover"/>
+                
+                <div class="audio-info">
+                    <!----- track title ----->
+                    <div class="track">pit-a-pet</div>
+                    
+                    <!----- artist name ----->
+                    <div class="artist">YUKIKA</div>
+                </div>
+                
+                <!----- audio controls / don't need to touch ----->
+                <div class="audio-controls">
+                    <i class="ph-repeat-fill"></i>
+                    
+                    <i class="ph-skip-back-fill"></i>
+                    
+                    <div class="player">
+                        <i class="play-pause ph-play-fill"></i>
+                    </div>
+                    
+                    <i class="ph-skip-forward-fill"></i>
+                    
+                    <i class="ph-shuffle-fill"></i>
+                </div>
+            </div>
+        </div>
+    </article>
+    
+    <!-------------------- likes -------------------->
+    <article class="likes">
+        <div class="title">likes</div>
+        
+        <ul>
+            <li>things i like</li>
+            <li>things i like</li>
+            <li>things i like</li>
+            <li>things i like</li>
+        </ul>
+    </article>
+    
+    <!-------------------- dislikes -------------------->
+    <article class="dislikes">
+        <div class="title">dislikes</div>
+        
+        <ul>
+            <li>things i dislike</li>
+            <li>things i dislike</li>
+            <li>things i dislike</li>
+            <li>things i dislike</li>
+        </ul>
+    </article>
+    
+    <!-------------------- skills -------------------->
+    <article class="skills">
+        <div class="title">skills</div>
+        
+        <!---------- first skill ---------->
+        <div class="skill-1">
+            <!----- skill title ----->
+            <div class="title">CSS</div>
+            
+            <!----- skill progress / change the width in data-width ----->
+            <div class="skill-bar">
+                <span class="skill-progress" data-width="85%"></span>
+                
+                <span class="skill-percent"></span>
+            </div>
+        </div>
+        
+        <!---------- second skill ---------->
+        <div class="skill-2">
+            <!----- skill title ----->
+            <div class="title">HTML</div>
+            
+            <!----- skill progress / change the width in data-width ----->
+            <div class="skill-bar">
+                <span class="skill-progress" data-width="78%"></span>
+                
+                <span class="skill-percent"></span>
+            </div>
+        </div>
+        
+        <!---------- third skill ---------->
+        <div class="skill-3">
+            <!----- skill title ----->
+            <div class="title">jQuery</div>
+            
+            <!----- skill progress / change the width in data-width ----->
+            <div class="skill-bar">
+                <span class="skill-progress" data-width="5%"></span>
+                
+                <span class="skill-percent"></span>
+            </div>
+        </div>
+    </article>
+</section>
+
+
+
+
+
+
+
+
+
+
+<!-------------------------------- navigation section -------------------------------->
+<section id="navigation" style="display:none;">
+    <!-------------------- links -------------------->
+    <article class="links">
+        <div class="title">links</div>
+        
+        <!---------- links links / idk how to name it ---------->
+        <ul>
+            <li>
+                <a href="/">link title</a>
+            </li>
+            
+            <li>
+                <a href="/">link title</a>
+            </li>
+            
+            <li>
+                <a href="/">link title</a>
+            </li>
+            
+            <li>
+                <a href="/">link title</a>
+            </li>
+            
+            <li>
+                <a href="/">link title</a>
+            </li>
+            
+            <li>
+                <a href="/">link title</a>
+            </li>
+        </ul>
+    </article>
+    
+    <!-------------------- tags -------------------->
+    <article class="tags">
+        <div class="title">tags</div>
+        
+        <!---------- tags links ---------->
+        <ul>
+            <li>
+                <a href="/">tag title</a>
+            </li>
+            
+            <li>
+                <a href="/">tag title</a>
+            </li>
+            
+            <li>
+                <a href="/">tag title</a>
+            </li>
+            
+            <li>
+                <a href="/">tag title</a>
+            </li>
+            
+            <li>
+                <a href="/">tag title</a>
+            </li>
+            
+            <li>
+                <a href="/">tag title</a>
+            </li>
+        </ul>
+    </article>
+    
+    <!-------------------- social media -------------------->
+    <article class="social">
+        <div class="title">social media</div>
+        
+        <!---------- social media links ---------->
+        <div class="social-media">
+            <a href="/">
+                <i class="ph-discord-logo-fill"></i>
+            </a>
+            
+            <a href="/">
+                <i class="ph-twitter-logo-fill"></i>
+            </a>
+            
+            <a href="/">
+                <i class="ph-facebook-logo-fill"></i>
+            </a>
+            
+            <a href="/">
+                <i class="ph-instagram-logo-fill"></i>
+            </a>
+            
+            <a href="/">
+                <i class="ph-spotify-logo-fill"></i>
+            </a>
+        </div>
+    </article>
+    
+</section>
+
+
+
+
+
+
+
+
+
+
+<!-------------------------------- message section -------------------------------->
+<section id="message" style="display:none;">
+
+    <!-------------------- message terms -------------------->
+    <article class="terms">
+        <div class="title">message terms</div>
+        
+        <ul>
+            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+        </ul>
+    </article>
+    
+    <!-------------------- status -------------------->
+    <article class="status">
+        <div class="title">status</div>
+        
+        <ul>
+            <!----- message status / you can use on or off in data-switch ----->
+            <li data-status="on">
+                <span class="switcher">
+                    <span class="switcher-dot"></span>
+                </span>
+                
+                ask box
+            </li>
+            
+            <li data-status="on">
+                <span class="switcher">
+                    <span class="switcher-dot"></span>
+                </span>
+                
+                submit box
+            </li>
+            
+            <li data-status="off">
+                <span class="switcher">
+                    <span class="switcher-dot"></span>
+                </span>
+                
+                commissions
+            </li>
+        </ul>
+    </article>
+    
+    <!-------------------- ask box / ask box will be hidden if it's disabled -------------------->
+    {block:AskEnabled}
+        <article class="ask">
+            <div class="title">{asklabel}</div>
+            <iframe frameborder="0" height="149" id="ask_form" scrolling="no" src="//www.tumblr.com/ask_form/{name}.tumblr.com" width="100%" style="background-color: transparent; overflow: hidden;"></iframe><!--[if IE]><script type="text/javascript">document.getElementById('ask_form').allowTransparency=true;</script><![endif]-->
+        </article>
+    {/block:AskEnabled}
+    
+    <!-------------------- submit box / submit box will be hidden if it's disabled -------------------->
+    {block:SubmissionsEnabled}
+        <article class="submit">
+            <div class="title">{submitlabel}</div>
+            <iframe frameborder="0" scrolling="no" width="100%" height="530" id="submit_form" src="https://www.tumblr.com/submit_form/{name}.tumblr.com" style="background-color:transparent; overflow:hidden;"></iframe><!--[if IE]><script type="text/javascript">document.getElementById('submit_form').allowTransparency=true;</script><![endif]-->
+        </article>
+    {/block:SubmissionsEnabled}
+
+</section>
+
+
+
+
+
+
+
+
+
+
+<!-------------------------------- blogroll section -------------------------------->
+<section id="blogroll" style="display:none;">
+    <!-------------------- blogs i follow -------------------->
+    <article class="blogroll">
+        {block:Following}
+            <div class="title">blogs i follow</div>
+            <div class="blogs">
+                {block:Followed}
+                    <ul>
+                        <li>
+                            <a href="{FollowedURL}" class="blogs-info" target="_blank">
+                                <img src="{FollowedPortraitURL-48}"/>
+                                <span class="title">{FollowedTitle}</span>
+                                <span class="url">{FollowedURL}</span>
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="//tumblr.com/follow/{FollowedName}" target="_blank" title="follow {FollowedTitle}" class="follow">
+                                <i class="ph-user-plus"></i>
+                            </a>
+                        </li>
+                    </ul>
+                {/block:Followed}
+            </div>
+        {/block:Following}
+    </article>
+</section>
+</main>
+
+<!--============================== scripts ==============================-->
+<script>
+$(document).ready(function(){
+	//feather icons
+    feather.replace();
+
+	// tooltips
+    $("[title]").style_my_tooltips({ 
+		tip_follows_cursor:true,
+		tip_delay_time:100,
+		tip_fade_speed:100
+	});
+	
+	//tabs
+    $('#left a[data-section]').click(function(){
+        $(this).addClass('active');
+        var divID = $(this).attr('data-section');
+        $("html, body").animate({scrollTop: 0}, 300);
+        $('main > #' + divID).delay(500).fadeIn().toggleClass('active');
+        $('main > section:not(#' + divID +')').fadeOut().removeClass('active');
+        $('.section-title span[data-section="' + divID + '"]').show();
+        $('.section-title span:not([data-section="' + divID + '"])').hide();
+        $('#left a:not([data-section="' + divID + '"])').removeClass('active');
+        return false 
+    });
+    
+    //skills
+    $('.skill-progress').each(function(){
+        var width = $(this).attr('data-width');
+        $(this).width(width);
+        $(this).next('.skill-percent').text(width);
+    });
+    
+    //message status
+    $('.status li[data-status]').each(function(){
+        var status = $(this).attr('data-status');
+        if ( status == 'on' ) {$(this).addClass('active');}
+        else {$(this).removeClass('active');}
+    });
+    
+    //music player
+	var aud = $('audio')[0];
+	var playing = false;
+    $('.player').on('click', function(){
+        if (aud.paused) {
+            aud.play();
+            $('.play-pause').removeClass('ph-play-fill');
+            $('.play-pause').addClass('ph-pause-fill');
+        } else {
+            aud.pause();
+            $('.play-pause').removeClass('ph-pause-fill');
+            $('.play-pause').addClass('ph-play-fill');
+        }
+    });
+    
+    aud.addEventListener('ended', function(){
+        $('.play-pause').removeClass('ph-pause-fill');
+        $('.play-pause').addClass('ph-play-fill');
+    });
+    
+});
+</script>
+</body>
+</html>
