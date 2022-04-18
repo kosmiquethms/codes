@@ -1,0 +1,1157 @@
+<!--
+
+    netuno by kosmique.tumblr.com
+    
+    ✧･ﾟ: *✧･ﾟ:*ﾟ✧*:･ﾟ✧
+    
+    * honeybee font by suiomi
+    * audio player by glenthemes
+    
+    full credits list at kosmique.tumblr.com/credits
+    
+    ✧･ﾟ: *✧･ﾟ:*ﾟ✧*:･ﾟ✧
+    
+    [NOTE]
+
+    * the scrollbar has been set to zero width, but you can scroll the sections normally
+    * to change the planet icon, you have to go to https://honeybee.suiomi.com and choose your icon, pick up its unicode (the "\xxxx") and paste it in the sidebar mini icon variable
+
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>{Title} / about</title>
+
+<meta charset="utf-8">
+
+<link rel="shortcut icon" href="{favicon}">
+
+<link rel="alternate" type="application/rss+xml" href="{RSS}">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!--Scripts-->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.js"></script>
+<!-------MUSIC PLAYER BY GLENTHEMES------->
+<script src="https://dl.dropbox.com/s/brdv4yv2iaigjmp/glenplayer07.js"></script>
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link href="//solrainha.github.io/honeybee/honeybee.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_o5hd5vvqpoqiwwmi.css"/>
+
+<!--CSS customization here. -->
+
+<style type="text/css">
+
+*{box-sizing:border-box}
+
+:root{
+    --Background:250,250,250;
+    --Text:100,100,100;
+    --Link:0,0,0;
+    --Title:0,0,0;
+    --Borders:240,240,240;
+    --Shadows:0,0,0;
+    --Accent:255, 189, 198;
+    --Sub-color:209, 209, 237;
+    --Container:255,255,255;
+    
+    --Sidebar-mini-icon-color:255,255,255; /* planet icon color */
+    --Sidebar-mini-icon-background:247, 200, 206; /* planet icon background */
+    
+    --About-icon-color:255,255,255; /* about title icon color */
+    --Navigation-icon-color:255,255,255; /* navigation title icon color */
+    --Blogroll-icon-color:255,255,255; /* blogroll title icon color */
+    --Message-icon-color:255,255,255; /* message title icon color */
+    
+    --About-icon-background:247, 200, 206; /* about title icon color */
+    --Navigation-icon-background:239, 187, 207; /* navigation title icon color */
+    --Blogroll-icon-background:217, 180, 211; /* blogroll title icon color */
+    --Message-icon-background:195, 174, 214; /* message title icon color */
+    
+    --Skill-one-background:247, 200, 206; /* first skill bar background */
+    --Skill-two-background:239, 187, 207; /* second skill bar background */
+    --Skill-three-background:217, 180, 211; /* third skill bar background */
+    --Skill-four-background:195, 174, 214; /* fourth skill bar background */
+    
+    --Main-font:'barlow';
+    
+    --Sidebar-mini-icon:'\ebf7'; /* planet icon / follow the notes to change */
+    
+    --Skill-one-bar-width:10%; /* first skill bar width */
+    --Skill-two-bar-width:80%; /* second skill bar width */
+    --Skill-three-bar-width:68%; /* third skill bar width */
+    --Skill-four-bar-width:100%; /* fourth skill bar width */
+    
+}
+
+.icon {
+    speak:none;
+    line-height:1;
+    font-style:normal;
+    font-weight:normal;
+    font-variant:normal;
+    text-transform:none;
+    font-family:'feather' !important;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+}
+
+body{
+    margin:0;
+    width:100vw;
+    height:100vh; 
+    display:flex;
+    overflow-x:hidden;
+    align-items:center;
+    word-break:break-word;
+    color:rgb(var(--Text));
+    justify-content:center;
+    background:rgb(var(--Background));
+    font:400 15px/1.6 var(--Main-font), sans-serif;
+}
+
+a, 
+a:hover{
+    cursor:pointer;
+    transition:ease .3s;
+    text-decoration:none;
+    -moz-transition:ease .3s;
+    -webkit-transition:ease .3s;
+}
+
+a{color:rgb(var(--Link))}
+
+b, 
+strong{font-weight:700;}
+
+b, 
+i, 
+strike, 
+u{color:rgb(var(--Accent))}
+
+small,
+sub,
+sup{font-size:.7em;}
+
+big{font-size:1.1em;}
+
+p {margin:.7em 0;}
+p:first-of-type {margin-top:0;}
+p:last-of-type {margin-bottom:0;}
+
+ul,ol{
+    padding:0;
+    margin:0;
+    list-style:none;
+}
+
+svg{
+	width:1em;
+	height:1em;
+}
+
+.credits{
+    z-index:1;
+    right:20px;
+    bottom:20px;
+    position:fixed;
+    color:rgb(var(--Accent));
+}
+
+input{display:none;}
+
+/*tumblr controls*/
+
+.tmblr-iframe{display:none !important;}
+
+/*scrollbar*/
+
+::-webkit-scrollbar{width:0;}
+
+
+/*container*/
+
+#container{
+    height:500px;
+    overflow:hidden;
+    border-radius:5px;
+    width:calc(250px + 500px);
+    background:rgb(var(--Container));
+    border:1px solid rgb(var(--Borders));
+}
+
+/* sections title */
+
+.section-title{
+    height:60px;
+    display:flex;
+    overflow:hidden;
+    font-size:1.2em;
+    align-items:center;
+    border-bottom:1px solid rgb(var(--Borders));
+}
+
+.section-title::before{
+    width:60px;
+    height:60px;
+    display:flex;
+    margin-right:30px;
+    align-items:center;
+    font-family:'feather';
+    justify-content:center;
+    transition:background .3s;
+    -moz-transition:background .3s;
+    -webkit-transition:background .3s;
+}
+
+.section-title span{
+    display:none;
+    font-weight:700;
+    color:rgb(var(--Title));
+}
+
+#section1:checked ~ #container .section-title .about-title,
+#section2:checked ~ #container .section-title .nav-title,
+#section3:checked ~ #container .section-title .blogroll-title,
+#section4:checked ~ #container .section-title .message-title{display:block;}
+
+#section1:checked ~ #container .section-title::before{
+    content:'\e8e9';
+    color:rgb(var(--About-icon-color));
+    background:rgb(var(--About-icon-background));
+}
+
+#section2:checked ~ #container .section-title::before{
+    content:'\e89f';
+    color:rgb(var(--Navigation-icon-color));
+    background:rgb(var(--Navigation-icon-background));
+}
+
+#section3:checked ~ #container .section-title::before{
+    content:'\e8e7';
+    color:rgb(var(--Blogroll-icon-color));
+    background:rgb(var(--Blogroll-icon-background));
+}
+
+#section4:checked ~ #container .section-title::before{
+    content:'\e890';
+    color:rgb(var(--Message-icon-color));
+    background:rgb(var(--Message-icon-background));
+}
+
+/*sidebar*/
+
+aside{
+    z-index:1;
+    width:250px;
+    position:absolute;
+    height:calc(500px - 63px);
+    background:rgb(var(--Container));
+    border-right:1px solid rgb(var(--Borders));
+}
+
+.blog-info{
+    padding:40px;
+    border-bottom:1px solid rgb(var(--Borders));
+}
+
+.sidebar-icon{
+    z-index:2;
+    width:90px;
+    margin:auto;
+    height:90px;
+    position:relative;
+    border-radius:100%;
+}
+
+.sidebar-icon::before{
+    width:35px;
+    height:35px;
+    display:flex;
+    font-size:1.2em;
+    position:absolute;
+    align-items:center;
+    border-radius:100%;
+    margin:65px 0  0 50px;
+    font-family:'honeybee';
+    justify-content:center;
+    content:var(--Sidebar-mini-icon);
+    color:rgb(var(--Sidebar-mini-icon-color));
+    background:rgb(var(--Sidebar-mini-icon-background));
+}
+
+.sidebar-icon::after{
+    z-index:-2;
+    width:100%;
+    content:'';
+    height:100%;
+    margin:-20px 0 0 -120px;
+    position:absolute;
+    border-radius:100%;
+    background:
+		linear-gradient(90deg, rgb(var(--Container)) 9px, transparent 1%) center,
+		linear-gradient(rgb(var(--Container)) 9px, transparent 1%) center,
+		rgb(var(--Text),.7);
+	background-size: 10px 10px;
+}
+
+.sidebar-icon img{
+    width:100%;
+    height:100%;
+    border-radius:100%;
+}
+
+.blog-title{
+    margin-top:20px;
+    font-weight:600;
+    text-align:center;
+    color:rgb(var(--Title));
+}
+
+aside nav a,
+aside nav label{
+    display:flex;
+    align-items:center;
+    color:rgb(var(--Link));
+    transition:background .3s;
+    padding:10px 20px 10px 40px;
+    -moz-transition:background .3s;
+    -webkit-transition:background .3s;
+    border-bottom:1px dashed rgb(var(--Borders));
+}
+
+aside nav label:last-of-type{border-bottom:0;}
+
+#section1:checked ~ #container aside nav #label1,
+#section2:checked ~ #container aside nav #label2,
+#section3:checked ~ #container aside nav #label3,
+#section4:checked ~ #container aside nav #label4{font-weight:600;}
+
+#section1:checked ~ #container aside nav #label1{background:rgba(var(--About-icon-background),.1);}
+
+#section2:checked ~ #container aside nav #label2{background:rgba(var(--Navigation-icon-background),.1);}
+
+#section3:checked ~ #container aside nav #label3{background:rgba(var(--Blogroll-icon-background),.1);}
+
+#section4:checked ~ #container aside nav #label4{background:rgba(var(--Message-icon-background),.1);}
+
+#section1:checked ~ #container aside nav #label1::before, 
+#section1:checked ~ #container aside nav #label1::after,
+#section2:checked ~ #container aside nav #label2::before, 
+#section2:checked ~ #container aside nav #label2::after,
+#section3:checked ~ #container aside nav #label3::before, 
+#section3:checked ~ #container aside nav #label3::after,
+#section4:checked ~ #container aside nav #label4::before, 
+#section4:checked ~ #container aside nav #label4::after{
+    width:6px;
+    content:'';
+    height:10px;
+    margin-top:2px;
+    margin-left:-20px; 
+    position:absolute;
+    transform-origin:0 100%;
+    transform:rotate(-45deg);
+    border-radius:4px 4px 0 0;
+    -o-transform-origin:0 100%;
+    -ms-transform-origin:0 100%;
+    -o-transform:rotate(-45deg);
+    -ms-transform:rotate(-45deg);
+    -moz-transform-origin:0 100%;
+    -moz-transform:rotate(-45deg);
+    -moz-border-radius:4px 4px 0 0;
+    -webkit-transform-origin:0 100%;
+    -webkit-transform:rotate(-45deg);
+    background-color:rgb(var(--Sub-color));
+}
+
+#section1:checked ~ #container aside nav #label1::after,
+#section2:checked ~ #container aside nav #label2::after,
+#section3:checked ~ #container aside nav #label3::after,
+#section4:checked ~ #container aside nav #label4::after{
+     margin-top:2px;
+    margin-left:-26px;
+    transform:rotate(45deg);
+    -o-transform:rotate(45deg);
+    -ms-transform:rotate(45deg);
+    transform-origin :100% 100%;
+    -moz-transform:rotate(45deg); 
+    -o-transform-origin:100% 100%;
+    -ms-transform-origin:100% 100%;
+    -moz-transform-origin:100% 100%;
+    -webkit-transform:rotate(45deg);
+    -webkit-transform-origin:100% 100%;
+ }
+
+#section1:checked ~ #container aside nav #label1::before{background:rgb(var(--About-icon-background));}
+
+#section2:checked ~ #container aside nav #label2::before{background:rgb(var(--Navigation-icon-background));}
+
+#section3:checked ~ #container aside nav #label3::before{background:rgb(var(--Blogroll-icon-background));}
+
+#section4:checked ~ #container aside nav #label4::before{background:rgb(var(--Message-icon-background));}
+
+/* sections */
+
+#sections{
+    width:500px;
+    display:flex;
+    margin-left:250px;
+    transition:transform .4s;
+    height:calc(500px - 60px);
+    -moz-transition:transform .4s;
+    -webkit-transition:transform .4s;
+}
+
+#sections section{
+    width:500px;
+    max-height:0;
+    flex-shrink:0;
+    overflow-y:auto;
+    transition:ease .6s;
+    -moz-transition:ease .6s;
+    -webkit-transition:ease .6s;
+    background:rgb(var(--Posts));
+}
+
+#section1:checked ~ #container #sections {transform: translateX(0%);}
+#section2:checked ~ #container #sections {transform: translateX(-100%);}
+#section3:checked ~ #container #sections {transform: translateX(-200%);}
+#section4:checked ~ #container #sections {transform: translateX(-300%);}
+
+#section1:checked ~ #container #sections .about,
+#section2:checked ~ #container #sections .navigation,
+#section3:checked ~ #container #sections .blogroll,
+#section4:checked ~ #container #sections .message{
+    height:auto;
+    max-height:calc(500px - 60px);
+}
+
+#sections .title{
+    width:100%;
+    display:flex;
+    font-weight:600;
+    position:relative;
+    align-items:center;
+    padding:20px 20px 20px 40px;
+    border-bottom:1px solid rgb(var(--Borders));
+}
+
+#sections .title:before, 
+#sections .title:after {
+    width:7px;
+    content:'';
+    height:12px;
+    margin-top:2px;
+    margin-left:-20px; 
+    position:absolute;
+    transform-origin:0 100%;
+    transform:rotate(-45deg);
+    border-radius:4px 4px 0 0;
+    -o-transform-origin:0 100%;
+    -ms-transform-origin:0 100%;
+    -o-transform:rotate(-45deg);
+    -ms-transform:rotate(-45deg);
+    -moz-transform-origin:0 100%;
+    -moz-transform:rotate(-45deg);
+    -moz-border-radius:4px 4px 0 0;
+    -webkit-transform-origin:0 100%;
+    -webkit-transform:rotate(-45deg);
+}
+
+ #sections .title:after {
+    margin-top:2px;
+    margin-left:-26px;
+    transform:rotate(45deg);
+    transform-origin:100% 100%;
+    -o-transform:rotate(45deg);
+    -ms-transform:rotate(45deg);
+    -moz-transform:rotate(45deg); 
+    -o-transform-origin:100% 100%;
+    -ms-transform-origin:100% 100%;
+    -moz-transform-origin:100% 100%;
+    -webkit-transform:rotate(45deg);
+    -webkit-transform-origin:100% 100%;
+    background-color:rgb(var(--Sub-color));
+}
+
+.about .title::before{background-color:rgb(var(--About-icon-background));}
+
+.navigation .title::before{background-color:rgb(var(--Navigation-icon-background));}
+
+.blogroll .title::before{background-color:rgb(var(--Blogroll-icon-background));}
+
+.message .title::before{background-color:rgb(var(--Message-icon-background));}
+ 
+.about .row1,
+.about .row2,
+.about .row3{border-bottom:1px solid rgb(var(--Borders));}
+
+/*------------------------- about section ------------------------*/
+
+/*about*/
+
+.about-text{padding:20px;}
+
+.about-text:first-letter{
+    font-size:1.3em;
+    color:rgb(var(--Accent));
+    text-transform:capitalize;
+}
+
+/*likes and dislikes*/
+
+.like-dislike,
+.about .row3, 
+.links,
+.tags,
+section.blogroll{
+    display:grid;
+    grid-template-columns:50% 50%;
+}
+
+.like-dislike ul,
+.skill,
+.hobbies ul,
+.links ul,
+.tags ul{
+    padding:20px;
+    overflow-y:auto;
+    max-height:210px;
+}
+
+.like li::before,
+.dislike li::before{
+    margin-right:20px;
+    font-family:'feather';
+    color:rgb(var(--Accent));
+}
+
+.like li::before{content:'\e83f';}
+
+.dislike li::before{content:'\e8f6';}
+
+.like,
+.skills,
+.links ul:first-of-type,
+.tags ul:first-of-type{border-right:1px solid rgb(var(--Borders));}
+
+.like li,
+.dislike li,
+.hobbies li,
+.links li,
+.tags li{margin-bottom:5px;}
+
+/*skills*/
+
+.skill{padding:20px;}
+
+.skill ul:not(:last-of-type){margin-bottom:20px;}
+
+.skill-title{
+    font-size:.75em;
+    text-transform:uppercase;
+}
+
+.skill-bar{
+    width:100%;
+    height:1px;
+    margin-top:5px;
+    overflow:hidden;
+    position:relative;
+    background:rgb(var(--Borders));
+}
+
+.skill-bar span{
+    height:1px;
+    position:absolute;
+    background:rgb(var(--Accent));
+}
+
+.skill-one .skill-bar span{
+    width:var(--Skill-one-bar-width);
+    background:rgb(var(--Skill-one-background));
+}
+
+.skill-two .skill-bar span{
+    width:var(--Skill-two-bar-width);
+    background:rgb(var(--Skill-two-background));
+}
+
+.skill-three .skill-bar span{
+    width:var(--Skill-three-bar-width);
+    background:rgb(var(--Skill-three-background));
+}
+
+.skill-four .skill-bar span{
+    width:var(--Skill-four-bar-width);
+    background:rgb(var(--Skill-four-background));
+}
+
+/*hobbies*/
+
+.hobbies ul{padding:20px;}
+
+.hobbies ul li::before{
+    content:'\e879';
+    margin-right:20px;
+    font-family:'feather';
+    color:rgb(var(--Accent));
+}
+
+/*audio player*/
+
+.audio {padding:20px;}
+
+/*-------MUSIC PLAYER BY GLENTHEMES-------*/
+:root {
+   --Circle-Size:40px;
+   --Progress-Border-Size:3px;
+   --Progress-Empty:#f0f0f0;
+   --Progress-Fill:#ffbdc6;
+   --Player-Background:#ffffff;
+   --Play-Pause-Buttons-Size:14px;
+   --Play-Pause-Buttons-Color:#111;
+   --Player-Text-Margin:16px;
+   --Song-Name-Color:#111;
+   --Artist-Name-Color:#888;
+}
+
+#glenplayer07 {position:relative;}
+
+.flamingo {
+    display:flex;
+    align-items:center;
+}
+
+.circleofdeath {
+    overflow:hidden;
+    border-radius:100%;
+    width:var(--Circle-Size);
+    height:var(--Circle-Size);
+}
+
+.tinfoil {
+    border-radius:100%;
+    width:var(--Circle-Size);
+    height:var(--Circle-Size);
+    background:var(--Progress-Empty);
+}
+
+.oven {background:var(--Progress-Fill);}
+
+.oliveoil {
+    width:100%;
+    height:100%;
+}
+
+.crust {
+    top:0;
+    display:flex;
+    position:absolute;
+    align-items:center;
+    justify-content:center;
+    width:var(--Circle-Size);
+    height:var(--Circle-Size);
+}
+
+.cherry {
+    z-index:1;
+    display:flex;
+    cursor:pointer;
+    align-items:center;
+    border-radius:100%;
+    justify-content:center;
+    background:var(--Player-Background);
+    width:calc(var(--Circle-Size) - (var(--Progress-Border-Size) * 2));
+    height:calc(var(--Circle-Size) - (var(--Progress-Border-Size) * 2));
+}
+
+.music-controls {display:flex;align-items:center}
+
+.music-controls .material-icons {
+    color:var(--Play-Pause-Buttons-Color);
+    font-size:var(--Play-Pause-Buttons-Size);
+}
+
+.pausee {display:none;}
+
+.beff {display:none;}
+.aff {display:block;}
+
+.music-info {
+    line-height:1em;
+    margin-left:var(--Player-Text-Margin);
+}
+
+.song-name {
+    font-weight:600;
+    color:var(--Song-Name-Color);
+}
+
+.artist-name {
+    margin-top:5px;
+    font-size:.85em;
+    color:var(--Artist-Name-Color);
+}
+            
+/*------------------------- navigation section ------------------------*/       
+
+.navigation .row1,
+.navigation .row2{border-bottom:1px solid rgb(var(--Borders));}
+
+.links a,
+.tags a{
+    position:relative;
+    display:inline-block;
+}
+
+.links a::before, 
+.tags a::before {
+    width:0;
+    right:0;
+    content:'';
+    height:3px;
+    bottom:-1px;
+    display:block;
+    position:absolute;
+    transition:width .3s;
+    background:rgb(var(--Accent));
+}
+
+.links a:hover::before, 
+.tags a:hover::before {
+    left:0;
+    width:100%;
+    transition:width .3s;
+}
+
+.links ul li::before,
+.tags ul li::before{
+    margin-right:20px;
+    font-family:'feather';
+    color:rgb(var(--Accent));
+}
+
+.links ul li::before{content:'\e882';}
+
+.tags ul li::before{content:'\e8d2';}
+
+.social{
+    padding:20px;
+    display:flex;
+}
+
+.social a {
+    width:45px;
+    height:45px;
+    display:flex;
+    border-radius:5px;
+    margin-right:20px;
+    align-items:center;
+    justify-content:center;
+}
+
+.social a:first-of-type{background:rgb(var(--Accent));}
+
+.social a:nth-of-type(2){background:rgba(var(--Accent),.85);}
+
+.social a:nth-of-type(3){background:rgba(var(--Accent),.65);}
+
+.social a:nth-of-type(4){background:rgba(var(--Accent),.45);}
+
+.social a:last-of-type{background:rgba(var(--Accent),.25);}
+
+/*------------------------- blogroll section ------------------------*/   
+
+.blogroll div{
+    padding:20px;
+    display:flex;
+    align-items:center;
+    transition:background .3s;
+    -moz-transition:background .3s;
+    -webkit-transition:background .3s;
+    border-right:1px solid rgb(var(--Borders));
+    border-bottom:1px solid rgb(var(--Borders));
+}
+
+.blogroll div:hover{background:rgba(var(--Borders),.4);}
+
+.blogroll-icon{
+    width:35px;
+    height:35px;
+    margin-right:20px;
+    border-radius:100%;
+}
+
+.blogroll-link {max-width: calc(100% - 45px);}
+
+.blogroll-link span{
+    display:block;
+    max-width:100%;
+    overflow:hidden;
+    position:relative;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+
+.bg-title{font-weight:600;}
+
+.bg-name{font-size:.85em;}
+
+
+/*------------------------- message section ------------------------*/  
+
+.message .row1{border-bottom:1px solid rgb(var(--Borders));}
+
+.message .row1 ul{padding:20px;}
+
+.message .row1 li{margin-bottom:10px;}
+
+.message .row1 li::before{
+    width:10px;
+    content:'';
+    height:10px;
+    margin-right:20px;
+    border-radius:3px;
+    vertical-align:-2px;
+    display:inline-block;
+    background:rgba(var(--Blogroll-icon-background),.5);
+}
+
+.askbox{padding:20px;}
+
+.askbox iframe{
+    width:100%;
+    display:block;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- don't touch here!!! -->
+
+<input type="radio" name="slides" id="section1" checked>
+<input type="radio" name="slides" id="section2">
+<input type="radio" name="slides" id="section3">
+<input type="radio" name="slides" id="section4">
+
+<!-- container -->
+
+<section id="container">
+
+<!--------------------------- sections title --------------------------->
+
+<div class="section-title">
+    <span class="about-title">about me</span>
+    <span class="nav-title">navigation</span>
+    <span class="blogroll-title">blogroll</span>
+    <span class="message-title">message</span>
+</div>
+
+<!--------------------------- sidebar --------------------------->
+
+<aside>
+    
+    <div class="blog-info">
+        
+        <!-- sidebar icon -->
+        <div class="sidebar-icon">
+            <img src="https://64.media.tumblr.com/b49ce5e44979ecb15819decd16d2dbe8/tumblr_plaeweP16Q1wvea6x_1280.jpg"/>
+        </div>
+        
+        <!-- blog title / you can use another text instead of -->
+        <div class="blog-title">{title}</div>
+    </div>
+    
+    <!-- sidebar links -->
+    <nav class="sidebar-links">
+        <a href="{blogurl}">
+            go back to blog
+        </a>
+        
+        <label for="section1" id="label1">
+            about me
+    	</label>
+    	
+    	<label for="section2" id="label2">
+    	    navigation
+    	</label>
+    	
+    	<label for="section3" id="label3">
+    	    blogroll
+    	</label>
+    	
+    	<label for="section4" id="label4">
+    	    message
+    	</label>
+    </nav>
+</aside>
+
+<!--------------------------- sections --------------------------->
+
+<div id="sections">
+
+<!--------------------------- about section --------------------------->
+
+<section class="about">
+
+<!------- about text ------->
+
+<div class="row1">
+    <div class="title">about</div>
+    
+    <!-- your about text -->
+    <div class="about-text">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget urna a augue facilisis blandit imperdiet vel purus. Sed lobortis pharetra quam vel eleifend. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec sit amet neque a magna tempus pharetra. Integer mattis nisl at diam convallis, fermentum dignissim odio efficitur. Donec convallis enim mauris, viverra egestas urna imperdiet nec. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla placerat urna eget erat rutrum facilisis. Proin dapibus, ex et consequat malesuada, risus eros pellentesque leo, a rutrum mi enim id lorem. Suspendisse mollis nisi eu mollis rhoncus. Duis quis laoreet augue. Mauris elementum nibh vitae laoreet feugiat. Vivamus sed orci orci.
+    </div>
+</div>
+
+<!------- like and dislike ------->
+
+<div class="row2">
+    <div class="title">likes and dislikes</div>
+    
+    <div class="like-dislike">
+        
+        <!---- likes ---->
+        <ul class="like">
+            <li>like</li>
+            <li>like</li>
+            <li>like</li>
+            <li>like</li>
+            <li>like</li>
+            <li>like</li>
+        </ul>
+        
+        <!---- dislikes ---->
+        <ul class="dislike">
+            <li>dislike</li>
+            <li>dislike</li>
+            <li>dislike</li>
+            <li>dislike</li>
+            <li>dislike</li>
+            <li>dislike</li>
+        </ul>
+    </div>
+</div>
+
+<!------- skills and hobbies ------->
+
+<div class="row3">
+
+    <!---- skills ---->
+    
+    <div class="skills">
+        <div class="title">skills</div>
+        
+        <div class="skill">
+            <!-- skill one -->
+            <ul class="skill-one">
+                <li class="skill-title">skill one</li>
+                <li class="skill-bar"><span></span></li>
+            </ul>
+            
+            <!-- skill two -->
+            <ul class="skill-two">
+                <li class="skill-title">skill two</li>
+                <li class="skill-bar"><span></span></li>
+            </ul>
+            
+            <!-- skill three -->
+            <ul class="skill-three">
+                <li class="skill-title">skill three</li>
+                <li class="skill-bar"><span></span></li>
+            </ul>
+            
+            <!-- skill four -->
+            <ul class="skill-four">
+                <li class="skill-title">skill four</li>
+                <li class="skill-bar"><span></span></li>
+            </ul>
+        </div>
+    </div>
+
+    <!---- hobbies ---->
+
+    <div class="hobbies">
+        <div class="title">hobbies</div>
+        <ul>
+            <li>hobby</li>
+            <li>hobby</li>
+            <li>hobby</li>
+            <li>hobby</li>
+            <li>hobby</li>
+        </ul>
+    </div>
+
+</div>
+
+<!------- song ------->
+
+<div class="row4">
+
+    <div class="title">favorite song</div>
+    
+    <div class="audio">
+        <!-------MUSIC PLAYER BY GLENTHEMES------->
+        <div id="glenplayer07">
+           <div class="flamingo">
+               <div class="circleofdeath">
+                   <div class="tinfoil">
+                       <div class="oliveoil"></div>
+                   </div>
+                  <div class="crust">
+                       <div class="cherry">
+                           <div class="music-controls">
+                               <i class="icon icon-play playy"></i>
+                               <i class="icon icon-pause pausee"></i>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+        
+               <div class="music-info">
+                   <div class="song-name">Sayonara</div>
+                   <div class="artist-name">Red Velvet</div>
+               </div>
+           </div>
+        </div>
+        
+        <!-- your song url here -->
+        <audio id="audio" src="https://dl.dropbox.com/s/pp6dyvmgvs1o309/03%20Sayonara.mp3" type="audio"></audio>
+        <!----end music player---->
+            
+    </div>
+</div>
+    
+    
+</section>
+
+<!--------------------------- about section --------------------------->
+<section class="navigation">
+
+    <!-- random links -->
+    <div class="row1">
+        <div class="title">links</div>
+        <div class="links">
+            <ul>
+                <li><a href="/">link title</a></li>
+                <li><a href="/">link title</a></li>
+                <li><a href="/">link title</a></li>
+                <li><a href="/">link title</a></li>
+                <li><a href="/">link title</a></li>
+                <li><a href="/">link title</a></li>
+            </ul>
+            
+            <ul>
+                <li><a href="/">link title</a></li>
+                <li><a href="/">link title</a></li>
+                <li><a href="/">link title</a></li>
+                <li><a href="/">link title</a></li>
+                <li><a href="/">link title</a></li>
+                <li><a href="/">link title</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- tags links -->
+    <div class="row2">
+        <div class="title">tags</div>
+        <div class="tags">
+            <ul>
+                <li><a href="/">tag title</a></li>
+                <li><a href="/">tag title</a></li>
+                <li><a href="/">tag title</a></li>
+                <li><a href="/">tag title</a></li>
+                <li><a href="/">tag title</a></li>
+                <li><a href="/">tag title</a></li>
+            </ul>
+            
+            <ul>
+                <li><a href="/">tag title</a></li>
+                <li><a href="/">tag title</a></li>
+                <li><a href="/">tag title</a></li>
+                <li><a href="/">tag title</a></li>
+                <li><a href="/">tag title</a></li>
+                <li><a href="/">tag title</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- social media -->
+    <div class="row3">
+        <div class="title">social media</div>
+        <div class="social">
+            <a href="/"><span class="th th-discord"></span></a>
+            <a href="/"><span class="th th-twitter-o"></span></a>
+            <a href="/"><span class="th th-instagram"></span></a>
+            <a href="/"><span class="th th-facebook-o"></span></a>
+            <a href="/"><span class="th th-tumblr-o"></span></a>
+        </div>
+    </div>
+</section>
+
+<!--------------------------- about section --------------------------->
+<section class="blogroll">
+    {block:Following}
+        {block:Followed}
+            <div>
+                <img src="{FollowedPortraitURL-48}" class="blogroll-icon"/>
+                <a href="{FollowedURL}" class="blogroll-link">
+                    <span class="bg-title">{FollowedTitle}</span>
+                    <span class="bg-name">{FollowedName}</span>
+                </a>
+            </div>
+        {/block:Followed}
+    {/block:Following}
+</section>
+
+<!--------------------------- about section --------------------------->
+<section class="message">
+
+    <!-- rules / you can delete this part or add more rules-->
+    <div class="row1">
+        <div class="title">rules</div>
+        <ul>
+            <li>first rule</li>
+            <li>second rule</li>
+            <li>third rule</li>
+            <li>fourth rule</li>
+            <li>fifth rule</li>
+            <li>sixth rule</li>
+        </ul>
+    </div>
+    
+    <!-- askbox-->
+    <div class="row2">
+        <div class="title">send your message</div>
+        <div class="askbox">
+            <iframe frameborder="0" height="149" id="ask_form" scrolling="no" src="//www.tumblr.com/ask_form/{name}.tumblr.com" width="100%" style="background-color: transparent; overflow: hidden;"></iframe><!--[if IE]><script type="text/javascript">document.getElementById('ask_form').allowTransparency=true;</script><![endif]-->
+        </div>
+    </div>
+</section>
+
+</div>
+
+</section>
+
+<a href="//kosmique.tumblr.com" class="credits"><i data-feather="star"></i></a>
+
+<script>
+$(document).ready(function(){
+    feather.replace();
+});
+
+
+</script>
+</body></html>
