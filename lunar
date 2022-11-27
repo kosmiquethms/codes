@@ -1,0 +1,3007 @@
+<!--
+
+    lunar by kosmique.tumblr.com
+    
+    ✧･ﾟ: *✧･ﾟ:*ﾟ✧*:･ﾟ✧
+    
+    * tumblr ajax notes: https://matthewbuchanan.name/tumblr/ajax-notes/
+
+    * base code by sorrism
+    * flexible frames by nouvae (modified by seyche)
+    * pxu photoset and lightboxes by shythemes
+    
+    full credits list at kosmique.tumblr.com/credits
+    
+    ✧･ﾟ: *✧･ﾟ:*ﾟ✧*:･ﾟ✧
+    
+    [NOTES]
+    
+    * dark mode colors are not directly editable from the panel. however, if you want to modify the colors, just search for /*----- dark mode -----*/
+        > decimal format only.
+    
+    * to find the about section faster, search for - about -
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>
+    {block:PostSummary}{PostSummary} : {/block:PostSummary}
+    {block:TagPage}#{Tag} : {/block:TagPage}
+    {block:SearchPage}{SearchQuery} : {/block:SearchPage}
+    {block:DayPage}{MonthNumberWithZero}/{DayOfMonthWithZero}/{Year} : {/block:DayPage}
+    {Title}
+</title>
+
+<link rel="shortcut icon" href="{favicon}"> 
+<link rel="alternate" type="application/rss+xml" href="{RSS}">
+
+{block:Description}
+	<meta name="description" content="{MetaDescription}" />
+{/block:Description}
+
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!--============================== variables ==============================-->
+
+<!----- images ----->
+
+<meta name="image:Header image" content=""/>
+<meta name="image:Background image" content=""/>
+<meta name="image:About image" content=""/>
+
+<!----- booleans ----->
+<meta name="if:Dark controls" content="1"/>
+<meta name="if:Header image" content="1"/>
+<meta name="if:Full width header" content="0"/>
+<meta name="if:Background image" content="0"/>
+<meta name="if:About section" content="1"/>
+
+<!----- colors ----->
+<meta name="color:Background gradient 1" content="#faf2f9"/>
+<meta name="color:Background gradient 2" content="#f4f9fb"/>
+<meta name="color:Text" content="#696969"/>
+<meta name="color:Link" content="#000000"/>
+<meta name="color:Accent" content="#9384bd"/>
+<meta name="color:Title" content="#000000"/>
+<meta name="color:Boxes" content="#ffffff"/>
+<meta name="color:Inner boxes" content="#f7f7f7"/>
+<meta name="color:Borders" content="#f0f0f0"/>
+<meta name="color:Header color" content="#c8c1db"/>
+<meta name="color:Header gradient 1" content="#f2c7f9"/>
+<meta name="color:Header gradient 2" content="#cbe6ee"/>
+
+<!----- selections ----->
+<meta name="select:Border width" content="0px"/>
+<meta name="select:Border width" content="1px"/>
+<meta name="select:Border width" content="2px"/>
+<meta name="select:Border width" content="3px"/>
+
+<meta name="select:Sidebar direction" content="left"/>
+<meta name="select:Sidebar direction" content="right"/>
+
+<meta name="select:Posts width" content="400px"/>
+<meta name="select:Posts width" content="450px"/>
+<meta name="select:Posts width" content="500px"/>
+<meta name="select:Posts width" content="540px"/>
+
+<meta name="select:Background size" content="cover"/>
+<meta name="select:Background size" content="contain"/>
+
+<meta name="select:Background position" content="top"/>
+<meta name="select:Background position" content="bottom"/>
+<meta name="select:Background position" content="center"/>
+<meta name="select:Background position" content="left"/>
+<meta name="select:Background position" content="right"/>
+
+<meta name="select:Background repetition" content="repeat"/>
+<meta name="select:Background repetition" content="no-repeat" title="no repetition"/>
+
+<!----- texts ----->
+<meta name="text:Font" content="Nunito"/>
+<meta name="text:Font size" content="15px"/>
+<meta name="text:Border radius" content="7px"/>
+
+<meta name="text:Sidebar description" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque hendrerit diam nec quam consequat tristique. Nam posuere finibus nisl at rutrum."/>
+
+<meta name="text:Link one title" content="link title"/>
+<meta name="text:Link one URL" content="/"/>
+<meta name="text:Link two title" content="link title"/>
+<meta name="text:Link two URL" content="/"/>
+<meta name="text:Link three title" content="link title"/>
+<meta name="text:Link three URL" content="/"/>
+<meta name="text:Link four title" content="link title"/>
+<meta name="text:Link four URL" content="/"/>
+<meta name="text:Link five title" content="link title"/>
+<meta name="text:Link five URL" content="/"/>
+
+<!--============================== links ==============================-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family={text:Font}:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_o5hd5vvqpoqiwwmi.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/iconfont/tabler-icons.min.css">
+<link rel="stylesheet" href="//npf-images-v3.github.io/recon.css">
+<link href="https://static.tumblr.com/qudkd6d/OcDnl99gb/style.css" rel="stylesheet" type="text/css"/>
+
+<!--============================== scripts ==============================-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script src="https://static.tumblr.com/qudkd6d/Az6nkemqr/pxuphotoset.min.js"></script>
+<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
+<script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
+<script src="https://seyche.github.io/external-files-hosting/plugins/flexframes-modified.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.js"></script>
+<script src="//npf-images-v3.github.io/script.js"></script>
+<script src="https://static.tumblr.com/0podkko/aZZqe4033/customaudio.min.js"></script>
+
+<!--============================== css ==============================-->
+
+<style type="text/css">
+
+*{box-sizing:border-box}
+
+*:not(a),
+::before,
+::after{transition:background .3s, border .3s}
+
+:root{
+    --Link:{RGBcolor:link};
+    --Title:{RGBcolor:title};
+    --Text:{RGBcolor:text};
+    --Boxes:{RGBcolor:boxes};
+    --Borders:{RGBcolor:borders};
+    --Accent:{RGBcolor:accent};
+    --Scrollbar:var(--Accent);
+    --Inner-boxes:{RGBcolor:inner boxes};
+    --Header-color:{RGBcolor:header color};
+    --Header-gradient:radial-gradient(circle, rgba({RGBcolor:header gradient 1},1) 0%, rgba({RGBcolor:header gradient 2},1) 100%);
+    --Background-gradient:radial-gradient(circle, rgba({RGBcolor:background gradient 1},1) 0%, rgba({RGBcolor:background gradient 2},1) 100%);
+    
+	--Font-size:{text:Font size};
+    --Main-font:'{text:font}';
+	
+	--Main-gap:50px;
+	--Posts-gap:50px;
+	--Border-width:{select:border width};
+	--Posts-width:{select:posts width};
+	--Border-radius:{text:border radius};
+	--Main-width:calc(245px + var(--Main-gap) + var(--Posts-width));
+    
+    --NPF-Image-Spacing:1px;
+    --NPF-Caption-Spacing:35px;
+}
+
+/*----- dark mode -----*/
+body.dark-mode{
+    --Boxes:24,24,24;
+    --Link:255,255,255;
+    --Text:195,195,195;
+    --Borders:32,32,32;
+    --Title:255,255,255;
+    --Inner-boxes:32,32,32;
+    --Background-gradient:radial-gradient(circle, rgba(16,16,16,1) 0%, rgba(16,16,16,1) 100%);
+}
+
+body{
+    margin:0;
+	padding:0;
+    opacity:0;
+    height:100%; 
+    overflow-x:hidden;
+    word-break:break-word;
+    color:rgb(var(--Text));
+    {block:ifBackgroundImage}
+        background-size:{select:background size};
+        background-repeat:{select:background repetition};
+        background-position:{select:background position};
+    {/block:ifBackgroundImage}
+    background-attachment:fixed!important;
+    background-image:{block:ifBackgroundImage}url("{image:background image}"),{/block:ifBackgroundImage} var(--Background-gradient);
+    font:400 var(--Font-size)/1.6 var(--Main-font), sans-serif;
+}
+
+body.loaded{opacity:1;}
+
+:focus{
+    border:0;
+    outline:0;
+}
+
+a:not(.back), 
+a:hover{
+    cursor:pointer;
+    transition:ease .3s;
+    text-decoration:none;
+    -moz-transition:ease .3s;
+    -webkit-transition:ease .3s;
+}
+
+a{color:rgb(var(--Link))}
+
+.tex a:not(.read_more):not(.post_media_photo_anchor),
+.source a{
+    font-weight:700;
+    border-bottom:2px dotted rgba(var(--Accent),.75);
+}
+
+b, 
+strong{font-weight:700;}
+
+b,
+i,
+u,
+s,
+strike{color:rgb(var(--Accent));}
+
+u{
+    text-decoration:none;
+    border-bottom:2px dotted;
+}
+
+small,
+sub,
+sup{font-size:.7em;}
+
+big{font-size:1.1em;}
+
+p {margin:.7em 0;}
+p:first-of-type {margin-top:0;}
+p:last-of-type {margin-bottom:0;}
+
+h1, 
+h2, 
+h3, 
+h4 {
+    margin:1em 0;
+    font-weight:700;
+    font-size:1.05em;
+}
+
+blockquote{
+    padding:15px;
+    margin:.5em 0;
+    border-radius:var(--Border-radius);
+    border:1px dotted rgba(var(--Accent),.75);
+}
+
+pre{
+    padding:15px;
+    margin:.5em 0;
+    display:block;
+    user-select:all;
+    position:relative;
+    font-family:inherit;
+    -ms-user-select:all;
+    white-space:pre-wrap;
+    -webkit-user-select:all;
+    background:rgba(var(--Accent),.25);
+    border-radius:var(--Border-radius);
+    border:1px solid rgba(var(--Accent),.5);
+}
+
+pre::before{
+    top:5px;
+    left:5px;
+    content:'';
+    position:absolute;
+    pointer-events:none;
+    width:calc(100% - 12px);
+    height:calc(100% - 12px);
+    border-radius:var(--Border-radius);
+    border:1px dotted rgba(var(--Accent),.5);
+}
+
+code{
+    margin:0;
+    display:inline;
+    border-radius:5px;
+    padding:.25em .5em;
+    font-family:inherit;
+    background:rgba(var(--Accent),.25);
+}
+
+h1:first-of-type, 
+h2:first-of-type, 
+h3:first-of-type, 
+h4:first-of-type {margin-top:0;}
+
+ul,
+ol{
+	margin:0;
+    padding:0;
+}
+
+ul{list-style:none;}
+
+ol{list-style:lower-alpha;}
+
+ol li::marker{color:rgb(var(--Accent));}
+
+.post .captions ul{padding-left:35px!important;}
+
+.post .captions ol{padding-left:calc(35px + 1em)!important;}
+
+.post .captions ul li::before{
+    width:5px;
+    height:5px;
+    content:"";
+    margin-right:1em;
+    position:relative;
+    display:inline-block;
+    vertical-align:middle;
+    background:rgb(var(--Accent));
+}
+
+hr {
+    width:100%;
+    height:1px;
+    border:none;
+    box-shadow:0;
+    margin:15px auto;
+    background:rgb(var(--Borders));
+}
+
+svg{
+	width:1em;
+	height:1em;
+}
+
+a.read_more{
+    line-height:1;
+    padding:5px 1em;
+    font-weight:700;
+    border-radius:30px;
+    text-transform:lowercase;
+    border:1px solid rgb(var(--Borders));
+}
+
+a.credits,
+{block:ifNotFullWidthHeader}
+a.night,
+a.open-controls,
+{/block:ifNotFullWidthHeader}
+a.back{
+    width:30px;
+    height:30px;
+    display:grid;
+    line-height:0;
+    border-radius:5px;
+    place-items:center;
+    background:rgb(var(--Boxes));
+    border:2px solid rgb(var(--Borders))!important;
+}
+
+/*credits*/
+
+a.credits{
+    z-index:9;
+    right:20px;
+	bottom:20px;
+    position:fixed;
+}
+
+a.credits svg{
+    transition:ease .3s;
+    -moz-transition:ease .3s;
+    -webkit-transition:ease .3s;
+}
+
+a.credits:hover svg{
+    fill:rgb(255, 249, 64);
+    color:rgb(255, 249, 64);
+    filter:drop-shadow(0 0 4px rgb(255, 249, 64));
+}
+
+/*mode button*/
+{block:ifNotFullWidthHeader}
+a.night{
+    top:70px;
+    z-index:9;
+    right:20px;
+    cursor:copy;
+    position:fixed;
+    text-decoration:none;
+}
+{/block:ifNotFullWidthHeader}
+
+a.night .sun,
+body.dark-mode a.night .moon{display:none;}
+
+body.dark-mode a.night .sun{display:initial;}
+
+a.night .sun{
+    fill:rgb(255, 249, 64);
+    color:rgb(255, 249, 64);
+    filter:drop-shadow(0 0 4px rgb(255, 249, 64));
+}
+
+/*back to top button*/
+
+a.back{
+    z-index:9;
+    right:20px;
+    bottom:70px;
+    cursor:copy;
+    position:fixed;
+    text-decoration:none;
+}
+
+/*selection*/
+::selection {
+    color:rgb(var(--Accent));
+    background-color:rgb(var(--Background-color));
+}
+
+::-moz-selection {
+    color:rgb(var(--Accent));
+    background-color:rgb(var(--Background-color));
+}
+
+/*tumblr controls*/
+
+.iframe-controls--desktop{
+    display:block;
+    {block:ifDarkControls}filter:invert(1);{/block:ifDarkControls}
+    
+    {block:ifNotFullWidthHeader}
+        top:20px!important;
+        right:70px!important;
+    {/block:ifNotFullWidthHeader}
+    
+    {block:ifFullWidthHeader}
+        {block:ifHeaderImage}
+            top:20px!important;
+        {/block:ifHeaderImage}
+        
+        {block:ifNotHeaderImage}
+            top:85px!important;
+        {/block:ifNotHeaderImage}
+            right:20px!important;
+    {/block:ifFullWidthHeader}
+    position:fixed!important;
+    z-index:9999999999999999999999999999999999!important;
+}
+
+{block:ifFullWidthHeader}
+    {block:ifHeaderImage}
+        .iframe-controls--desktop.stuck{top:85px!important;}
+    {/block:ifHeaderImage}
+{block:ifFullWidthHeader}
+
+.tmblr-iframe{
+    opacity:0;
+    visibility:hidden;
+    transition:ease .3s;
+    -moz-transition:ease .3s;
+    transform-origin:right top;
+    -webkit-transition:ease .3s;
+    transform:scale(0.7)!important;
+    -moz-transform:scale(0.7)!important;
+    -webkit-transform:scale(0.7)!important;
+}
+
+.tmblr-iframe.active{
+    opacity:1;
+    visibility:visible;
+}
+
+.tmblr-iframe--follow-teaser, 
+.tmblr-iframe--app-cta-button{display:none !important;}
+
+.open-controls{cursor:copy!important;}
+
+{block:ifNotFullWidthHeader}
+.open-controls{
+    top:20px;
+    z-index:9;
+    right:20px;
+    position:fixed;
+}
+{/block:ifNotFullWidthHeader}
+
+/*tooltip*/
+ 
+.tippy-box[data-theme~='kosmique'] {
+    font-size:.85em;
+    border-radius:30px;
+    color:rgb(var(--Text));
+    backdrop-filter:blur(10px);
+    background:rgba(var(--Boxes),.75);
+    border:1px solid rgb(var(--Borders));
+}
+
+[data-tippy-root]{z-index:99999999999999999999999999;}
+
+.tippy-content{padding:5px 1em;}   
+
+/*scrollbar*/
+
+::-webkit-scrollbar{
+    width:14px;
+    height:14px;
+    padding:5px;
+    border:6px solid rgba(var(--Boxes));
+    background-color:rgb(var(--Borders));
+    outline:2px solid rgb(var(--Borders));
+}
+ 
+::-webkit-scrollbar-thumb {
+    border-radius:10px;
+    background-clip:padding-box;
+    border:5px solid transparent;
+    background-color:rgb(var(--Scrollbar));
+}
+
+/*-============================== header ==============================-*/
+
+header{flex-wrap:wrap}
+
+{block:ifNotFullWidthHeader}
+    .header-image{
+        height:300px;
+    	margin:50px auto 0;
+    	width:var(--Main-width);
+    	background-image:var(--Header-gradient);
+    	background-color:rgb(var(--Header-color));
+    	border:var(--Border-width) solid rgb(var(--Borders));
+    	border-radius:var(--Border-radius) var(--Border-radius) 0 0;
+    }
+    
+    .header-image img{
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        object-position:center;
+    	border-radius:var(--Border-radius) var(--Border-radius) 0 0;
+    }
+    
+    header{
+        top:0;
+        z-index:99;
+        display:flex;
+        padding:15px;
+        position:sticky;
+        align-items:center;
+    	width:var(--Main-width);
+        background:rgb(var(--Boxes));
+        justify-content:space-between;
+    }
+    
+    {block:ifHeaderImage}
+        header{
+        	margin:-1px auto 0;
+            border-top:0!important;
+            border:var(--Border-width) solid rgb(var(--Borders));
+            border-radius:0 0 var(--Border-radius) var(--Border-radius);
+        }
+    {/block:ifHeaderImage}
+    
+    {block:ifNotHeaderImage}
+        header{
+            margin:50px auto;
+            border-radius:var(--Border-radius);
+            border:var(--Border-width) solid rgb(var(--Borders));
+        }
+        
+        header[stuck]{
+            border-top-color:transparent;
+            border:var(--Border-width) solid rgb(var(--Borders));
+            border-radius:0 0 var(--Border-radius) var(--Border-radius);
+        }
+    {/block:ifNotHeaderImage}
+    
+    header a.night{position:none;}
+{/block:ifNotFullWidthHeader}
+
+{block:ifFullWidthHeader}
+    .header-image{
+        width:100%;
+        height:300px;
+    	background-image:var(--Header-gradient);
+    	background-color:rgb(var(--Header-color));
+    }
+        
+    .header-image img{
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        object-position:center;
+    }
+        
+    header{
+        top:0;
+    	width:100%;
+        z-index:99;
+        display:flex;
+        padding:15px;
+        align-items:center;
+        background:rgb(var(--Boxes));
+        justify-content:space-between;
+        border:var(--Border-width) solid rgb(var(--Borders));
+        border-radius:0 0 var(--Border-radius) var(--Border-radius);
+    }
+    
+    {block:ifHeaderImage}
+        header{
+            position:sticky;
+        	margin:-1px auto 0;
+            border-top-color:transparent;
+        }
+    {/block:ifHeaderImage}
+    
+    {block:ifNotHeaderImage}
+        header{
+            position:fixed;
+            border:var(--Border-width) solid rgb(var(--Borders));
+        }
+    {/block:ifNotHeaderImage}
+{/block:ifFullWidthHeader}
+
+.blog-icon{
+    width:30px;
+    height:30px;
+    border-radius:5px;
+}
+
+.blog-title{
+    height:30px;
+    line-height:1;
+    border-radius:5px;
+    letter-spacing:1px;
+    padding:.5rem .75em;
+    background:rgb(var(--Inner-boxes));
+}
+
+header nav{
+    gap:10px;
+    display:flex;
+}
+
+header nav a{
+    width:30px;
+    height:30px;
+    display:grid;
+    line-height:0;
+    border-radius:5px;
+    place-items:center;
+    border:2px solid rgb(var(--Borders))!important;
+}
+
+header nav svg{
+    width:18px;
+    height:18px;
+}
+
+header a[class^="open-"]{cursor:copy;}
+
+a.open-section svg.icon-tabler-x,
+a.open-section.active svg.icon-tabler-user,
+a.open-controls svg.icon-tabler-x,
+a.open-controls.active svg.icon-tabler-tool,
+a.open-menu svg.icon-tabler-x,
+a.open-menu.active svg.icon-tabler-menu-2{display:none;}
+
+a.open-section.active svg.icon-tabler-x,
+a.open-controls.active svg.icon-tabler-x,
+a.open-menu.active svg.icon-tabler-x{display:initial;}
+
+header .dropdown{
+    width:100%;
+    margin-top:15px;
+}
+
+header .dropdown ul{
+    opacity:0;
+    display:flex;
+    flex-wrap:wrap;
+    padding-top:15px;
+    border-top:2px dotted rgb(var(--Borders));
+}
+
+header .dropdown ul.active{opacity:1;}
+
+header .dropdown ul li{line-height:1;}
+
+header .dropdown li + li::before{
+    width:1px;
+    content:'';
+    height:20px;
+    margin-inline:15px;
+    display:inline-block;
+    vertical-align:middle;
+    transform:rotate(15deg);
+    background:rgb(var(--Borders));
+}
+
+header .dropdown a:hover{
+    border-radius:3px;
+    color:rgb(var(--Accent));
+    background:rgba(var(--Accent),.15);
+    box-shadow:0 0 0 5px rgba(var(--Accent),.15);
+}
+/*-============================== main ==============================-*/
+
+main{
+	display:grid;
+	margin:50px auto;
+	align-items:start;
+	width:var(--Main-width);
+	column-gap:var(--Main-gap);
+	{block:ifFullWidthHeader}
+	    {block:ifNotHeaderImage}
+	        margin-top:115px!important;
+	    {/block:ifNotHeaderImage}
+	{/block:ifFullWidthHeader}
+	min-height:calc(100vh - 248px);
+}
+
+main[layout="left"]{grid-template-columns:245px var(--Posts-width);}
+main[layout="right"]{grid-template-columns:var(--Posts-width) 245px;}
+
+/*-============================== aside ==============================-*/
+
+main[layout="right"] aside{
+    grid-row-start:1;
+    grid-column-start:2;
+}
+
+aside{
+    top:105px;
+    position:sticky;
+}
+
+aside > section{
+    padding:15px;
+    margin-bottom:45px;
+    background:rgb(var(--Boxes));
+    border-radius:var(--Border-radius);
+    border:var(--Border-width) solid rgb(var(--Borders));
+}
+
+/*blog title*/
+
+.blog{
+    gap:10px;
+    display:flex;
+    align-items:center;
+    color:rgb(var(--Title));
+}
+
+span.small-icon{
+    width:22px;
+    height:22px;
+    display:grid;
+    line-height:0;
+    border-radius:5px;
+    place-items:center;
+    background:rgb(var(--Borders));
+}
+
+span.blog-user{font-weight:700;}
+
+/*description*/
+
+aside .description{
+    margin-top:15px;
+    padding-top:15px;
+    border-top:2px dotted rgb(var(--Borders));
+}
+
+/*-============================== posts ==============================-*/
+
+main[layout="right"] #posts,
+main[layout="right"] #about{grid-column-start:1;}
+
+#posts,
+#about{width:var(--Posts-width);}
+
+.post{
+    overflow:hidden;
+    background:rgb(var(--Boxes));
+    margin-bottom:var(--Posts-gap);
+    border-radius:var(--Border-radius);
+    border:var(--Border-width) solid rgb(var(--Borders));
+}
+
+.post:last-of-type{margin-bottom:0;}
+
+/*photo*/
+
+.photo {
+    overflow:hidden;
+    position:relative;
+    border-radius:var(--Border-radius) var(--Border-radius) 0 0;
+}
+
+.photo a{cursor:zoom-in;}
+
+.photo img,
+.tex > .tmblr-full img{
+    width:100%;
+    display:block;
+}
+
+.tex > .tmblr-full img, 
+.npf_inst{
+    padding:15px;
+    overflow:hidden;
+    border-radius:var(--Border-radius);
+    border:2px dotted rgb(var(--Borders));
+}
+
+.tex > .tmblr-full img + p, 
+.npf_inst + p{margin-top:15px;}
+
+/*lightboxes*/
+
+img{
+    height:auto;
+    display:block;
+    max-width:100%;
+}
+
+iframe,
+.tmblr-full > video{display:block;}
+
+.vignette, 
+#vignette {opacity:0;}
+
+.lightbox-image, 
+#tumblr_lightbox img {
+    max-width:none;
+    padding:10px!important;
+    box-shadow:none !important;
+    background:rgb(var(--Boxes))!important;
+    border-radius:var(--Border-radius)!important;
+    border:4px double rgb(var(--Borders))!important;
+}
+
+.tmblr-lightbox, 
+#tumblr_lightbox {
+    cursor:zoom-out;
+    background:rgb(var(--Background-color))!important;
+}
+
+.lightbox-caption, 
+#tumblr_lightbox_caption {visibility:hidden;}
+
+.npf_row figure{cursor:pointer;}
+
+.npf_row figure:focus{outline:0;}
+
+/*titles*/
+ 
+.post-title{
+    padding:15px;
+    font-weight:700;
+    color:rgb(var(--Title));
+    border-bottom:2px dotted rgb(var(--Borders));
+}
+
+/*captions*/ 
+
+.comment {
+    padding:25px;
+    list-style:none;
+}    
+
+.comment + .comment,
+.photo + .captions,
+.link + .captions{border-top:3px double rgb(var(--Borders));}
+
+a.user,
+span.user{
+    gap:10px;
+    display:flex;
+    align-items:center;
+    margin-bottom:15px;
+    padding-bottom:15px;
+    color:rgb(var(--Link));
+    border-bottom:2px dotted rgb(var(--Borders));
+}
+
+a.user svg,
+span.user svg{
+    width:26px;
+    height:26px;
+    padding:5px;
+    display:grid;
+    line-height:0;
+    border-radius:5px;
+    place-items:center;
+    background:rgba(var(--Borders));
+}
+
+a.user span,
+span.user span{font-weight:700;}
+
+span.deactivated span::after{
+    opacity:0;
+    line-height:1;
+    font-size:.7em;
+    padding:5px 1em;
+    font-weight:700;
+    margin-left:10px;
+    border-radius:30px;
+    pointer-events:none;
+    content:'deactivated';
+    vertical-align:middle;
+    color:rgb(var(--Text));
+    transition:opacity .4s;
+    text-transform:lowercase;
+    border:1px solid rgb(var(--Borders));
+}
+
+span.deactivated:hover span::after{opacity:1;}
+
+/*quote*/
+
+.quote{
+    display:grid;
+    padding:15px;
+    column-gap:15px;
+    grid-template-columns:30px 1fr;
+}
+
+.quote > svg{
+    width:30px;
+    height:30px;
+    padding:5px;
+    display:grid;
+    line-height:0;
+    flex-shrink:0;
+    border-radius:5px;
+    place-items:center;
+    color:rgb(var(--Accent));
+    background:rgba(var(--Accent),.25);
+}
+
+.q{
+    list-style:none;
+    min-height:30px;
+    font-weight:700;
+    padding:6.5px 1em;
+    border-radius:30px;
+    color:rgb(var(--Link));
+    text-transform:lowercase;
+    border:1px solid rgb(var(--Borders));
+}
+
+.q::first-line{line-height:1;}
+
+.source{
+    margin-top:15px;
+    padding-top:15px;
+    grid-column:span 2;
+    border-top:2px dotted rgb(var(--Borders));
+}
+
+/*link*/
+
+.npf-link-block{font:inherit;}
+
+.link{
+    display:block;
+    overflow:hidden;
+    border-radius:var(--Border-radius) var(--Border-radius) 0 0;
+}
+
+.npf-link-block{
+    display:block;
+    overflow:hidden;
+    border-radius:var(--Border-radius);
+    border:1px solid rgb(var(--Borders))!important;
+}
+
+.link-info,
+.npf-link-block .bottom{padding:30px;}
+
+div.npf-link-block .bottom .description{
+    padding:15px;
+    max-height:none!important;
+    border-radius:var(--Border-radius);
+    border:2px dotted rgb(var(--Borders))!important;
+}
+
+div.npf-link-block a{
+    border-bottom:0!important;
+    font-weight:normal!important;
+}
+
+.npf-link-block .title + .bottom {padding-top:15px;}
+
+.link-name,
+.npf-link-block .title{
+    font-size:1.3em;
+    font-weight:700;
+}
+
+.npf-link-block .title {padding:30px 30px 0!important;}
+
+.npf-link-block .title {
+    overflow:inherit;
+    max-height:inherit;
+    line-height:inherit;
+}
+
+.host,
+.npf-link-block .bottom .site-name {
+    padding:5px 1em;
+    margin-top:10px;
+    border-radius:30px;
+    opacity:1!important;
+    display:inline-block;
+    line-height:1!important;
+    font-weight:700!important;
+    font-size:inherit!important;
+    color:rgb(var(--Link))!important;
+    text-transform:inherit!important;
+    border:1px solid rgb(var(--Borders));
+}
+
+.host, 
+.npf-link-block .bottom .site-name{}
+
+.host::before,
+.npf-link-block .bottom .site-name::before{
+    content:'\eade';
+    margin-right:15px;
+    vertical-align:middle;
+    font-family:'tabler-icons';
+}
+
+/*audio*/
+
+.audio {padding:15px;}
+
+.audio-time {
+    display:flex;
+    font-size:.8em;
+    margin-top:10px;
+    padding-top:10px;
+    border-top:2px dotted rgb(var(--Borders));
+}
+
+.audio_info{
+    gap:15px;
+    display:grid;
+    grid-template-columns:90px 1fr;
+}
+
+.album-art{border-radius:5px;}
+
+.time_left::before {content:"/";}
+
+.track{
+    font-weight:700;
+    color:rgb(var(--Title));
+}
+
+.player-controls {
+    gap:15px;
+    display:flex;
+    line-height:0;
+    margin-top:15px;
+    align-items:center;
+    border-radius:30px;
+    justify-content:center;
+    border:1px solid rgb(var(--Borders));
+}
+
+.error_icon svg {stroke:red;}
+
+.player{
+    padding:15px;
+    border-inline:1px solid rgb(var(--Borders));
+}
+
+.player svg{
+    width:30px;
+    height:30px;
+    padding:5px;
+    line-height:0;
+    border-radius:5px;
+    place-items:center;
+    display:inline-grid;
+    vertical-align:middle;
+    color:rgb(var(--Accent));
+    background:rgba(var(--Accent),.25);
+}
+
+.icon-tabler-repeat,
+.icon-tabler-arrows-shuffle{width:.85em;}
+
+/*asks*/
+
+.question{padding:15px;}
+
+.answer{padding:15px;}
+
+.question + .answer{border-top:3.5px double rgb(var(--Borders));}
+
+.answer + .answer{border-top:2px dotted rgb(var(--Borders));}
+
+.question .tex,
+.answer .tex{
+    padding:15px;
+    margin-top:15px;
+    margin-left:45px;
+    border-radius:var(--Border-radius);
+    border:2px dotted rgb(var(--Borders));
+}
+
+.as{
+    gap:15px;
+    display:grid;
+    grid-template-columns:30px 1fr 30px;
+}
+
+.as .user{
+    flex:1;
+    line-height:1;
+    font-weight:700;
+    padding:6.5px 1em;
+    border-radius:5px;
+    color:rgb(var(--Link));
+    text-transform:lowercase;
+    border:1px solid rgb(var(--Borders));
+}
+
+.as img{
+    width:30px;
+    height:30px;
+    border-radius:5px;
+}
+
+.as svg{
+    width:30px;
+    height:30px;
+    padding:5px;
+    display:grid;
+    line-height:0;
+    flex-shrink:0;
+    border-radius:5px;
+    place-items:center;
+    color:rgb(var(--Accent));
+    background:rgba(var(--Accent),.25);
+}
+
+
+/*chat*/
+
+.chat{
+}
+
+.tex .npf_chat{margin-bottom:15px;}
+
+.l{
+    padding:15px;
+    border-bottom:2px dotted rgb(var(--Borders));
+}
+
+.l:last-of-type{border-bottom:0;}
+
+.tex .npf_chat {font: inherit;}
+
+.label,
+.npf_chat b{
+    font-weight:700;
+    color:rgb(var(--Accent));
+}
+
+.l:last-of-type,
+.tex .npf_chat:last-of-type{margin-bottom:0;}
+
+/*post header*/
+
+.post-header{
+    display:flex;
+    margin-bottom:2em;
+    align-items:center;
+    text-transform:lowercase;
+}
+
+.post-header img{
+    width:35px;
+    height:35px;
+    margin-right:1.5em;
+    border-radius:100%;
+}
+
+.post-origin{font-weight:700;}
+.post-origin a{color:rgb(var(--Title));}
+
+/*post info*/
+
+.when {
+    gap:15px;
+    display:flex;
+    padding:25px;
+    align-items:center;
+    border-top:3px double rgb(var(--Borders));
+}
+
+.when a{
+    display:flex;
+    overflow:hidden;
+    position:relative;
+    align-items:center;
+}
+
+.when svg{
+    width:26px;
+    height:26px;
+    padding:5px;
+    display:grid;
+    line-height:0;
+    border-radius:5px;
+    place-items:center;
+    background:rgb(var(--Inner-boxes));
+}
+
+a.notecount{
+    gap:10px;
+    {block:indexpage}cursor:copy;{/block:indexpage}
+    {block:permalinkpage}cursor:text;{/block:permalinkpage}
+    display:flex;
+    line-height:1;
+    font-weight:700;
+    overflow:hidden;
+    position:relative;
+    align-items:center;
+}
+
+.pin{
+    gap:15px;
+    display:flex;
+    padding:15px;
+    border-bottom:2px dotted rgb(var(--Borders));
+}
+
+.pin + .photo,
+.pin + .link{border-radius:0;}
+
+.pin svg{
+    width:26px;
+    height:26px;
+    padding:5px;
+    display:grid;
+    line-height:0;
+    flex-shrink:0;
+    border-radius:5px;
+    place-items:center;
+    color:rgb(var(--Accent));
+    background:rgba(var(--Accent),.25);
+}
+
+.pin span{
+    line-height:1;
+    padding:5px 1em;
+    font-weight:700;
+    border-radius:30px;
+    color:rgb(var(--Accent));
+    text-transform:lowercase;
+    border:1px solid rgb(var(--Borders));
+}
+
+.like-button{margin-left:auto;}
+
+.liked ~ svg,
+a.reblog-button:visited{color:rgb(var(--Accent))}
+
+.when .like-button .like_button {position:relative;}
+
+.when .like-button .like_button iframe {
+    right:0;
+    bottom:0;
+    top:-30px;
+    z-index:2;
+    opacity:0;
+    left:-30px;
+    position:absolute;
+}
+
+/*permalink info*/
+ 
+.perma-info{
+    padding:15px;
+    list-style:none;
+}
+
+.perma-info li:not(:last-of-type){
+    margin-bottom:15px;
+    padding-bottom:15px;
+    border-bottom:2px dotted rgb(var(--Borders));
+}
+
+.perma-info a{
+    font-weight:700;
+    text-transform:lowercase;
+    border-bottom:2px dotted rgba(var(--Accent),.75);
+}
+ 
+.perma-info svg{
+    width:26px;
+    height:26px;
+    padding:5px;
+    line-height:0;
+    margin-right:15px;
+    border-radius:5px;
+    place-items:center;
+    display:inline-grid;
+    vertical-align:middle;
+    color:rgb(var(--Accent));
+    background:rgba(var(--Accent),.25);
+}
+
+/*notes*/
+
+.pagenotes .post-title{
+    gap:15px;
+    display:flex;
+    align-items:center;
+}
+
+.pagenotes .post-title svg{
+    width:26px;
+    height:26px;
+    padding:5px;
+    display:grid;
+    line-height:0;
+    border-radius:5px;
+    place-items:center;
+    color:rgb(var(--Accent));
+    background:rgba(var(--Accent),.25);
+}
+
+ol.notes {
+    margin:0px;
+    padding:15px;
+    text-transform:lowercase;
+}
+
+ol.notes li.note:not(:last-of-type){
+    margin-bottom:15px;
+    padding-bottom:15px;
+    border-bottom:2px dotted rgb(var(--Borders));
+}
+
+ol.notes li.note {
+    gap:15px;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:start;
+}
+
+ol.notes span.action{
+    flex:1;
+    min-height:30px;
+    padding-block:0.5rem;
+}
+
+ol.notes span.action::first-line{line-height:1;}
+
+ol.notes span.action a{font-weight:700;}
+
+a.avatar_frame{
+    flex-shrink:0;
+    position:relative;
+}
+
+li.note a.avatar_frame::before{
+    width:15px;
+    right:-5px;
+    bottom:-5px;
+    height:15px;
+    display:grid;
+    line-height:0;
+    font-size:10px;
+    position:absolute;
+    border-radius:3px;
+    place-items:center;
+    box-sizing:border-box;
+    color:rgb(255,255,255);
+    font-family:"tabler-icons";
+}
+
+li.note.reblog a.avatar_frame::before{
+    content:'\eb72';
+    background:rgb(38, 189, 96);
+}
+
+li.note.like a.avatar_frame::before{
+    content:'\eabe';
+    background:rgb(189, 38, 61);
+}
+
+li.note.reply a.avatar_frame::before{
+    content:'\eaec';
+    background:rgb(38, 119, 189);
+}
+
+li.note.reblog.original_post a.avatar_frame::before{
+    content: "\eb4d";
+    background:rgb(189, 38, 186);
+}
+
+a.avatar_frame img.avatar{
+    width:30px;
+    height:30px;
+    border-radius:5px;
+}
+
+ol.notes blockquote{
+    width:100%;
+    margin:5px 15px 0 45px!important;
+}
+
+a.more_notes_link{
+    gap:15px;
+    display:flex;
+    font-weight:700;
+    align-items:center;
+}
+
+a.more_notes_link::before,
+span.notes_loading::before{
+    width:30px;
+    height:30px;
+    line-height:0;
+    flex-shrink:0;
+    font-size:18px;
+    content:'\ebb5';
+    border-radius:5px;
+    font-weight:normal;
+    place-items:center;
+    display:inline-grid;
+    font-family:'tabler-icons';
+    background:rgb(var(--Borders));
+}
+
+span.notes_loading{
+    font-weight:700;
+    color:rgb(var(--Link));
+}
+
+span.notes_loading::before{
+    margin-right:15px;
+    vertical-align:middle;
+}
+
+.notes-content{border-top:3px double rgb(var(--Borders));}
+
+.notes-content ol.notes{
+    overflow:auto;
+    max-height:300px;
+}
+
+.loading {
+    gap:20px;
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    margin-bottom:15px;
+    justify-content:center;
+}
+
+.loading div {
+    width:10px;
+    height:10px;
+    border-radius:100%;
+    background:rgb(var(--Accent));
+    animation:.9s bounce infinite alternate;
+}
+
+.loading div:nth-child(2) {animation-delay: 0.3s;}
+
+.loading div:nth-child(3) {animation-delay: 0.6s;}
+
+ @keyframes bounce {
+	 to {opacity: 0.3;}
+}
+
+/*tags*/
+
+.result{
+    padding:25px;
+    background:rgb(var(--Boxes));
+    margin-bottom:var(--Posts-gap);
+    border-radius:var(--Border-radius);
+    border:var(--Border-width) solid rgb(var(--Borders));
+}
+
+.result span{
+    gap:15px;
+    display:flex;
+    margin-top:15px;
+    font-weight:700;
+    padding-top:15px;
+    align-items:center;
+    color:rgb(var(--Title));
+    text-transform:lowercase;
+    border-top:2px dotted rgb(var(--Borders));
+}
+
+.result span::before{
+    width:26px;
+    height:26px;
+    display:grid;
+    line-height:0;
+    flex-shrink:0;
+    border-radius:5px;
+    place-items:center;
+    font-weight:normal;
+    color:rgb(var(--Accent));
+    font-family:'tabler-icons';
+    background:rgba(var(--Accent),.25);
+}
+
+.result span.tag::before{content:'\eabc';}
+
+.result span.search_query::before{content:'\eb1c';}
+
+.result span.date::before{content:'\ee21';}
+
+.tags{
+    gap:15px;
+    display:flex;
+    padding:25px;
+    border-top:2px dotted rgb(var(--Borders));
+}
+
+.tags > div{
+    gap:15px;
+    display:flex;
+    flex-wrap:wrap;
+}
+
+.tags svg{
+    width:26px;
+    height:26px;
+    padding:5px;
+    display:grid;
+    line-height:0;
+    flex-shrink:0;
+    border-radius:5px;
+    place-items:center;
+    color:rgb(var(--Accent));
+    background:rgba(var(--Accent),.25);
+}
+
+.tags a {
+    line-height:1;
+    padding:5px 1em;
+    font-weight:700;
+    border-radius:30px;
+    border:1px solid rgb(var(--Borders));
+}  
+
+/*-============================== footer ==============================-*/
+
+footer{
+    display:flex;
+    padding:20px;
+    font-size:.85em;
+    align-items:center;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    background:rgb(var(--Boxes));
+    justify-content:space-around;
+    border-top:var(--Border-width) solid rgb(var(--Borders));
+}
+
+/*pagination*/
+
+#pagination a + a::before,
+#pagination a + span::before,
+#pagination span + a::before{
+    content:'/';
+    margin:0 10px;
+    pointer-events:none;
+    color:rgba(var(--Text),.3);
+}
+
+#pagination a:not(.active){
+    cursor:text;
+    color:rgb(var(--Text));
+}
+
+/*search bar*/
+
+.search form{
+    gap:10px;
+    padding:10px;
+    display:flex;
+    align-items:center;
+    border-radius:var(--Border-radius);
+    border:1px solid rgb(var(--Borders));
+}
+
+.search input{
+    border:0;
+    padding:0;
+    width:100%;
+    color:inherit;
+    font-family:inherit;
+    background:transparent;
+}
+
+.search input::placeholder {
+    color:inherit;
+    font-size:.85em;
+    letter-spacing:1px;
+	transition:opacity .3s;
+    text-transform:uppercase;
+	-moz-transition:opacity .3s;
+	-webkit-transition:opacity .3s
+}
+
+.search input:focus::-webkit-input-placeholder{opacity:0;}
+.search input:focus:-moz-placeholder{opacity:0;}
+.search input:focus::-moz-placeholder{opacity:0;}
+.search input:focus:-ms-input-placeholder{opacity:0;}
+
+/*-============================== about ==============================-*/
+
+#about{
+    gap:30px;
+    display:grid;
+}
+
+.about-image{
+    width:100%;
+    padding:5px;
+    height:125px;
+    object-fit:cover;
+    object-position:center;
+    background:rgb(var(--Boxes));
+    border-radius:var(--Border-radius);
+    border:var(--Border-width) solid rgb(var(--Borders));
+}
+
+#about > div{
+    padding:15px;
+    background:rgb(var(--Boxes));
+	border-radius:var(--Border-radius);
+	border:var(--Border-width) solid rgb(var(--Borders));
+}
+
+.main-info{list-style:none;}
+
+.main-info li:not(:last-of-type){
+    margin-bottom:15px;
+    padding-bottom:15px;
+    border-bottom:2px dotted rgb(var(--Borders));
+}
+
+.main-info li{
+    gap:15px;
+    display:flex;
+    align-items:center;
+}
+
+.main-info li::before{
+    width:30px;
+    height:30px;
+    display:grid;
+    line-height:0;
+    flex-shrink:0;
+    font-size:18px;
+    border-radius:5px;
+    place-items:center;
+    font-family:'tabler-icons';
+    background:rgb(var(--Borders));
+}
+
+.main-info li.name::before{content:'\eee0';}
+.main-info li.pronouns::before{content:'\eb4d';}
+.main-info li.location::before{content:'\eae8';}
+.main-info li.likes::before{content:'\eb3c';}
+.main-info li.dislikes::before{content:'\eb3b';}
+
+/*-============================== queries ==============================-*/
+
+@media (max-width:450px){
+    a.blog span.blog-title{display:none;}
+}
+
+@media (max-width:1023px){
+    header,
+    .header-image{
+        margin:0;
+        width:100%;
+    }
+    
+    .header-image,
+    .header-image img{border-radius:0;}
+    
+    main{display:block;}
+    
+    aside,
+    a.open-controls,
+    body > a.night,
+    .tmblr-iframe{display:none!important;}
+    
+    header a.night{position:initial;}
+    
+    main,
+    #posts,
+    #about{
+        width:75vw;
+        margin-inline:auto;
+    }
+}
+
+
+/*custom css*/
+{CustomCSS}
+
+</style>
+
+</head>
+
+<body>
+
+<!--============================== header ==============================-->
+
+{block:ifHeaderImage}
+    <div class="header-image">
+        <img src="{image:Header image}">
+    </div>
+{/block:ifHeaderImage}
+
+<header>
+    <a href="{blogurl}" class="blog">
+        <img src="{portraiturl-48}" class="blog-icon">
+        <span class="blog-title">{title}</span>
+    </a>
+    
+    <nav>
+        <a href="{blogurl}" title="home">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+               <polyline points="5 12 3 12 12 3 21 12 19 12"></polyline>
+               <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"></path>
+               <rect x="10" y="12" width="4" height="4"></rect>
+            </svg>
+        </a>
+        
+        <a href="/ask" title="message">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mailbox" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+               <path d="M10 21v-6.5a3.5 3.5 0 0 0 -7 0v6.5h18v-6a4 4 0 0 0 -4 -4h-10.5"></path>
+               <path d="M12 11v-8h4l2 2l-2 2h-4"></path>
+               <path d="M6 15h1"></path>
+            </svg>
+        </a>
+        
+        {block:homepage}
+            {block:ifAboutSection}
+                <a class="open-section" title="about">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                       <circle cx="12" cy="7" r="4"></circle>
+                       <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+                    </svg>
+                    
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                       <line x1="18" y1="6" x2="6" y2="18"></line>
+                       <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </a>
+            {/block:ifAboutSection}
+        {/block:homepage}
+        
+        <a class="open-menu" title="menu">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-menu-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+               <line x1="4" y1="6" x2="20" y2="6"></line>
+               <line x1="4" y1="12" x2="20" y2="12"></line>
+               <line x1="4" y1="18" x2="20" y2="18"></line>
+            </svg>
+            
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+               <line x1="18" y1="6" x2="6" y2="18"></line>
+               <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </a>
+        
+        <a href="/archive" title="history">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-history" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+               <polyline points="12 8 12 12 14 14"></polyline>
+               <path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5"></path>
+            </svg>
+        </a>
+        
+        {block:ifNotFullWidthHeader}
+            <a class="night" onclick="themeToggle()" title="dark mode">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-sun sun" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"></path>
+                </svg>
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-moon-stars moon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path>
+                    <path d="M17 4a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2"></path>
+                    <path d="M19 11h2m-1 -1v2"></path>
+                </svg>
+            </a>
+        {block:ifNotFullWidthHeader}
+        
+        {block:ifFullWidthHeader}
+            <a class="open-controls" title="open controls">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tool" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                   <path d="M7 10h3v-3l-3.5 -3.5a6 6 0 0 1 8 8l6 6a2 2 0 0 1 -3 3l-6 -6a6 6 0 0 1 -8 -8l3.5 3.5"></path>
+                </svg>
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                   <line x1="18" y1="6" x2="6" y2="18"></line>
+                   <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </a>
+            
+            <a class="night" onclick="themeToggle()" title="dark mode">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-sun sun" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"></path>
+                </svg>
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-moon-stars moon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path>
+                    <path d="M17 4a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2"></path>
+                    <path d="M19 11h2m-1 -1v2"></path>
+                </svg>
+            </a>
+
+        {/block:ifFullWidthHeader}
+    </nav>
+    
+    <div class="dropdown" style="display:none;">
+        <ul>
+            {block:ifLinkOneTitle}
+                <li><a href="{text:link one url}">{text:link one title}</a></li>
+            {/block:ifLinkOneTitle}
+            
+            {block:ifLinkTwoTitle}
+                <li><a href="{text:link two url}">{text:link two title}</a></li>
+            {/block:ifLinkTwoTitle}
+            
+            {block:ifLinkThreeTitle}
+                <li><a href="{text:link three url}">{text:link three title}</a></li>
+            {/block:ifLinkThreeTitle}
+            
+            {block:ifLinkFourTitle}
+                <li><a href="{text:link four url}">{text:link four title}</a></li>
+            {/block:ifLinkFourTitle}
+            
+            {block:ifLinkFiveTitle}
+                <li><a href="{text:link five url}">{text:link five title}</a></li>
+            {/block:ifLinkFiveTitle}
+            
+            {block:HasPages}
+                {block:Pages}
+                    <li><a href="{URL}">{Label}</a></li>
+                {/block:Pages}
+            {/block:HasPages}
+        </ul>
+    </div>
+</header>
+
+<!--============================== content ==============================-->
+
+<main layout="{select:Sidebar direction}">
+
+<!--------------------------------- sidebar --------------------------------->
+<aside>
+    
+    <section>
+        <div class="blog">
+            <span class="small-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-at" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                   <circle cx="12" cy="12" r="4"></circle>
+                   <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28"></path>
+                </svg>
+            </span>
+            
+            <span class="blog-user">{name}</span>
+        </div>
+        
+        {block:ifSidebarDescription}
+            <div class="description">{text:Sidebar description}</div>
+        {/block:ifSidebarDescription}  
+    </section>
+</aside>
+
+<!--------------------------------- posts --------------------------------->
+<section id="posts">
+
+{block:SearchPage}
+    <article class="result">
+        <!----- no search result callback -----> 
+        {block:NoSearchResults}
+            {lang:No search results for SearchQuery 2}
+        {/block:NoSearchResults}
+ 
+        <!----- search result ----->
+        {lang:SearchResultCount results for SearchQuery 2}
+    </article>
+{/block:SearchPage}
+ 
+<!----- no posts callback -----> 
+{block:NoPosts}
+    <article class="result">
+        {lang:This minimalist Tumblr has no posts}
+    </article>
+{/block:NoPosts}
+ 
+<!----- tag counter result -----> 
+{block:TagPage}
+    <article class="result">
+        {lang:TagResultCount posts tagged Tag 2}
+    </article>
+{/block:TagPage}
+ 
+<!----- day page result -----> 
+{block:DayPage}
+    <article class="result">
+        {lang:Posted on DayOfWeek DayOfMonth Month Year 2}
+    </article>
+{/block:DayPage}
+
+<!----- entries ----->
+{block:posts inlineMediaWidth="1280" inlineNestedMediaWidth="1280"}
+    
+<article post-type="{posttype}" class="post {block:caption}captioned{/block:caption} {block:PinnedPostLabel}pinned{/block:PinnedPostLabel}" id="{postid}">
+
+<!----- pinned posts indicator ----->
+{block:indexpage}
+    {block:PinnedPostLabel} 
+        <div class="pin">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pin" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+               <path d="M15 4.5l-4 4l-4 1.5l-1.5 1.5l7 7l1.5 -1.5l1.5 -4l4 -4"></path>
+               <line x1="9" y1="15" x2="4.5" y2="19.5"></line>
+               <line x1="14.5" y1="4" x2="20" y2="9.5"></line>
+            </svg>
+            
+            <span>{PinnedPostLabel}</span>
+        </div>
+    {/block:PinnedPostLabel}
+{/block:indexpage}
+
+<!----- quote posts ----->
+{block:Quote}
+    <div class="quote">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-blockquote" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+           <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+           <path d="M6 15h15"></path>
+           <path d="M21 19h-15"></path>
+           <path d="M15 11h6"></path>
+           <path d="M21 7h-6"></path>
+           <path d="M9 9h1a1 1 0 1 1 -1 1v-2.5a2 2 0 0 1 2 -2"></path>
+           <path d="M3 9h1a1 1 0 1 1 -1 1v-2.5a2 2 0 0 1 2 -2"></path>
+        </svg>
+
+        <div class="q">{quote}</div>
+                
+        {block:Source}
+            <div class="source">{source}</div>
+        {/block:Source}
+    </div>
+    
+{/block:Quote}
+
+<!----- text posts ----->
+{block:Text}
+    {block:Title}
+        <div class="post-title">{title}</div>
+    {/block:Title}
+    
+    {block:RebloggedFrom}
+        <div class="captions">
+            {block:Reblogs}
+                <li class="comment">
+                	{block:IsActive}
+                        <a {block:haspermalink}href="{permalink}"{/block:haspermalink} class="user" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-at" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                               <circle cx="12" cy="12" r="4"></circle>
+                               <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28"></path>
+                            </svg>
+                            <span>{username}</span>
+                        </a>
+                    {/block:IsActive}
+                    
+                    {block:IsDeactivated}
+                        <span class="user deactivated">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-at" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                               <circle cx="12" cy="12" r="4"></circle>
+                               <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28"></path>
+                            </svg>
+                            <span>{username}</span>
+                        </span>
+                    {/block:IsDeactivated}
+                    <div class="tex">{body}</div>
+                </li>
+            {/block:Reblogs}
+        </div>
+    {/block:RebloggedFrom}
+    
+    {block:NotReblog}
+        <div class="captions">
+            <li class="comment">
+                <div class="tex">{body}</div>
+            </li>
+        </div>
+    {/block:NotReblog}
+{/block:Text}
+
+<!----- link posts ----->        
+{block:Link}
+    <a href="{URL}" {Target} class="link">
+        {block:Thumbnail}
+            <img src="{Thumbnail-HighRes}" class="thumbnail"/>
+        {/block:Thumbnail}
+        
+        <div class="link-info">
+            <div class="link-name">{name}</div>
+            
+            {block:Host}
+                <div class="host">{Host}</div>
+            {/block:Host}
+        </div>
+        
+    </a>
+        
+    {block:RebloggedFrom}
+        <div class="captions">
+            {block:Reblogs}
+                <li class="comment">
+                	{block:IsActive}
+                        <a {block:haspermalink}href="{permalink}"{/block:haspermalink} class="user" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-at" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                               <circle cx="12" cy="12" r="4"></circle>
+                               <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28"></path>
+                            </svg>
+                            <span>{username}</span>
+                        </a>
+                    {/block:IsActive}
+                    
+                    {block:IsDeactivated}
+                        <span class="user deactivated">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-at" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                               <circle cx="12" cy="12" r="4"></circle>
+                               <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28"></path>
+                            </svg>
+                            <span>{username}</span>
+                        </span>
+                    {/block:IsDeactivated}
+                    <div class="tex">{body}</div>
+                </li>
+            {/block:Reblogs}
+        </div>
+    {/block:RebloggedFrom}
+
+    {block:Description}
+        {block:NotReblog}
+            <div class="captions">
+                <li class="comment">
+                    <div class="tex">{description}</div>
+                </li>
+            </div>
+        {/block:NotReblog}
+    {/block:Description}
+{/block:Link}
+        
+<!----- chat posts ----->            
+{block:Chat}
+    {block:Title}
+    	<div class="post-title">{title}</div>
+    {/block:Title}
+    
+    <ol class="chat">
+        {block:lines}
+            <li class="l {Alt}">
+                {block:label}<span class="label">{label}</span>{/block:label}             {line}
+            </li>
+        {/block:lines}
+    </ol>
+{/block:Chat}
+
+<!----- photo posts ----->     
+{block:Photo}
+    <div class="photo">
+        {linkopentag}
+            <a href="#" onclick="Tumblr.Lightbox.init([{ width: {PhotoWidth-HighRes}, height: {PhotoHeight-HighRes}, low_res: '{PhotoURL-500}', high_res: '{PhotoURL-HighRes}' }]); $('body').toggleClass('tumblr_lightbox_active'); return false">
+                <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}">
+            </a>
+        {linkclosetag}
+    </div>
+    
+    {block:caption}
+        <div class="captions">
+            {block:Reblogs}
+                <li class="comment">
+                	{block:IsActive}
+                        <a {block:haspermalink}href="{permalink}"{/block:haspermalink} class="user" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-at" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                               <circle cx="12" cy="12" r="4"></circle>
+                               <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28"></path>
+                            </svg>
+                            <span>{username}</span>
+                        </a>
+                    {/block:IsActive}
+                    
+                    {block:IsDeactivated}
+                        <span class="user deactivated">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-at" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                               <circle cx="12" cy="12" r="4"></circle>
+                               <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28"></path>
+                            </svg>
+                            <span>{username}</span>
+                        </span>
+                    {/block:IsDeactivated}
+                    <div class="tex">{body}</div>
+                </li>
+            {/block:Reblogs}
+            
+            {block:NotReblog}
+                <li class="comment">
+                    <div class="tex">{caption}</div>
+                </li>
+            {/block:NotReblog}
+        </div>
+    {/block:caption}
+{/block:Photo}
+        
+<!----- photoset posts ----->     
+{block:Photoset}
+    <div class="photo">
+        <div class="photo-slideshow" id="photoset_{PostID}" data-layout="{PhotosetLayout}">
+            {block:Photos}
+                <div class="photo-data">
+                    <div class="pxu-photo">
+                        <img src="{PhotoURL-500}" width="{PhotoWidth-500}" height="{PhotoHeight-500}" data-highres="{PhotoURL-HighRes}" data-width="{PhotoWidth-HighRes}" data-height="{PhotoHeight-HighRes}" alt="{PhotoAlt}">
+                   </div>
+                   <a class="tumblr-box" rel="post-{PostID}" href="{PhotoURL-HighRes}"></a>
+                </div>
+            {/block:Photos}
+                
+        </div>
+    </div>
+    
+    {block:caption}
+        <div class="captions">
+            {block:Reblogs}
+                <li class="comment">
+                	{block:IsActive}
+                        <a {block:haspermalink}href="{permalink}"{/block:haspermalink} class="user" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-at" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                               <circle cx="12" cy="12" r="4"></circle>
+                               <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28"></path>
+                            </svg>
+                            <span>{username}</span>
+                        </a>
+                    {/block:IsActive}
+                    
+                    {block:IsDeactivated}
+                        <span class="user deactivated">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-at" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                               <circle cx="12" cy="12" r="4"></circle>
+                               <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28"></path>
+                            </svg>
+                            <span>{username}</span>
+                        </span>
+                    {/block:IsDeactivated}
+                    <div class="tex">{body}</div>
+                </li>
+            {/block:Reblogs}
+            
+            {block:NotReblog}
+                <li class="comment">
+                    <div class="tex">{caption}</div>
+                </li>
+            {/block:NotReblog}
+        </div>
+    {/block:caption}
+{/block:Photoset}
+        
+<!----- panorama posts ----->     
+{block:Panorama}
+    <div class="photo">
+        {LinkOpenTag}
+            <a href="#" onclick="Tumblr.Lightbox.init([{ width: {PhotoWidth-HighRes}, height: {PhotoHeight-HighRes}, low_res: '{PhotoURL-500}', high_res: '{PhotoURL-HighRes}' }]); $('body').toggleClass('tumblr_lightbox_active'); return false">
+                <img src="{PhotoURL-Panorama}" alt="{PhotoAlt}" />
+            </a>
+        {LinkCloseTag}
+     </div>
+     
+     {block:caption}
+        <div class="captions">
+            {block:Reblogs}
+                <li class="comment">
+                	{block:IsActive}
+                        <a {block:haspermalink}href="{permalink}"{/block:haspermalink} class="user" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-at" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                               <circle cx="12" cy="12" r="4"></circle>
+                               <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28"></path>
+                            </svg>
+                            <span>{username}</span>
+                        </a>
+                    {/block:IsActive}
+                    
+                    {block:IsDeactivated}
+                        <span class="user deactivated">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-at" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                               <circle cx="12" cy="12" r="4"></circle>
+                               <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28"></path>
+                            </svg>
+                            <span>{username}</span>
+                        </span>
+                    {/block:IsDeactivated}
+                    <div class="tex">{body}</div>
+                </li>
+            {/block:Reblogs}
+            
+            {block:NotReblog}
+                <li class="comment">
+                    <div class="tex">{caption}</div>
+                </li>
+            {/block:NotReblog}
+        </div>
+    {/block:caption}
+{/block:Panorama}
+
+<!----- video posts ----->     
+{block:Video}
+    <div class="photo video">{video-500}</div>
+    
+    {block:caption}
+        <div class="captions">
+            {block:Reblogs}
+                <li class="comment">
+                	{block:IsActive}
+                        <a {block:haspermalink}href="{permalink}"{/block:haspermalink} class="user" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-at" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                               <circle cx="12" cy="12" r="4"></circle>
+                               <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28"></path>
+                            </svg>
+                            <span>{username}</span>
+                        </a>
+                    {/block:IsActive}
+                    
+                    {block:IsDeactivated}
+                        <span class="user deactivated">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-at" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                               <circle cx="12" cy="12" r="4"></circle>
+                               <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28"></path>
+                            </svg>
+                            <span>{username}</span>
+                        </span>
+                    {/block:IsDeactivated}
+                    <div class="tex">{body}</div>
+                </li>
+            {/block:Reblogs}
+            
+            {block:NotReblog}
+                <li class="comment">
+                    <div class="tex">{caption}</div>
+                </li>
+            {/block:NotReblog}
+        </div>
+    {/block:caption}
+{/block:Video}
+        
+<!----- audio posts ----->     
+{block:Audio}
+    <div class="audio">
+        {block:AudioPlayer}
+            <div class="audio_info">
+                {block:AlbumArt}
+                    <img src="{AlbumArtURL}" class="album-art"/>
+                {/block:AlbumArt}
+                
+                <ul>
+                    {block:TrackName}
+                        <li class="track">
+                            {TrackName}
+                        </li>
+                    {/block:TrackName}
+                    
+                    {block:Artist}
+                        <li class="artist">
+                            {Artist}
+                        </li>
+                    {/block:Artist}
+                    
+                    <li class="audio-time">
+                        {audio:CurrentPlayTime}
+                        {audio:PlayTimeLeft}
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="player-controls">
+ 
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-repeat" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                   <path d="M4 12v-3a3 3 0 0 1 3 -3h13m-3 -3l3 3l-3 3"></path>
+                   <path d="M20 12v3a3 3 0 0 1 -3 3h-13m3 3l-3 -3l3 -3"></path>
+                </svg>
+ 
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-player-skip-back" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                   <path d="M20 5v14l-12 -7z"></path>
+                   <line x1="4" y1="5" x2="4" y2="19"></line>
+                </svg>
+ 
+                <div class="player">
+                    {AudioPlayer}
+                    {audio:AudioButtons}
+                </div>
+ 
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-player-skip-forward" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                   <path d="M4 5v14l12 -7z"></path>
+                   <line x1="20" y1="5" x2="20" y2="19"></line>
+                </svg>
+ 
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrows-shuffle" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                   <path d="M18 4l3 3l-3 3"></path>
+                   <path d="M18 20l3 -3l-3 -3"></path>
+                   <path d="M3 7h3a5 5 0 0 1 5 5a5 5 0 0 0 5 5h5"></path>
+                   <path d="M21 7h-5a4.978 4.978 0 0 0 -2.998 .998m-4.002 8.003a4.984 4.984 0 0 1 -3 .999h-3"></path>
+                </svg>
+            </div>
+            
+    	{/block:AudioPlayer}
+    </div>
+    
+    {block:caption}
+        <div class="captions">
+            {block:Reblogs}
+                <li class="comment">
+                	{block:IsActive}
+                        <a {block:haspermalink}href="{permalink}"{/block:haspermalink} class="user" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-at" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                               <circle cx="12" cy="12" r="4"></circle>
+                               <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28"></path>
+                            </svg>
+                            <span>{username}</span>
+                        </a>
+                    {/block:IsActive}
+                    
+                    {block:IsDeactivated}
+                        <span class="user deactivated">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-at" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                               <circle cx="12" cy="12" r="4"></circle>
+                               <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28"></path>
+                            </svg>
+                            <span>{username}</span>
+                        </span>
+                    {/block:IsDeactivated}
+                    <div class="tex">{body}</div>
+                </li>
+            {/block:Reblogs}
+            
+            {block:NotReblog}
+                <li class="comment">
+                    <div class="tex">{caption}</div>
+                </li>
+            {/block:NotReblog}
+        </div>
+    {/block:caption}
+{/block:Audio}
+        
+<!----- answer posts ----->     
+{block:Answer}
+    <div class="question">
+        <div class="as">
+            <img src="{askerportraiturl-64}" class="icon">
+            
+            <div class="user">{asker}</div>
+            
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-question-mark" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+               <path d="M8 8a3.5 3 0 0 1 3.5 -3h1a3.5 3 0 0 1 3.5 3a3 3 0 0 1 -2 3a3 4 0 0 0 -2 4"></path>
+               <line x1="12" y1="19" x2="12" y2="19.01"></line>
+            </svg>
+        </div>
+        
+        <div class="tex">{question}</div>
+    </div>
+
+    {block:Answerer}
+        <div class="answer">
+            <div class="as">
+                <img src="{answererportraiturl-64}" class="icon">
+                
+                <div class="user">{answerer}</div>
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail-opened" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                   <polyline points="3 9 12 15 21 9 12 3 3 9"></polyline>
+                   <path d="M21 9v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10"></path>
+                   <line x1="3" y1="19" x2="9" y2="13"></line>
+                   <line x1="15" y1="13" x2="21" y2="19"></line>
+                </svg>
+            </div>
+            
+            <div class="tex">{answer}</div>
+        </div>
+    {/block:Answerer}
+
+    {block:NotReblog}
+        <div class="answer">
+            <div class="as">
+                <img src="{portraiturl-64}" class="icon">
+                
+                <div class="user"><a href="{permalink}">{name}</a></div>
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail-opened" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                   <polyline points="3 9 12 15 21 9 12 3 3 9"></polyline>
+                   <path d="M21 9v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10"></path>
+                   <line x1="3" y1="19" x2="9" y2="13"></line>
+                   <line x1="15" y1="13" x2="21" y2="19"></line>
+                </svg>
+            </div>
+            
+            <div class="tex">{replies}</div>
+        </div>
+    {/block:NotReblog}
+
+    {block:RebloggedFrom}
+        {block:Reblogs}
+            <div class="answer">
+                <div class="as">
+                    <img src="{portraiturl-64}" class="icon">
+                    
+                    <div class="user"><a href="{permalink}">{username}</a></div>
+        			<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail-opened" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                       <polyline points="3 9 12 15 21 9 12 3 3 9"></polyline>
+                       <path d="M21 9v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10"></path>
+                       <line x1="3" y1="19" x2="9" y2="13"></line>
+                       <line x1="15" y1="13" x2="21" y2="19"></line>
+                    </svg>
+                </div>
+                
+                <div class="tex">{body}</div>
+            </div>
+        {/block:Reblogs}
+    {/block:RebloggedFrom}
+{/block:Answer}
+
+<!----- posts footer ----->     
+{block:date}
+
+    {block:hastags}
+        <div class="tags">  
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tags" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+               <path d="M7.859 6h-2.834a2.025 2.025 0 0 0 -2.025 2.025v2.834c0 .537 .213 1.052 .593 1.432l6.116 6.116a2.025 2.025 0 0 0 2.864 0l2.834 -2.834a2.025 2.025 0 0 0 0 -2.864l-6.117 -6.116a2.025 2.025 0 0 0 -1.431 -.593z"></path>
+               <path d="M17.573 18.407l2.834 -2.834a2.025 2.025 0 0 0 0 -2.864l-7.117 -7.116"></path>
+               <path d="M6 9h-.01"></path>
+            </svg>
+                
+            <div>
+               {block:Tags}
+                    <a href="{TagUrl}">#{Tag}</a>
+                {/block:Tags} 
+            </div>        
+            
+        </div>
+    {/block:hasTags}
+    
+    
+    <div class="when">
+        {block:NoteCount}
+            <a {block:indexpage}href="{postNotesURL}" rel="{postID}" title="open notes"{/block:indexpage} class="notes-button notecount">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-activity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                   <path d="M3 12h4l3 8l4 -16l3 8h4"></path>
+                </svg>
+                <span>{NoteCountWithLabel}</span>
+            </a>
+        {/block:NoteCount}
+        
+        <a href="#" class="like-button" title="like">
+            {LikeButton size="100"}
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-heart" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+               <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path>
+            </svg>
+        </a>
+        
+        <a href="{ReblogURL}" class="reblog-button" title="reblog">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-repeat" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+               <path d="M4 12v-3a3 3 0 0 1 3 -3h13m-3 -3l3 3l-3 3"></path>
+               <path d="M20 12v3a3 3 0 0 1 -3 3h-13m3 3l-3 -3l3 -3"></path>
+            </svg>
+        </a>
+        
+        <a href="{permalink}" title="permalink">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-bookmark" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+               <path d="M9 4h6a2 2 0 0 1 2 2v14l-5 -3l-5 3v-14a2 2 0 0 1 2 -2"></path>
+            </svg>
+        </a>
+        
+        {block:ContentSource}
+            <a href="{SourceURL}" title="source" target="_blank" class="source-button">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                   <circle cx="12" cy="7" r="4"></circle>
+                   <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+                </svg>
+            </a>
+        {/block:ContentSource}
+        
+    </div>
+    
+    {block:indexpage}
+    <div class="notes-container" id="notes-{postID}" style="display:none;">
+        <div class="loading">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        
+        <div class="notes-content">
+            <div class="notes-loader">
+            </div>
+        </div>
+    </div>
+    {/block:indexpage}
+
+{/block:date}
+
+</article>
+
+<!----- posts notes ----->    
+{block:permalinkpage}
+    <!-----posts info ----->  
+    {block:Date}  
+ 
+        <article class="post perma-info">
+            <li class="posted">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                   <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4"></path>
+                   <circle cx="18" cy="18" r="4"></circle>
+                   <path d="M15 3v4"></path>
+                   <path d="M7 3v4"></path>
+                   <path d="M3 11h16"></path>
+                   <path d="M18 16.496v1.504l1 1"></path>
+                </svg>
+                
+                posted on <a href="/day/{year}/{MonthNumberWithZero}/{DayOfMonthWithZero}">{Month} {DayOfMonthWithZero}{DayOfMonthSuffix} {Year}</a>
+            </li>
+ 
+            {block:RebloggedFrom}
+                <li class="via-blog">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-repeat" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                       <path d="M4 12v-3a3 3 0 0 1 3 -3h13m-3 -3l3 3l-3 3"></path>
+                       <path d="M20 12v3a3 3 0 0 1 -3 3h-13m3 3l-3 -3l3 -3"></path>
+                    </svg>
+                    
+                    reblogged from <a href="{reblogparenturl}">{reblogparentname}</a>
+                </li>
+ 
+                <li class="source-blog">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-external-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                       <path d="M11 7h-5a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-5"></path>
+                       <line x1="10" y1="14" x2="20" y2="4"></line>
+                       <polyline points="15 4 20 4 20 9"></polyline>
+                    </svg>
+                    
+                    original post by <a href="{reblogrooturl}">{reblogrootname}</a>
+                </li>
+            {block:RebloggedFrom}
+ 
+            {block:NotReblog}
+                
+                <li class="original-post">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                       <circle cx="12" cy="7" r="4"></circle>
+                       <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+                    </svg>
+
+                    original post
+                </li>
+            {/block:NotReblog}
+        </article>
+    {/block:Date}
+    
+    <!----- notes ----->    
+    {block:PostNotes}
+        <article class="post pagenotes">
+            {block:NoteCount}
+                <div class="post-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-activity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                       <path d="M3 12h4l3 8l4 -16l3 8h4"></path>
+                    </svg>
+                    {NoteCountWithLabel}
+                </div>
+            {/block:NoteCount}
+            {PostNotes-64}
+        </article>
+    {/block:PostNotes}
+
+{/block:permalinkpage}
+
+{/block:Posts}
+</section> <!-- #posts -->
+
+{block:homepage}
+    {block:ifAboutSection}
+        <!--------------------------------- about --------------------------------->
+        <section id="about" style="display:none;">
+            <img src="{image:About image}" class="about-image">
+            
+            <div class="main-info">
+                
+                <!----- your name ----->
+                <li class="name">
+                    sasa
+                </li>
+                
+                <!----- your pronouns ----->
+                <li class="pronouns">
+                    she/her
+                </li>
+                
+                <!----- your location ----->
+                <li class="location">
+                    solar system
+                </li>
+                
+                <!----- your likes ----->
+                <li class="likes">
+                    acai bowl, barbecue, kpop, action movies
+                </li>
+                
+                <!----- your dislikes ----->
+                <li class="dislikes">
+                    chocolate, terror movies, gore, fish
+                </li>
+            </div>
+            
+            <!----- about text ----->
+            <div class="about-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vitae turpis ac mi condimentum vehicula. Fusce diam arcu, vulputate ac tincidunt ac, cursus at leo. Nullam sit amet gravida leo. Morbi egestas sapien vitae lectus aliquam, eu pharetra justo ultricies. Vestibulum luctus metus nisl, sit amet hendrerit velit tempor vitae. In convallis nisl vitae libero rhoncus mollis. Etiam ultrices arcu sed arcu mattis interdum. Donec non porttitor tellus, non cursus sapien. Maecenas accumsan tellus arcu, eget interdum massa ullamcorper sed. Morbi pharetra ipsum sed diam convallis, in blandit nulla condimentum. Integer eget dolor et magna pretium porttitor.
+            </div>
+        </section>
+    {/block:ifAboutSection}
+{/block:homepage}
+</main>
+
+<!--============================== footer ==============================-->
+<footer>
+{block:Pagination}
+	<nav id="pagination">
+ 
+    	<div>
+            <a {block:PreviousPage}class="active" href="{PreviousPage}"{/block:PreviousPage}>
+                previous
+            </a>
+ 
+            <span class="current_page">{CurrentPage} of {totalpages}</span>
+        
+            <a {block:NextPage}class="active" href="{NextPage}"{/block:NextPage}>
+                next
+            </a>
+    	</div>
+	</nav>
+{/block:Pagination}
+ 
+{block:DayPagination}
+    <nav id="pagination">
+    	<div>
+            <a {block:PreviousPage}class="active" href="{PreviousPage}"{/block:PreviousPage}>
+                previous
+            </a>
+ 
+            <a {block:NextPage}class="active" href="{NextPage}"{/block:NextPage}>
+                next
+            </a>
+    	</div>
+ 
+	</nav>
+{/block:DayPagination}
+
+<div class="search">
+    <form action="/search" method="get">
+        <input type="text" name="q" id="search" value="{SearchQuery}" placeholder="type here"/>
+    
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+           <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+           <circle cx="10" cy="10" r="7"></circle>
+           <line x1="21" y1="21" x2="15" y2="15"></line>
+        </svg>
+    </form>
+    
+</div>
+    
+</footer>
+
+{block:ifNotFullWidthHeader}
+<!--============================== tumblr controls button ==============================-->
+<a class="open-controls" title="open controls">
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tool" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+       <path d="M7 10h3v-3l-3.5 -3.5a6 6 0 0 1 8 8l6 6a2 2 0 0 1 -3 3l-6 -6a6 6 0 0 1 -8 -8l3.5 3.5"></path>
+    </svg>
+    
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+       <line x1="18" y1="6" x2="6" y2="18"></line>
+       <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+</a>
+
+<!--============================== mode button ==============================-->
+<a class="night" onclick="themeToggle()" title="dark mode">
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-sun sun" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <circle cx="12" cy="12" r="4"></circle>
+        <path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"></path>
+    </svg>
+    
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-moon-stars moon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path>
+        <path d="M17 4a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2"></path>
+        <path d="M19 11h2m-1 -1v2"></path>
+    </svg>
+</a>
+{/block:ifNotFullWidthHeader}
+
+<!--============================== back to top ==============================-->
+<a class="back" style="display:none;" title="back to top">
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-big-top" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+       <path d="M9 20v-8h-3.586a1 1 0 0 1 -.707 -1.707l6.586 -6.586a1 1 0 0 1 1.414 0l6.586 6.586a1 1 0 0 1 -.707 1.707h-3.586v8a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"></path>
+    </svg>
+</a>
+
+<!--============================== credits / don't touch ==============================-->
+<a href="//kosmique.tumblr.com" target="_blank" class="credits" title="by kosmique">
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-star" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+       <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
+    </svg>
+</a>
+
+<!--============================== scripts ==============================-->
+<script>
+$(document).ready(function(){
+    
+    $('body').addClass('loaded', 1000);
+    
+    //shorten notes counter - modified by kosmique
+    $('article').find('.notecount span').each(function(){
+       var n = $(this).html().split(' ')[0].replace(/,/g, '');
+       if (n > 999 && n <= 999999) {
+           n = Math.floor(n / 100) / 10;
+           $(this).text(n + 'k notes');
+       }
+       
+       if (n > 999999) {
+           n = Math.floor(n / 100000) / 10;
+           $(this).text(n + 'kk notes');
+       }
+    });
+    
+    // photoset
+    $('.photo-slideshow').pxuPhotoset({
+        lightbox: true,
+        rounded: false,
+        gutter: '1px',
+        borderRadius: '0px',
+        photoset: '.photo-slideshow',
+        photoWrap: '.photo-data',
+        photo: '.pxu-photo'
+    });
+    
+    // flexible frames
+    function flexFrame() {
+       $(".captions").each(function() {
+            $(this).find("iframe").wrap("<div class='capframe'></div>"); // wrap iframe 
+            flexibleFrames($(".capframe"));
+        });
+        flexibleFrames($(".video"));
+    }
+    
+    $(document).ready(flexFrame);
+    
+    /// tooltips
+    tippy("[title]", {
+        theme: "kosmique",
+        duration: 300,
+        allowHTML: true,
+        arrow: false,
+        followCursor: true,
+        interactive: false,
+        inlinePositioning: false,
+        maxWidth: 300,
+        offset: [0, 20],
+        zIndex: 99999999999999999999999999999999999999,
+        placement: "top",
+        content(reference) {
+            const title = reference.getAttribute("title");
+            reference.removeAttribute("title");
+            return title
+        },
+    });
+    
+    // remove blank captions
+    $('.captions').each(function() {
+        var $this = $(this);
+        if($this.html().replace(/\s|&nbsp;/g, '').length == 0)
+            $this.remove();
+    });
+    
+    //back to top
+    $(document).scroll(function() {
+        var y = $(this).scrollTop();
+        if (y > 200) {$('.back').fadeIn();} 
+        else {$('.back').fadeOut();}
+        
+        if (y > 290) {$('.iframe-controls--desktop').addClass('stuck', 50);} 
+        else {$('.iframe-controls--desktop').removeClass('stuck', 50);}
+        
+        {block:ifNotHeaderImage}
+            if(y >= $('header').offset().top){$('header').attr('stuck','');}
+            else{$('header').removeAttr('stuck');}
+        {/block:ifNotHeaderImage}
+    });
+
+    $(".back").click(function() {
+        $("html, body").animate({scrollTop: 0}, 2500);
+        return false;
+    });
+    
+    // tumblr controls
+    $('.open-controls').click(function(){
+        $(this).toggleClass('active')
+        $('.tmblr-iframe').toggleClass('active');
+		return false
+    }),
+    {block:homepage}
+        $('.open-section').click(function(){
+            $(this).toggleClass('active');
+            {block:ifHeaderImage}
+                {block:ifNotFullWidthHeader}$("html, body").animate({scrollTop: 350},250);{/block:ifNotFullWidthHeader}
+                {block:ifFullWidthHeader}$("html, body").animate({scrollTop: 300},250);{/block:ifFullWidthHeader}
+            {/block:ifHeaderImage}
+            
+            {block:ifNotHeaderImage}
+                {block:ifNotFullWidthHeader}$("html, body").animate({scrollTop: 50},250);{block:ifNotFullWidthHeader}
+                {block:ifFullWidthHeader}$("html, body").animate({scrollTop: 0},250);{block:ifFullWidthHeader}
+            {/block:ifNotHeaderImage}
+            
+            if($(this).hasClass("active")){
+                $('#posts').delay(500).fadeOut();
+                $('#about').fadeIn(500);
+            } else{500
+                $('#about').delay(500).fadeOut();
+                $('#posts').fadeIn(500);
+            }
+    		return false
+        }),
+    {/block:homepage}
+    $('.open-menu').click(function(){
+        $(this).toggleClass('active');
+        if($(this).hasClass("active")){
+            $('.dropdown').slideDown();
+            $('.dropdown ul').delay(500).addClass('active', 500);
+        } else{500
+            $('.dropdown').delay(500).slideUp();
+            $('.dropdown ul').removeClass('active', 500);
+        }
+        return false; 
+    });
+    
+    // custom audio
+    customAudio({
+    	post: ".post",
+    	default: false,
+    	pauseAll: true,
+    	playButton: "<svg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-player-play' width='24' height='24' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><path d='M7 4v16l13 -8z'></path></svg>",
+    	pauseButton: "<svg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-player-pause' width='24' height='24' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><rect x='6' y='5' width='4' height='14' rx='1'></rect><rect x='14' y='5' width='4' height='14' rx='1'></rect></svg>",
+    	errorIcon: "<svg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-ban' width='24' height='24' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><circle cx='12' cy='12' r='9'></circle><line x1='5.7' y1='5.7' x2='18.3' y2='18.3'></line></svg>",
+    	hideInfoIfError: true,
+    });
+    
+    {block:indexpage}
+        //ajax notes
+        $("a.notes-button").each(function() {
+    		var noteCount = $(this).html();
+    		if (noteCount.indexOf(" ") != -1) {noteCount = parseInt(noteCount.substring(0,noteCount.indexOf(" ")));} 
+    		else {noteCount = parseInt(noteCount);}
+    		if (noteCount > 0) {$(this).show();}
+    	});
+    	
+    	$("a.notes-button").click(function(event) {
+    		event.preventDefault();
+    		var node = $("#notes-"+$(this).attr("rel"));
+    		$("#notes-"+$(this).attr("rel")).slideToggle();
+    		$.ajax({ url: $(this).attr("href"), success: function(data){
+    		    node.find(".loading").hide();
+    			node.find(".notes-loader").html(data)
+    		} });
+    	});
+    	
+    {/block:indexpage}
+});
+
+// remove tumblr's redirects
+function noHrefLi(){
+    var linkSet = document.querySelectorAll('a[href*="href.li/?"]');
+    Array.prototype.forEach.call(linkSet,function(el,i){
+        var theLink = linkSet[i].getAttribute('href').split("href.li/?")[1];
+        linkSet[i].setAttribute("href",theLink);
+    });
+}
+noHrefLi();
+
+// dark mode
+(function() {
+    let onpageLoad = localStorage.getItem("body") || "";
+    let element = document.body;
+    element.classList.add(onpageLoad);
+    document.getElementsByTagName('body').textContent =
+    localStorage.getItem("body") || "light";
+})();
+
+function themeToggle() {
+    let element = document.body;
+    element.classList.toggle("dark-mode");
+    
+    let theme = localStorage.getItem("body");
+    if (theme && theme === "dark-mode") {
+        localStorage.setItem("body", "");
+    } else {
+        localStorage.setItem("body", "dark-mode");
+    }
+    
+    document.getElementsByTagName('body').textContent = localStorage.getItem("body");
+}
+
+</script>
+</body></html>
