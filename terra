@@ -1861,7 +1861,7 @@ li.status::after{
             </li>
             
             <li>
-                <a href="#" data-section="message">{text:ask link title}</a>
+                <a href="/ask">{text:ask link title}</a>
             </li>
             
             <li>
