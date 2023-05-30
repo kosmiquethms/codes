@@ -5,7 +5,7 @@
     ✧･ﾟ: *✧･ﾟ:*ﾟ✧*:･ﾟ✧
 
 	* inspiration: https://dribbble.com/shots/16384637-Smart-Dashboard-Overview-Weekly-UI
-    * phosphoricons: phosphoricons.com
+    * tabler icons: https://tabler-icons.io
 	* music player: https://blogs.perficient.com/2017/12/19/how-to-customize-your-own-html5-audio-player/
     
     full credits list at kosmique.tumblr.com/credits
@@ -59,7 +59,7 @@
 <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.js"></script>
 <script src="https://static.tumblr.com/dj2anrv/ZVmq8svlk/jquery.style-my-tooltips.js"></script>
-<script src="https://unpkg.com/phosphor-icons"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/iconfont/tabler-icons.min.css">
 
 <!--============================== css ==============================-->
 
@@ -483,8 +483,8 @@ article.music-player > div{
     background:rgb(var(--Accent));
 }
 
-.ph-repeat-fill,
-.ph-shuffle-fill{opacity:.5;}
+.ti-repeat,
+.ti-arrows-shuffle{opacity:.5;}
 
 /*likes, dislikes, skills*/
 
@@ -506,12 +506,12 @@ article.music-player > div{
 
 .likes ul li::before,
 .dislikes ul li::before{
-    font-family:'phosphor';
     color:rgb(var(--Accent));
+    font-family:'tabler-icons';
 }
 
-.likes ul li::before{content:"\f1ca";}
-.dislikes ul li::before{content:"\f289";}
+.likes ul li::before{content:"\eb3c";}
+.dislikes ul li::before{content:"\eb3b";}
 
 /*skills*/
 .skills > div[class^="skill-"]:not(:last-of-type){margin-bottom:30px;}
@@ -594,12 +594,12 @@ article.music-player > div{
 
 .links ul li::before,
 .tags ul li::before{
-    font-family:'phosphor';
     color:rgb(var(--Accent));
+    font-family:'tabler-icons';
 }
 
-.links ul li::before{content:"\f1f6";}
-.tags ul li::before{content:"\f1c5";}
+.links ul li::before{content:"\eade";}
+.tags ul li::before{content:"\eb34";}
 
 .tags a,
 .links a{
@@ -665,9 +665,9 @@ article.music-player > div{
 .terms ul li:not(:last-of-type){margin-bottom:15px;}
 
 .terms ul li::before{
-    content:"\f0c4";
-    font-family:'phosphor';
+    content:"\ea05";
     color:rgb(var(--Accent));
+    font-family:'tabler-icons';
 }
 
 /*status*/
@@ -818,23 +818,43 @@ a.follow{
 <!--============================== left menu ==============================-->
 <nav id="left">
     <a href="#" data-section="about" class="active">
-        <i class="ph-user"></i>
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+           <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+           <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+           <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+        </svg>
     </a>
     
     <a href="#" data-section="navigation">
-        <i class="ph-navigation-arrow"></i>
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-location" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+           <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+           <path d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5"></path>
+        </svg>
     </a>
     
     <a href="#" data-section="message">
-        <i class="ph-envelope"></i>
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+           <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+           <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z"></path>
+           <path d="M3 7l9 6l9 -6"></path>
+        </svg>
     </a>
     
     <a href="#" data-section="blogroll">
-        <i class="ph-users"></i>
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-plus" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+           <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+           <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+           <path d="M16 19h6"></path>
+           <path d="M19 16v6"></path>
+           <path d="M6 21v-2a4 4 0 0 1 4 -4h4"></path>
+        </svg>
     </a>
     
     <a href="//kosmique.tumblr.com" class="credits" target="_blank" title="page by kosmique">
-        <i data-feather="star"></i>
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-star" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+           <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+           <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
+        </svg>
     </a>
 
 </nav>
@@ -903,17 +923,17 @@ a.follow{
                 
                 <!----- audio controls / don't need to touch ----->
                 <div class="audio-controls">
-                    <i class="ph-repeat-fill"></i>
+                    <i class="ti ti-repeat"></i>
                     
-                    <i class="ph-skip-back-fill"></i>
+                    <i class="ti ti-player-skip-back"></i>
                     
                     <div class="player">
-                        <i class="play-pause ph-play-fill"></i>
+                        <i class="play-pause ti ti-player-play"></i>
                     </div>
                     
-                    <i class="ph-skip-forward-fill"></i>
+                    <i class="ti ti-player-skip-forward"></i>
                     
-                    <i class="ph-shuffle-fill"></i>
+                    <i class="ti ti-arrows-shuffle"></i>
                 </div>
             </div>
         </div>
@@ -1070,23 +1090,43 @@ a.follow{
         <!---------- social media links ---------->
         <div class="social-media">
             <a href="/">
-                <i class="ph-discord-logo-fill"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-discord-filled" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                   <path d="M14.983 3l.123 .006c2.014 .214 3.527 .672 4.966 1.673a1 1 0 0 1 .371 .488c1.876 5.315 2.373 9.987 1.451 12.28c-1.003 2.005 -2.606 3.553 -4.394 3.553c-.732 0 -1.693 -.968 -2.328 -2.045a21.512 21.512 0 0 0 2.103 -.493a1 1 0 1 0 -.55 -1.924c-3.32 .95 -6.13 .95 -9.45 0a1 1 0 0 0 -.55 1.924c.717 .204 1.416 .37 2.103 .494c-.635 1.075 -1.596 2.044 -2.328 2.044c-1.788 0 -3.391 -1.548 -4.428 -3.629c-.888 -2.217 -.39 -6.89 1.485 -12.204a1 1 0 0 1 .371 -.488c1.439 -1.001 2.952 -1.459 4.966 -1.673a1 1 0 0 1 .935 .435l.063 .107l.651 1.285l.137 -.016a12.97 12.97 0 0 1 2.643 0l.134 .016l.65 -1.284a1 1 0 0 1 .754 -.54l.122 -.009zm-5.983 7a2 2 0 0 0 -1.977 1.697l-.018 .154l-.005 .149l.005 .15a2 2 0 1 0 1.995 -2.15zm6 0a2 2 0 0 0 -1.977 1.697l-.018 .154l-.005 .149l.005 .15a2 2 0 1 0 1.995 -2.15z" stroke-width="0" fill="currentColor"></path>
+                </svg>
             </a>
             
             <a href="/">
-                <i class="ph-twitter-logo-fill"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter-filled" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                   <path d="M14.058 3.41c-1.807 .767 -2.995 2.453 -3.056 4.38l-.002 .182l-.243 -.023c-2.392 -.269 -4.498 -1.512 -5.944 -3.531a1 1 0 0 0 -1.685 .092l-.097 .186l-.049 .099c-.719 1.485 -1.19 3.29 -1.017 5.203l.03 .273c.283 2.263 1.5 4.215 3.779 5.679l.173 .107l-.081 .043c-1.315 .663 -2.518 .952 -3.827 .9c-1.056 -.04 -1.446 1.372 -.518 1.878c3.598 1.961 7.461 2.566 10.792 1.6c4.06 -1.18 7.152 -4.223 8.335 -8.433l.127 -.495c.238 -.993 .372 -2.006 .401 -3.024l.003 -.332l.393 -.779l.44 -.862l.214 -.434l.118 -.247c.265 -.565 .456 -1.033 .574 -1.43l.014 -.056l.008 -.018c.22 -.593 -.166 -1.358 -.941 -1.358l-.122 .007a.997 .997 0 0 0 -.231 .057l-.086 .038a7.46 7.46 0 0 1 -.88 .36l-.356 .115l-.271 .08l-.772 .214c-1.336 -1.118 -3.144 -1.254 -5.012 -.554l-.211 .084z" stroke-width="0" fill="currentColor"></path>
+                </svg>
             </a>
             
             <a href="/">
-                <i class="ph-facebook-logo-fill"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-facebook-filled" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                   <path d="M18 2a1 1 0 0 1 .993 .883l.007 .117v4a1 1 0 0 1 -.883 .993l-.117 .007h-3v1h3a1 1 0 0 1 .991 1.131l-.02 .112l-1 4a1 1 0 0 1 -.858 .75l-.113 .007h-2v6a1 1 0 0 1 -.883 .993l-.117 .007h-4a1 1 0 0 1 -.993 -.883l-.007 -.117v-6h-2a1 1 0 0 1 -.993 -.883l-.007 -.117v-4a1 1 0 0 1 .883 -.993l.117 -.007h2v-1a6 6 0 0 1 5.775 -5.996l.225 -.004h3z" stroke-width="0" fill="currentColor"></path>
+                </svg>
             </a>
             
             <a href="/">
-                <i class="ph-instagram-logo-fill"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-instagram" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                   <path d="M4 4m0 4a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4z"></path>
+                   <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+                   <path d="M16.5 7.5l0 .01"></path>
+                </svg>
             </a>
             
             <a href="/">
-                <i class="ph-spotify-logo-fill"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-spotify" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                   <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                   <path d="M8 11.973c2.5 -1.473 5.5 -.973 7.5 .527"></path>
+                   <path d="M9 15c1.5 -1 4 -1 5 .5"></path>
+                   <path d="M7 9c2 -1 6 -2 10 .5"></path>
+                </svg>
             </a>
         </div>
     </article>
@@ -1197,7 +1237,13 @@ a.follow{
                         
                         <li>
                             <a href="//tumblr.com/follow/{FollowedName}" target="_blank" title="follow {FollowedTitle}" class="follow">
-                                <i class="ph-user-plus"></i>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-plus" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                   <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+                                   <path d="M16 19h6"></path>
+                                   <path d="M19 16v6"></path>
+                                   <path d="M6 21v-2a4 4 0 0 1 4 -4h4"></path>
+                                </svg>
                             </a>
                         </li>
                     </ul>
@@ -1254,18 +1300,18 @@ $(document).ready(function(){
     $('.player').on('click', function(){
         if (aud.paused) {
             aud.play();
-            $('.play-pause').removeClass('ph-play-fill');
-            $('.play-pause').addClass('ph-pause-fill');
+            $('.play-pause').removeClass('ti-player-play');
+            $('.play-pause').addClass('ti-player-pause');
         } else {
             aud.pause();
-            $('.play-pause').removeClass('ph-pause-fill');
-            $('.play-pause').addClass('ph-play-fill');
+            $('.play-pause').removeClass('ti-player-pause');
+            $('.play-pause').addClass('ti-player-play');
         }
     });
     
     aud.addEventListener('ended', function(){
-        $('.play-pause').removeClass('ph-pause-fill');
-        $('.play-pause').addClass('ph-play-fill');
+        $('.play-pause').removeClass('ti-player-pause');
+        $('.play-pause').addClass('ti-player-play');
     });
     
 });
