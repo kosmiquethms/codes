@@ -1,6 +1,6 @@
 <!--
 
-    lunar by kosmique.tumblr.com
+    lunar 1.1v by kosmique.tumblr.com
     
     ✧･ﾟ: *✧･ﾟ:*ﾟ✧*:･ﾟ✧
     
@@ -14,12 +14,22 @@
     
     ✧･ﾟ: *✧･ﾟ:*ﾟ✧*:･ﾟ✧
     
+    [NEW]
+    
+    * post author picture
+    * optional message section
+    * optional post date on index
+    * optional post notes on index
+    * optional toggleable tags
+    
     [NOTES]
     
     * dark mode colors are not directly editable from the panel. however, if you want to modify the colors, just search for /*----- dark mode -----*/
         > decimal format only.
     
     * to find the about section faster, search for - about -
+    * to find the message section faster, search for - message -
+    * message section is only available if askbox is enabled
 -->
 
 <!DOCTYPE html>
@@ -58,6 +68,10 @@
 <meta name="if:Full width header" content="0"/>
 <meta name="if:Background image" content="0"/>
 <meta name="if:About section" content="1"/>
+<meta name="if:Message section" content="1"/>
+<meta name="if:Toggle tags" content="1"/>
+<meta name="if:Post date" content="0"/>
+<meta name="if:Post notes" content="1"/>
 
 <!----- colors ----->
 <meta name="color:Background gradient 1" content="#faf2f9"/>
@@ -677,16 +691,22 @@ header nav svg{
 
 header a[class^="open-"]{cursor:copy;}
 
-a.open-section svg.icon-tabler-x,
-a.open-section.active svg.icon-tabler-user,
+a.open-about svg.icon-tabler-x,
+a.open-about.active svg.icon-tabler-user,
+a.open-message svg.icon-tabler-x,
+a.open-message.active svg.icon-tabler-mail,
 a.open-controls svg.icon-tabler-x,
 a.open-controls.active svg.icon-tabler-tool,
 a.open-menu svg.icon-tabler-x,
-a.open-menu.active svg.icon-tabler-menu-2{display:none;}
+a.open-menu.active svg.icon-tabler-menu-2,
+a.open-tags svg.icon-tabler-x,
+a.open-tags.active svg.icon-tabler-hash{display:none;}
 
-a.open-section.active svg.icon-tabler-x,
+a.open-about.active svg.icon-tabler-x,
+a.open-message.active svg.icon-tabler-x,
 a.open-controls.active svg.icon-tabler-x,
-a.open-menu.active svg.icon-tabler-x{display:initial;}
+a.open-menu.active svg.icon-tabler-x,
+a.open-tags.active svg.icon-tabler-x{display:initial;}
 
 header .dropdown{
     width:100%;
@@ -903,16 +923,11 @@ span.user{
     border-bottom:2px dotted rgb(var(--Borders));
 }
 
-a.user svg,
-span.user svg{
+a.user img,
+span.user img{
     width:26px;
     height:26px;
-    padding:5px;
-    display:grid;
-    line-height:0;
     border-radius:5px;
-    place-items:center;
-    background:rgba(var(--Borders));
 }
 
 a.user span,
@@ -1220,6 +1235,7 @@ div.npf-link-block a{
     gap:15px;
     display:flex;
     padding:25px;
+    {block:ifPostDate}flex-wrap:wrap;{/block:ifPostDate}
     align-items:center;
     border-top:3px double rgb(var(--Borders));
 }
@@ -1242,17 +1258,31 @@ div.npf-link-block a{
     background:rgb(var(--Inner-boxes));
 }
 
-a.notecount{
+a.notecount,
+span.post-date{
     gap:10px;
-    {block:indexpage}cursor:copy;{/block:indexpage}
-    {block:permalinkpage}cursor:text;{/block:permalinkpage}
     display:flex;
     line-height:1;
     font-weight:700;
     overflow:hidden;
     position:relative;
     align-items:center;
+    text-transform:lowercase;
 }
+
+span.post-date{
+    width:100%;
+    color:rgb(var(--Link));
+}
+
+{block:ifPostDate}a.notecount{margin-right:auto;}{/block:ifPostDate}
+
+{block:ifPostNotes}
+a.notecount{
+    {block:indexpage}cursor:copy;{/block:indexpage}
+    {block:permalinkpage}cursor:text;{/block:permalinkpage}
+}
+{/block:ifPostNotes}
 
 .pin{
     gap:15px;
@@ -1287,7 +1317,7 @@ a.notecount{
     border:1px solid rgb(var(--Borders));
 }
 
-.like-button{margin-left:auto;}
+{block:ifNotPostDate}.like-button{margin-left:auto;}{/block:ifNotPostDate}
 
 .liked ~ svg,
 a.reblog-button:visited{color:rgb(var(--Accent))}
@@ -1647,8 +1677,9 @@ footer{
 
 /*-============================== about ==============================-*/
 
-#about{
-    gap:30px;
+#about,
+#message{
+    gap:50px;
     display:grid;
 }
 
@@ -1663,12 +1694,14 @@ footer{
     border:var(--Border-width) solid rgb(var(--Borders));
 }
 
-#about > div{
-    padding:15px;
+#about > div,
+#message > div{
     background:rgb(var(--Boxes));
 	border-radius:var(--Border-radius);
 	border:var(--Border-width) solid rgb(var(--Borders));
 }
+
+#about > div{padding:15px;}
 
 .main-info{list-style:none;}
 
@@ -1703,6 +1736,101 @@ footer{
 .main-info li.likes::before{content:'\eb3c';}
 .main-info li.dislikes::before{content:'\eb3b';}
 
+.about-links,
+.about-tags{
+    display:grid;
+    column-gap:15px;
+    grid-template-columns:30px 1fr;
+}
+
+.about-links svg,
+.about-tags svg{
+    width:30px;
+    height:30px;
+    padding:5px;
+    display:grid;
+    line-height:0;
+    flex-shrink:0;
+    border-radius:5px;
+    place-items:center;
+    background:rgba(var(--Borders));
+}
+
+.about-tags{
+    margin-top:15px;
+    padding-top:15px;
+    border-top:2px dotted rgb(var(--Borders));
+}
+
+.about-links a,
+.about-tags a{
+    line-height:1;
+    padding:5px 1em;
+    font-weight:700;
+    border-radius:30px;
+    border:1px solid rgb(var(--Borders));
+}
+
+.about-links > div,
+.about-tags > div{
+    gap:10px;
+    display:flex;
+    flex-wrap:wrap;
+}
+
+/*-============================== message ==============================-*/
+
+.faq{counter-reset:faq}
+
+.faq ul{
+    display:grid;
+    padding:15px;
+    column-gap:15px;
+    align-items:center;
+    grid-template-columns:30px 1fr;
+    border-bottom:3px double rgb(var(--Borders));
+}
+
+.faq ul:last-of-type{border-bottom:0;}
+
+.faq ul::before{
+    width:30px;
+    height:30px;
+    display:grid;
+    line-height:0;
+    flex-shrink:0;
+    font-size:18px;
+    border-radius:5px;
+    place-items:center;
+    content:counter(faq);
+    counter-increment:faq;
+    background:rgb(var(--Borders));
+}
+
+.faq-question{
+    cursor:help;
+    font-weight:700;
+    color:rgb(var(--Title));
+}
+
+.faq-answer{
+    display:none;
+    margin-top:15px;
+    padding-top:15px;
+    grid-column-start:2;
+    border-top:2px dotted rgb(var(--Borders));
+}
+
+.askbox{padding:20px;}
+
+.askbox .title{
+    font-weight:700;
+    margin-bottom:15px;
+    padding-bottom:15px;
+    color:rgb(var(--Title));
+    border-bottom:2px dotted rgb(var(--Borders));
+}
+
 /*-============================== queries ==============================-*/
 
 @media (max-width:450px){
@@ -1730,7 +1858,8 @@ footer{
     
     main,
     #posts,
-    #about{
+    #about,
+    #message{
         width:75vw;
         margin-inline:auto;
     }
@@ -1770,33 +1899,18 @@ footer{
             </svg>
         </a>
         
-        <a href="/ask" title="message">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mailbox" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-               <path d="M10 21v-6.5a3.5 3.5 0 0 0 -7 0v6.5h18v-6a4 4 0 0 0 -4 -4h-10.5"></path>
-               <path d="M12 11v-8h4l2 2l-2 2h-4"></path>
-               <path d="M6 15h1"></path>
-            </svg>
-        </a>
-        
-        {block:homepage}
-            {block:ifAboutSection}
-                <a class="open-section" title="about">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        {block:AskEnabled}
+            {block:ifNotMessageSection}
+                <a href="/ask" title="message">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mailbox" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                       <circle cx="12" cy="7" r="4"></circle>
-                       <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
-                    </svg>
-                    
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                       <line x1="18" y1="6" x2="6" y2="18"></line>
-                       <line x1="6" y1="6" x2="18" y2="18"></line>
+                       <path d="M10 21v-6.5a3.5 3.5 0 0 0 -7 0v6.5h18v-6a4 4 0 0 0 -4 -4h-10.5"></path>
+                       <path d="M12 11v-8h4l2 2l-2 2h-4"></path>
+                       <path d="M6 15h1"></path>
                     </svg>
                 </a>
-            {/block:ifAboutSection}
-        {/block:homepage}
-        
+            {/block:ifNotMessageSection}
+        {/block:AskEnabled}
         <a class="open-menu" title="menu">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-menu-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -1811,6 +1925,40 @@ footer{
                <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
         </a>
+        
+        {block:homepage}
+            {block:ifAboutSection}
+                <a class="open-about" title="about">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                       <circle cx="12" cy="7" r="4"></circle>
+                       <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+                    </svg>
+                    
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                       <line x1="18" y1="6" x2="6" y2="18"></line>
+                       <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </a>
+            {/block:ifAboutSection}
+            
+            {block:ifMessageSection}
+                <a class="open-message" title="about">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                       <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z"></path>
+                       <path d="M3 7l9 6l9 -6"></path>
+                    </svg>
+                    
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                       <line x1="18" y1="6" x2="6" y2="18"></line>
+                       <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </a>
+            {/block:ifMessageSection}
+        {/block:homepage}
         
         <a href="/archive" title="history">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-history" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -2017,22 +2165,14 @@ footer{
                 <li class="comment">
                 	{block:IsActive}
                         <a {block:haspermalink}href="{permalink}"{/block:haspermalink} class="user" target="_blank">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-at" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                               <circle cx="12" cy="12" r="4"></circle>
-                               <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28"></path>
-                            </svg>
+                            <img src="{portraiturl-64}"/>
                             <span>{username}</span>
                         </a>
                     {/block:IsActive}
                     
                     {block:IsDeactivated}
                         <span class="user deactivated">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-at" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                               <circle cx="12" cy="12" r="4"></circle>
-                               <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28"></path>
-                            </svg>
+                            <img src="{portraiturl-64}"/>
                             <span>{username}</span>
                         </span>
                     {/block:IsDeactivated}
@@ -2074,22 +2214,14 @@ footer{
                 <li class="comment">
                 	{block:IsActive}
                         <a {block:haspermalink}href="{permalink}"{/block:haspermalink} class="user" target="_blank">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-at" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                               <circle cx="12" cy="12" r="4"></circle>
-                               <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28"></path>
-                            </svg>
+                            <img src="{portraiturl-64}"/>
                             <span>{username}</span>
                         </a>
                     {/block:IsActive}
                     
                     {block:IsDeactivated}
                         <span class="user deactivated">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-at" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                               <circle cx="12" cy="12" r="4"></circle>
-                               <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28"></path>
-                            </svg>
+                            <img src="{portraiturl-64}"/>
                             <span>{username}</span>
                         </span>
                     {/block:IsDeactivated}
@@ -2141,22 +2273,14 @@ footer{
                 <li class="comment">
                 	{block:IsActive}
                         <a {block:haspermalink}href="{permalink}"{/block:haspermalink} class="user" target="_blank">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-at" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                               <circle cx="12" cy="12" r="4"></circle>
-                               <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28"></path>
-                            </svg>
+                            <img src="{portraiturl-64}"/>
                             <span>{username}</span>
                         </a>
                     {/block:IsActive}
                     
                     {block:IsDeactivated}
                         <span class="user deactivated">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-at" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                               <circle cx="12" cy="12" r="4"></circle>
-                               <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28"></path>
-                            </svg>
+                            <img src="{portraiturl-64}"/>
                             <span>{username}</span>
                         </span>
                     {/block:IsDeactivated}
@@ -2195,22 +2319,14 @@ footer{
                 <li class="comment">
                 	{block:IsActive}
                         <a {block:haspermalink}href="{permalink}"{/block:haspermalink} class="user" target="_blank">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-at" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                               <circle cx="12" cy="12" r="4"></circle>
-                               <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28"></path>
-                            </svg>
+                            <img src="{portraiturl-64}"/>
                             <span>{username}</span>
                         </a>
                     {/block:IsActive}
                     
                     {block:IsDeactivated}
                         <span class="user deactivated">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-at" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                               <circle cx="12" cy="12" r="4"></circle>
-                               <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28"></path>
-                            </svg>
+                            <img src="{portraiturl-64}"/>
                             <span>{username}</span>
                         </span>
                     {/block:IsDeactivated}
@@ -2243,22 +2359,14 @@ footer{
                 <li class="comment">
                 	{block:IsActive}
                         <a {block:haspermalink}href="{permalink}"{/block:haspermalink} class="user" target="_blank">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-at" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                               <circle cx="12" cy="12" r="4"></circle>
-                               <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28"></path>
-                            </svg>
+                            <img src="{portraiturl-64}"/>
                             <span>{username}</span>
                         </a>
                     {/block:IsActive}
                     
                     {block:IsDeactivated}
                         <span class="user deactivated">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-at" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                               <circle cx="12" cy="12" r="4"></circle>
-                               <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28"></path>
-                            </svg>
+                            <img src="{portraiturl-64}"/>
                             <span>{username}</span>
                         </span>
                     {/block:IsDeactivated}
@@ -2285,22 +2393,14 @@ footer{
                 <li class="comment">
                 	{block:IsActive}
                         <a {block:haspermalink}href="{permalink}"{/block:haspermalink} class="user" target="_blank">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-at" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                               <circle cx="12" cy="12" r="4"></circle>
-                               <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28"></path>
-                            </svg>
+                            <img src="{portraiturl-64}"/>
                             <span>{username}</span>
                         </a>
                     {/block:IsActive}
                     
                     {block:IsDeactivated}
                         <span class="user deactivated">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-at" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                               <circle cx="12" cy="12" r="4"></circle>
-                               <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28"></path>
-                            </svg>
+                            <img src="{portraiturl-64}"/>
                             <span>{username}</span>
                         </span>
                     {/block:IsDeactivated}
@@ -2389,22 +2489,14 @@ footer{
                 <li class="comment">
                 	{block:IsActive}
                         <a {block:haspermalink}href="{permalink}"{/block:haspermalink} class="user" target="_blank">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-at" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                               <circle cx="12" cy="12" r="4"></circle>
-                               <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28"></path>
-                            </svg>
+                            <img src="{portraiturl-64}"/>
                             <span>{username}</span>
                         </a>
                     {/block:IsActive}
                     
                     {block:IsDeactivated}
                         <span class="user deactivated">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-at" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                               <circle cx="12" cy="12" r="4"></circle>
-                               <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28"></path>
-                            </svg>
+                            <img src="{portraiturl-64}"/>
                             <span>{username}</span>
                         </span>
                     {/block:IsDeactivated}
@@ -2505,7 +2597,7 @@ footer{
 {block:date}
 
     {block:hastags}
-        <div class="tags">  
+        <div class="tags" {block:ifToggleTags}style="display:none;"{/block:ifToggleTags}>  
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tags" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                <path d="M7.859 6h-2.834a2.025 2.025 0 0 0 -2.025 2.025v2.834c0 .537 .213 1.052 .593 1.432l6.116 6.116a2.025 2.025 0 0 0 2.864 0l2.834 -2.834a2.025 2.025 0 0 0 0 -2.864l-6.117 -6.116a2.025 2.025 0 0 0 -1.431 -.593z"></path>
@@ -2525,7 +2617,7 @@ footer{
     
     <div class="when">
         {block:NoteCount}
-            <a {block:indexpage}href="{postNotesURL}" rel="{postID}" title="open notes"{/block:indexpage} class="notes-button notecount">
+            <a {block:ifPostNotes}{block:indexpage}href="{postNotesURL}" rel="{postID}" title="open notes"{/block:indexpage}{/block:ifPostNotes} {block:ifNotPostNotes}href="{permalink}"{/block:ifNotPostNotes}class="{block:ifPostNotes}notes-button{/block:ifPostNotes} notecount">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-activity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                    <path d="M3 12h4l3 8l4 -16l3 8h4"></path>
@@ -2557,6 +2649,26 @@ footer{
             </svg>
         </a>
         
+        {block:ifToggleTags}
+            {block:HasTags}
+                <a href="#" title="tags" class="open-tags">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                       <path d="M5 9l14 0"></path>
+                       <path d="M5 15l14 0"></path>
+                       <path d="M11 4l-4 16"></path>
+                       <path d="M17 4l-4 16"></path>
+                    </svg>
+                    
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                       <line x1="18" y1="6" x2="6" y2="18"></line>
+                       <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </a>
+            {block:HasTags}
+        {/block:ifToggleTags}
+        
         {block:ContentSource}
             <a href="{SourceURL}" title="source" target="_blank" class="source-button">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -2567,6 +2679,20 @@ footer{
             </a>
         {/block:ContentSource}
         
+        {block:ifPostDate}
+            <span class="post-date">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                   <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4"></path>
+                   <circle cx="18" cy="18" r="4"></circle>
+                   <path d="M15 3v4"></path>
+                   <path d="M7 3v4"></path>
+                   <path d="M3 11h16"></path>
+                   <path d="M18 16.496v1.504l1 1"></path>
+                </svg>
+                {Month} {DayOfMonthWithZero}{DayOfMonthSuffix}
+            </span>
+        {/block:ifPostDate}
     </div>
     
     {block:indexpage}
@@ -2667,12 +2793,13 @@ footer{
 {/block:Posts}
 </section> <!-- #posts -->
 
+<!--------------------------------- about --------------------------------->
 {block:homepage}
     {block:ifAboutSection}
-        <!--------------------------------- about --------------------------------->
         <section id="about" style="display:none;">
             <img src="{image:About image}" class="about-image">
             
+            <!---------- your info ---------->
             <div class="main-info">
                 
                 <!----- your name ----->
@@ -2701,12 +2828,118 @@ footer{
                 </li>
             </div>
             
-            <!----- about text ----->
+            <!---------- about text ---------->
             <div class="about-text">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vitae turpis ac mi condimentum vehicula. Fusce diam arcu, vulputate ac tincidunt ac, cursus at leo. Nullam sit amet gravida leo. Morbi egestas sapien vitae lectus aliquam, eu pharetra justo ultricies. Vestibulum luctus metus nisl, sit amet hendrerit velit tempor vitae. In convallis nisl vitae libero rhoncus mollis. Etiam ultrices arcu sed arcu mattis interdum. Donec non porttitor tellus, non cursus sapien. Maecenas accumsan tellus arcu, eget interdum massa ullamcorper sed. Morbi pharetra ipsum sed diam convallis, in blandit nulla condimentum. Integer eget dolor et magna pretium porttitor.
             </div>
+            
+            <!---------- links and tags ---------->
+            <div class="link-tag">
+                <!----- links ----->
+                <nav class="about-links">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                       <path d="M9 15l6 -6"></path>
+                       <path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464"></path>
+                       <path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463"></path>
+                    </svg>
+                    
+                    <div>
+                        <a href="">link title</a>
+                        <a href="">link title</a>
+                        <a href="">link title</a>
+                        <a href="">link title</a>
+                        <a href="">link title</a>
+                    </div>
+                </nav>
+                
+                <!----- tags ----->
+                <nav class="about-tags">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tags" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                       <path d="M7.859 6h-2.834a2.025 2.025 0 0 0 -2.025 2.025v2.834c0 .537 .213 1.052 .593 1.432l6.116 6.116a2.025 2.025 0 0 0 2.864 0l2.834 -2.834a2.025 2.025 0 0 0 0 -2.864l-6.117 -6.116a2.025 2.025 0 0 0 -1.431 -.593z"></path>
+                       <path d="M17.573 18.407l2.834 -2.834a2.025 2.025 0 0 0 0 -2.864l-7.117 -7.116"></path>
+                       <path d="M6 9h-.01"></path>
+                    </svg>
+                    
+                    <div>
+                        <a href="">link title</a>
+                        <a href="">link title</a>
+                        <a href="">link title</a>
+                        <a href="">link title</a>
+                        <a href="">link title</a>
+                    </div>
+                </nav>
+            </div>
         </section>
     {/block:ifAboutSection}
+    
+<!--------------------------------- message --------------------------------->
+    {block:ifMessageSection}
+        <section id="message" style="display:none;">
+            <div class="faq">
+                <!---------- first question block ---------->
+                <ul>
+                    <!----- question ----->
+                    <li class="faq-question">
+                        ask a question
+                    </li>
+                    
+                    <!----- answer ----->
+                    <li class="faq-answer">
+                        and answer it
+                    </li>
+                </ul>
+                
+                <!---------- second question block ---------->
+                <ul>
+                    <!----- question ----->
+                    <li class="faq-question">
+                        ask a question
+                    </li>
+                    
+                    <!----- answer ----->
+                    <li class="faq-answer">
+                        and answer it
+                    </li>
+                </ul>
+                
+                <!---------- third question block ---------->
+                <ul>
+                    <!----- question ----->
+                    <li class="faq-question">
+                        ask a question
+                    </li>
+                    
+                    <!----- answer ----->
+                    <li class="faq-answer">
+                        and answer it
+                    </li>
+                </ul>
+                
+                <!---------- fourth question block ---------->
+                <ul>
+                    <!----- question ----->
+                    <li class="faq-question">
+                        ask a question
+                    </li>
+                    
+                    <!----- answer ----->
+                    <li class="faq-answer">
+                        and answer it
+                    </li>
+                </ul>
+            </div>
+            
+            {block:AskEnabled}
+                <div class="askbox">
+                    <div class="title">{asklabel}</div>
+                    
+                    <iframe frameborder="0" height="149" id="ask_form" scrolling="no" src="//www.tumblr.com/ask_form/{name}.tumblr.com" width="100%" style="background-color: transparent; overflow: hidden;"></iframe>
+                </div>
+            {/block:AskEnabled}
+        </section>
+    {/block:ifMessageSection}
 {/block:homepage}
 </main>
 
@@ -2902,8 +3135,17 @@ $(document).ready(function(){
         $('.tmblr-iframe').toggleClass('active');
 		return false
     }),
+    $('.open-tags').click(function(){
+        $(this).toggleClass('active')
+        $('.tags').slideToggle();
+		return false
+    }),
+    $('.faq-question').click(function(){
+        $(this).next('.faq-answer').slideToggle();
+		return false
+    }),
     {block:homepage}
-        $('.open-section').click(function(){
+        $('.open-about').click(function(){
             $(this).toggleClass('active');
             {block:ifHeaderImage}
                 {block:ifNotFullWidthHeader}$("html, body").animate({scrollTop: 350},250);{/block:ifNotFullWidthHeader}
@@ -2916,10 +3158,33 @@ $(document).ready(function(){
             {/block:ifNotHeaderImage}
             
             if($(this).hasClass("active")){
-                $('#posts').delay(500).fadeOut();
+                $('#posts,#message').delay(500).fadeOut();
                 $('#about').fadeIn(500);
+                $('.open-message').removeClass('active');
             } else{500
                 $('#about').delay(500).fadeOut();
+                $('#posts').fadeIn(500);
+            }
+    		return false
+        }),
+        $('.open-message').click(function(){
+            $(this).toggleClass('active');
+            {block:ifHeaderImage}
+                {block:ifNotFullWidthHeader}$("html, body").animate({scrollTop: 350},250);{/block:ifNotFullWidthHeader}
+                {block:ifFullWidthHeader}$("html, body").animate({scrollTop: 300},250);{/block:ifFullWidthHeader}
+            {/block:ifHeaderImage}
+            
+            {block:ifNotHeaderImage}
+                {block:ifNotFullWidthHeader}$("html, body").animate({scrollTop: 50},250);{block:ifNotFullWidthHeader}
+                {block:ifFullWidthHeader}$("html, body").animate({scrollTop: 0},250);{block:ifFullWidthHeader}
+            {/block:ifNotHeaderImage}
+            
+            if($(this).hasClass("active")){
+                $('#posts,#about').delay(500).fadeOut();
+                $('#message').fadeIn(500);
+                $('.open-about').removeClass('active');
+            } else{500
+                $('#message').delay(500).fadeOut();
                 $('#posts').fadeIn(500);
             }
     		return false
