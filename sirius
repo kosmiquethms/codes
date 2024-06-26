@@ -1,0 +1,2477 @@
+<!--
+    sirius by kosmique.tumblr.com
+    
+    ✧･ﾟ: *✧･ﾟ:*ﾟ✧*:･ﾟ✧
+
+    * base code by eggdesign
+    * npf images fix by glenthemes
+    * flexible frames by nouvae (modified by seyche)
+    * pxu photoset and lightboxes by shythemes
+    * customaudio.js by annasthms
+    
+    full credits list at kosmique.tumblr.com/credits
+    
+-->
+<!DOCTYPE html> 
+<html> 
+<head>
+
+<title>
+    {block:PostSummary}{PostSummary} : {/block:PostSummary}
+    {block:TagPage}#{Tag} : {/block:TagPage}
+    {block:SearchPage}{SearchQuery} : {/block:SearchPage}
+    {block:DayPage}{MonthNumberWithZero}/{DayOfMonthWithZero}/{Year} : {/block:DayPage}
+    {Title}
+</title>
+
+<link rel="shortcut icon" href="{Favicon}"> 
+<link rel="alternate" type="application/rss+xml" href="{RSS}">
+
+{block:Description}
+	<meta name="description" content="{MetaDescription}" />
+{/block:Description}
+
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+{NewPostStyles}
+
+<!--============================== variables ==============================-->
+<!----- images ----->
+<meta name="image:Sidebar image" content=""/>
+<meta name="image:Sidebar icon" content=""/>
+
+<!----- booleans ----->
+<meta name="if:Contained posts" content="1"/>
+<meta name="if:Shadows" content="1"/>
+<meta name="if:Dark mode" content="1"/>
+<meta name="if:Toggle tags" content="0"/>
+<meta name="if:Update tab" content="1"/>
+<meta name="if:Menu tab" content="1"/>
+
+<!----- selections ----->
+<meta name="select:Sidebar position" content="left" title="Left"/>
+<meta name="select:Sidebar position" content="right" title="Right"/>
+
+<meta name="select:Font size" content="13px"/>
+<meta name="select:Font size" content="14px"/>
+<meta name="select:Font size" content="15px"/>
+<meta name="select:Font size" content="16px"/>
+<meta name="select:Font size" content="17px"/>
+
+<meta name="select:Border radius" content="0px"/>
+<meta name="select:Border radius" content="1px"/>
+<meta name="select:Border radius" content="2px"/>
+<meta name="select:Border radius" content="3px"/>
+<meta name="select:Border radius" content="4px"/>
+<meta name="select:Border radius" content="5px"/>
+<meta name="select:Border radius" content="6px"/>
+<meta name="select:Border radius" content="7px"/>
+<meta name="select:Border radius" content="8px"/>
+<meta name="select:Border radius" content="9px"/>
+<meta name="select:Border radius" content="10px"/>
+
+<meta name="select:Icon border radius" content="0px"/>
+<meta name="select:Icon border radius" content="1px"/>
+<meta name="select:Icon border radius" content="2px"/>
+<meta name="select:Icon border radius" content="3px"/>
+<meta name="select:Icon border radius" content="4px"/>
+<meta name="select:Icon border radius" content="5px"/>
+<meta name="select:Icon border radius" content="6px"/>
+<meta name="select:Icon border radius" content="7px"/>
+<meta name="select:Icon border radius" content="8px"/>
+<meta name="select:Icon border radius" content="9px"/>
+<meta name="select:Icon border radius" content="10px"/>
+
+<meta name="select:Post width" content="450px"/>
+<meta name="select:Post width" content="500px"/>
+<meta name="select:Post width" content="540px"/>
+<meta name="select:Post width" content="600px"/>
+
+<!----- colors ----->
+<meta name="color:&#9472;&#9472;&#9472; &#65381; &#65377;&#65439;&#9734;: *. LIGHT MODE"/>
+<meta name="color:Background" content="#ffffff"/>
+<meta name="color:Text" content="#919191"/>
+<meta name="color:Link" content="#0f0f0f"/>
+<meta name="color:Title" content="#0f0f0f"/>
+<meta name="color:Accent" content="#a2a2ff"/>
+<meta name="color:Details" content="#ff9aca"/>
+<meta name="color:Borders" content="#ebebeb"/>
+<meta name="color:Shadows" content="#dddddd"/>
+<meta name="color:Search bar" content="#f5f5f5"/>
+<meta name="color:Search text" content="#919191"/>
+<meta name="color:Search label" content="#9c9c9c"/>
+<meta name="color:Menu background" content="#f5f5f5"/>
+<meta name="color:Menu icons color" content="#919191"/>
+<meta name="color:Menu background hover" content="#a2a2ff"/>
+<meta name="color:Menu icons hover" content="#ffffff"/>
+<meta name="color:Update box" content="#f5f5f5"/>
+<meta name="color:Update text" content="#919191"/>
+<meta name="color:Bottom menu background" content="#f5f5f5"/>
+<meta name="color:Bottom menu icons" content="#919191"/>
+<meta name="color:Main boxes" content="#fdfdfd"/>
+<meta name="color:Inner boxes" content="#f5f5f5"/>
+
+<meta name="color:&#9472;&#9472;&#9472; &#65381; &#65377;&#65439;&#9734;: *. DARK MODE"/>
+<meta name="color:Dark Background" content="#070707"/>
+<meta name="color:Dark Text" content="#adadad"/>
+<meta name="color:Dark Link" content="#f7fcff"/>
+<meta name="color:Dark Title" content="#f7fcff"/>
+<meta name="color:Dark Borders" content="#202020"/>
+<meta name="color:Dark Shadows" content="#000000"/>
+<meta name="color:Dark Search bar" content="#151515"/>
+<meta name="color:Dark Search text" content="#adadad"/>
+<meta name="color:Dark Search label" content="#9c9c9c"/>
+<meta name="color:Dark Menu background" content="#151515"/>
+<meta name="color:Dark Menu icons color" content="#adadad"/>
+<meta name="color:Dark Menu background hover" content="#a2a2ff"/>
+<meta name="color:Dark Menu icons hover" content="#ffffff"/>
+<meta name="color:Dark Update box" content="#151515"/>
+<meta name="color:Dark Update text" content="#adadad"/>
+<meta name="color:Dark Bottom menu background" content="#151515"/>
+<meta name="color:Dark Bottom menu icons" content="#e7e7e7"/>
+<meta name="color:Dark Main boxes" content="#151515"/>
+<meta name="color:Dark Inner boxes" content="#1e1e1e"/>
+
+<!----- texts ----->
+<meta name="text:Font" content="Public Sans"/>
+
+<meta name="text:Home link title" content="home"/>
+<meta name="text:Ask link title" content="ask"/>
+<meta name="text:Archive link title" content="archive"/>
+
+<meta name="text:Custom description" content="this is a custom description."/>
+
+<meta name="text:Link one title" content="link title"/>
+<meta name="text:Link one URL" content="/"/>
+<meta name="text:Link two title" content="link title"/>
+<meta name="text:Link two URL" content="/"/>
+<meta name="text:Link three title" content="link title"/>
+<meta name="text:Link three URL" content="/"/>
+<meta name="text:Link four title" content="link title"/>
+<meta name="text:Link four URL" content="/"/>
+<meta name="text:Link five title" content="link title"/>
+<meta name="text:Link five URL" content="/"/>
+
+<meta name="text:Update text" content="this is an update text. write whaterver you want."/>
+
+<meta name="text:Currently watching" content="watching"/>
+<meta name="text:Currently playing" content="playing"/>
+<meta name="text:Currently listening" content="listening"/>
+<meta name="text:Currently reading" content="reading"/>
+
+<!--============================== links ==============================-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family={text:Font}:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="https://assets.tumblr.com/fonts/favorit/stylesheet.css?v=1">
+<link rel="stylesheet" href="//npf-images-v3.github.io/recon.css">
+<link rel="stylesheet" media="screen" href="//assets.tumblr.com/client/prod/standalone/blog-network-npf/index.build.css">
+<link href="https://static.tumblr.com/qudkd6d/OcDnl99gb/style.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/iconfont/tabler-icons.min.css">
+<link href="//static.tumblr.com/gtjt4bo/mXBrpdj0n/unblue-polls.css" rel="stylesheet">
+<link href="//tmblr-npf-audio.gitlab.io/s/base.css" rel="stylesheet">
+
+<!--============================== scripts ==============================-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="//npf-images-v3.github.io/script.js"></script>
+<script src="https://static.tumblr.com/qudkd6d/Az6nkemqr/pxuphotoset.min.js"></script>
+<script src="https://static.tumblr.com/dj2anrv/ZVmq8svlk/jquery.style-my-tooltips.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.js"></script>
+<script src="https://seyche.github.io/external-files-hosting/plugins/flexframes-modified.js"></script>
+<script src="https://static.tumblr.com/0podkko/aZZqe4033/customaudio.min.js"></script>
+<script src="//tmblr-npf-audio.gitlab.io/s/init.js"></script>
+
+<!--============================== css ==============================-->
+<style>
+
+*{box-sizing:border-box;}
+
+:root {
+    /*colors*/
+    --background-color:{RGBcolor:background};
+    
+    --text:{RGBcolor:text};
+    --link:{RGBcolor:link};
+    --title:{RGBcolor:title};
+    
+    --accent:{RGBcolor:accent};
+    --details:{RGBcolor:details};
+    
+    --borders:{RGBcolor:borders};
+    --shadows:{RGBcolor:shadows};
+    --scrollbar:var(--gradient);
+    
+    --gradient:linear-gradient(147deg, rgb(var(--accent)), rgb(var(--details)));
+    
+    --main-boxes:{RGBcolor:main boxes};
+    --inner-boxes:{RGBcolor:inner boxes};
+    
+    --search:{RGBcolor:search bar};
+    --search-text:{RGBcolor:search text};
+    --search-placeholder:{RGBcolor:search label};
+    
+    --menu-link:{RGBcolor:menu background};
+    --menu-link-text:{RGBcolor:menu icons color};
+    --menu-link-hover:{RGBcolor:menu background hover};
+    --menu-link-text-hover:{RGBcolor:menu icons hover};
+    
+    --update-box:{RGBcolor:update box};
+    --update-text:{RGBcolor:update text};
+    
+    --top-menu:{RGBcolor:bottom menu background};
+    --top-menu-link:{RGBcolor:bottom menu icons};
+    
+    /*images*/
+    
+    /*fonts*/
+    
+    --main-font:'{text:Font}';
+    --font-size:{select:font size};
+    
+    /*npf set*/
+    --NPF-Caption-Spacing:25px;
+    --NPF-Image-Spacing:1px;
+    
+    /*content adjustments*/
+    --gap:75px;
+    --posts-width:{select:post width};
+    --sidebar-width:250px;
+    --main-width:calc(var(--sidebar-width) + var(--gap) + var(--posts-width));
+    
+    --border-radius:{select:border radius};
+    --icon-radius:{select:icon border radius};
+    --boxes-shadow:{block:ifShadows}0 0 10px rgb(var(--shadows)){/block:ifShadows};
+    --small-shadow:{block:ifShadows}0 0 4px rgb(var(--shadows)){/block:ifShadows};
+    --border:1px solid rgb(var(--borders));
+}
+
+.poll-post {
+    --Poll-Question-Font-Size:1em;
+    
+    --Poll-Option-Background-Color:rgb(var(--inner-boxes));
+    --Poll-Option-Corner-Rounding:var(--border-radius);
+    --Poll-Option-Border-Size: 2px;
+    --Poll-Option-Border-Color:rgb(var(--borders));
+    --Poll-Option-Padding: 15px;
+    --Poll-Option-Font-Size:1em;
+    --Poll-Option-Spacing: 10px;
+    --Poll-Option-Text-Color: rgb(var(--link));
+    
+    --Poll-Option-HOVER-Border-Color:rgb(var(--accent));
+    --Poll-Option-HOVER-Background-Color:rgb(var(--accent));
+    --Poll-Option-HOVER-Text-Color:rgb(var(--link));
+    --Poll-Option-HOVER-Speed: 0.4s;
+}
+
+.npf-audio-wrapper {
+    --NPF-Audio-Buttons-Size:18px;
+    --NPF-Audio-Buttons-Color:rgb(var(--title)); /* color of play & pause buttons */
+    --NPF-Audio-Buttons-Spacing:20px; /* space between buttons and song info */
+    
+    --NPF-Audio-Image-Size:90px;
+    --NPF-Audio-Image-Spacing: 0px; /* gap between player info and cover image */
+}
+
+/*basic css*/
+
+body{
+    margin:0;
+	padding:0;
+    height:100%; 
+    overflow-x:hidden;
+    word-break:break-word;
+    color:rgb(var(--text));
+    background-color:rgb(var(--background-color));
+    font:400 var(--font-size)/1.6 var(--main-font), sans-serif;
+}
+
+{block:ifDarkMode}
+    body.dark-mode{
+         --background-color:{RGBcolor:dark background};
+        
+        --text:{RGBcolor:dark text};
+        --link:{RGBcolor:dark link};
+        --title:{RGBcolor:dark title};
+        
+        --borders:{RGBcolor:dark borders};
+        --shadows:{RGBcolor:dark shadows};
+        
+        --main-boxes:{RGBcolor:dark main boxes};
+        --inner-boxes:{RGBcolor:dark inner boxes};
+        
+        --search:{RGBcolor:dark search bar};
+        --search-text:{RGBcolor:dark search text};
+        --search-placeholder:{RGBcolor:dark search label};
+        
+        --menu-link:{RGBcolor:dark menu background};
+        --menu-link-text:{RGBcolor:dark menu icons color};
+        --menu-link-hover:{RGBcolor:dark menu background hover};
+        --menu-link-text-hover:{RGBcolor:dark menu icons hover};
+        
+        --update-box:{RGBcolor:dark update box};
+        --update-text:{RGBcolor:dark update text};
+    
+        --top-menu:{RGBcolor:dark bottom menu background};
+        --top-menu-link:{RGBcolor:dark bottom menu icons};
+        
+        --boxes-shadow:{block:ifShadows}0 0 10px rgb(var(--shadows)){/block:ifShadows};
+        --small-shadow:{block:ifShadows}0 0 4px rgb(var(--shadows)){/block:ifShadows};
+        --border:1px solid rgb(var(--borders));
+    }
+{/block:ifDarkMode}
+
+:focus{
+    border:0;
+    outline:0;
+}
+
+a{
+    text-decoration:none;
+    color:rgb(var(--link));
+}
+
+a, 
+a:hover{
+    cursor:pointer;
+    text-decoration:none;
+    transition:ease-in-out .45s;
+    -moz-transition:ease-in-out .45s;
+    -webkit-transition:ease-in-out .45s;
+}
+
+.tags a,
+ol.notes a,
+#credits a,
+.answer-body a,
+.perma-info span,
+.question-body a,
+#pagination a.back,
+.blog-description a,
+.pag-buttons a.active,
+.reblog-content a:not(.read_more):not(.post_media_photo_anchor){border-bottom:1px solid rgb(var(--accent));}
+
+.tags a:hover,
+ol.notes a:hover,
+#credits a:hover,
+.answer-body a:hover,
+.question-body a:hover,
+#pagination a.back:hover,
+.perma-info a:hover span,
+.blog-description a:hover,
+.pag-buttons a.active:hover,
+.reblog-content a:not(.read_more):not(.post_media_photo_anchor):hover{
+    border-color:rgb(var(--details));
+    box-shadow:inset 0 -1.2em 0 0 rgb(var(--details));
+}
+
+p.read_more_container{margin-top:1em;}
+
+a.read_more{text-transform:lowercase;}
+
+b, 
+strong{font-weight:700;}
+
+b,
+i,
+u,
+s,
+strike{color:rgb(var(--accent));}
+
+small,
+sub,
+sup{font-size:.7em;}
+
+big{font-size:1.1em;}
+
+p {margin:.5em 0;}
+
+h1, 
+h2, 
+h3, 
+h4 {
+    margin:1rem 0;
+    font-weight:700;
+}
+
+h1:first-of-type, 
+h2:first-of-type, 
+h3:first-of-type, 
+h4:first-of-type {margin-top:0;}
+
+blockquote{
+    margin:.5em 0;
+    position:relative;
+    padding:5px 0 5px 15px;
+    border-left:2px solid rgb(var(--borders));
+}
+
+blockquote::before{
+    top:0;
+    height:0;
+    content:'';
+    left:-1.5px;
+    width:1.5px;
+    position:absolute;
+    transition:height .25s;
+    background:rgb(var(--accent));
+}
+
+blockquote:hover::before{height:100%;}
+
+pre{
+    margin:.5em 0;
+    display:block;
+    user-select:all;
+    -ms-user-select:all;
+    white-space:pre-wrap;
+    -webkit-user-select:all;
+}
+
+code{
+    margin:0;
+    display:inline;
+}
+
+ul,
+ol{
+    margin:.5em 0;
+    padding-left:20px;
+}
+
+ol{list-style:lower-alpha;}
+
+ol li::marker{color:rgb(var(--accent));}
+
+p:first-child,
+ul:first-child,
+ol:first-child,
+pre:first-child,
+blockquote:first-child{margin-top:0;}
+
+p:last-child,
+ul:last-child,
+ol:last-child,
+pre:last-child,
+blockquote:last-child{margin-bottom:0;}
+
+hr {
+    width:100%;
+    height:1px;
+    border:none;
+    box-shadow:0;
+    margin:20px 0;
+    background-color:rgb(var(--borders));
+}
+
+a.credits{
+    right:20px;
+    width:30px;
+    bottom:20px;
+    height:30px;
+    display:grid;
+    position:fixed;
+    border-radius:3px;
+    place-content:center;
+    color:rgb(var(--text));
+    background-color:rgb(var(--inner-boxes));
+}
+
+a.credits svg{
+    width:18px;
+    height:18px;
+}
+
+a.credits:hover{
+    color:rgb(var(--background-color));
+    background-color:rgb(var(--accent));
+}
+/*selection*/
+::selection {
+    color:rgb(var(--accent));
+    background-color:rgb(var(--background-color));
+}
+
+::-moz-selection {
+    color:rgb(var(--accent));
+    background-color:rgb(var(--background-color));
+}
+
+/*tumblr controls*/
+
+.tmblr-iframe{
+    top:15px!important;
+    transition:ease .3s;
+    right:15px!important;
+    z-index:12!important;
+    -moz-transition:ease .3s;
+    transform-origin:right top;
+    -webkit-transition:ease .3s;
+    transform:scale(0.7)!important;
+    -moz-transform:scale(0.7)!important;
+    -webkit-transform:scale(0.7)!important;
+}
+
+.tmblr-iframe--follow-teaser, 
+.tmblr-iframe--app-cta-button{display:none !important;}
+
+/*tooltip*/
+#s-m-t-tooltip{
+    font-size:11px;
+    z-index:9999999;
+    max-width:300px;
+    font-weight:700;
+    position:relative;
+    border-radius:5px;
+    letter-spacing:1px;
+    padding:.5em 1.25em;
+    margin:0 14px 7px 30px;
+    -moz-border-radius:5px;
+    color:rgb(255,255,255);
+    text-transform:uppercase;
+    backdrop-filter:blur(5px);
+    -webkit-border-radius:5px;
+    background:rgba(0,0,0,.85);
+}
+
+/*scrollbar*/
+::-webkit-scrollbar{
+    width:15px;
+    height:15px;
+    outline-offset:-15px;
+    outline:var(--border);
+    background-color:inherit;
+}
+ 
+::-webkit-scrollbar-thumb {
+    border-radius:10px;
+    outline:2px solid rgb(var(--borders));
+    background-image:var(--scrollbar);
+    border:4.5px solid rgb(var(--background-color));
+}
+
+/*lightboxes*/
+img{
+    height:auto;
+    display:block;
+    max-width:100%;
+}
+
+iframe{display:block;}
+
+.vignette, 
+#vignette {opacity:0;}
+
+.lightbox-image, 
+#tumblr_lightbox img {
+    box-shadow:none !important;
+    border-radius:0 !important;
+    max-width:none;
+}
+
+.tmblr-lightbox, 
+#tumblr_lightbox {background:rgba(var(--background-color),.9) !important;}
+
+.lightbox-caption, 
+#tumblr_lightbox_caption {visibility:hidden;}
+
+.npf_row figure{cursor:pointer;}
+
+.npf_row figure:focus{outline:0;}
+
+/*-============================== main ==============================-*/
+
+main{
+    display:grid;
+    gap:var(--gap);
+	align-items:start;
+    margin:var(--gap) auto;
+    width:var(--main-width);
+}
+
+main[layout="right"]{grid-template-columns:var(--posts-width) var(--sidebar-width);}
+
+main[layout="left"]{grid-template-columns:var(--sidebar-width) var(--posts-width);}
+
+/*-============================== sidebar ==============================-*/
+main[layout="right"] aside{
+    grid-row-start:1;
+    grid-column-start:2;
+}
+
+main aside{position:sticky;}
+
+main aside.no-image{top:50px;}
+
+main aside .header{{block:ifShadows}filter:drop-shadow(0 0 10px rgb(var(--shadows)));{/block:ifShadows}}
+
+.sidebar-image{
+    width:100%;
+    border-radius:var(--border-radius);
+}
+
+.sidebar-icon{
+    width:50px;
+    height:50px;
+    object-fit:cover;
+    position:relative;
+    border-radius:var(--icon-radius);
+}
+
+main aside:not(.no-image) .sidebar-icon{margin:-20px 0 35px 20px;}
+
+main aside.no-icon .sidebar-image,
+main aside.no-image .sidebar-icon{margin-bottom:35px;}
+
+.blog-title{
+    gap:10px;
+    font-weight:700;
+    font-size:1.15em;
+    align-items:center;
+    display:inline-flex;
+    color:rgb(var(--title));
+}
+
+.blog-title::before{
+    z-index:1;
+    width:10px;
+    content:'';
+    height:10px;
+    position:relative;
+    border-radius:3px;
+    transition:background .5s;
+    background-color:rgb(var(--accent));
+}
+
+.blog-title:hover::before{background-color:rgb(var(--details));}
+
+.blog-description.hide{display:none;}
+
+.sidebar-info{
+    position:relative;
+    padding:10px 0 0 20px;
+}
+
+.sidebar-info::before,
+.sidebar-info::after{
+    left:4px;
+    top:-10px;
+    width:2px;
+    content:'';
+    position:absolute;
+    transition:height .5s cubic-bezier(.85,.12,.07,.85);
+}
+
+.sidebar-info::before{
+    height:calc(100% + 5px);
+    background-color:rgb(var(--borders));
+}
+
+.sidebar-info::after{
+    height:0;
+    background-image:var(--gradient);
+}
+
+main aside:hover .sidebar-info::after,
+.sidebar-info:has(.search:focus-within)::after{height:calc(100% + 5px);}
+
+.search input::placeholder{
+    transition:color .45s;
+    -moz-transition:color .45s;
+    -webkit-transition:color .45s;
+    color:rgb(var(--search-placeholder));
+}
+
+.search input:focus::-webkit-input-placeholder { color:transparent; }
+.search input:focus:-moz-placeholder { color:transparent; }
+.search input:focus::-moz-placeholder { color:transparent; }
+.search input:focus:-ms-input-placeholder { color:transparent; }
+
+.blog-description{margin-bottom:20px;}
+
+.search{
+    gap:10px;
+    display:flex;
+    align-items:center;
+}
+
+.search svg,
+.obsessions svg{
+    width:18px;
+    height:18px;
+    flex-shrink:0;
+    transition:color .5s;
+}
+
+.search input{
+    border:0;
+    width:100%;
+    font:inherit;
+    padding:3px 15px;
+    border-radius:30px;
+    text-transform:lowercase;
+    color:rgb(var(--search-text));
+    box-shadow:var(--small-shadow);
+    background-color:rgb(var(--search));
+}
+
+.search:focus-within svg{color:rgb(var(--accent))}
+
+main aside .menu{
+    gap:10px;
+    display:flex;
+    margin-block:20px;
+    padding-left:20px;
+}
+
+main aside .menu a{
+    width:30px;
+    height:30px;
+    display:grid;
+    border-radius:3px;
+    place-items:center;
+    color:rgb(var(--menu-link-text));
+    background-color:rgb(var(--menu-link));
+}
+
+main aside .menu a:hover{
+    color:rgb(var(--menu-link-text-hover));
+    background-color:rgb(var(--menu-link-hover));
+}
+
+main aside .menu a svg{
+    width:18px;
+    height:18px;
+}
+
+a.night .sun,
+body.dark-mode a.night .moon,
+a[data-section="dropdown"] .icon-tabler-x,
+a[data-section="dropdown"].active .icon-tabler-menu-2,
+a[data-section="menu"] .icon-tabler-x,
+a[data-section="menu"].active .icon-tabler-menu-2,
+a[data-section$="update"] .icon-tabler-bell-off,
+a[data-section$="update"].active .icon-tabler-bell{display:none;}
+ 
+body.dark-mode a.night .sun,
+a[data-section="dropdown"].active .icon-tabler-x,
+a[data-section="menu"].active .icon-tabler-x,
+a[data-section$="update"].active .icon-tabler-bell-off{display:initial;}
+
+main aside section{
+    padding-top:20px;
+    margin:20px 0 0 20px;
+    border-top:2px solid rgb(var(--borders));
+}
+
+.dropdown{
+    gap:10px;
+    display:grid;
+    align-items:start;
+    counter-reset:lista;
+    grid-template-columns:1fr 1fr;
+}
+
+.dropdown a {
+    overflow:hidden;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+}
+
+#menu .menu > a:not([data-section="pages"])::before,
+.dropdown a:not([data-section="pages"])::before{
+    margin-right:5px;
+    transition:color .45s;
+    counter-increment:lista;
+    color:rgb(var(--accent));
+    content:counter(lista, decimal-leading-zero)'.';
+}
+
+#menu .menu > a::before,
+.dropdown a:hover::before,
+.dropdown a[data-section="pages"]:hover::before{color:rgb(var(--details));}
+
+#menu .menu > a[data-section="pages"]::before,
+.dropdown a[data-section="pages"]::before{
+    content:'\ea5f';
+    margin-right:5px;
+    display:inline-block;
+    vertical-align:middle;
+    color:rgb(var(--accent));
+    font-family:'tabler-icons';
+    transition:color .45s, transform .45s;
+}
+
+#menu .menu > a[data-section="pages"].active::before,
+.dropdown a[data-section="pages"].active::before{
+    transform:rotate(-90deg);
+    color:rgb(var(--details));
+}
+
+a[data-section="pages"]{text-transform:lowercase;}
+
+nav.pages{
+    overflow-y:auto;
+    max-height:120px;
+    margin:20px 0 0 20px;
+}
+
+nav.pages div{
+    gap:10px;
+    display:grid;
+    position:relative;
+}
+
+nav.pages div::before{
+    left:0;
+    width:2px;
+    content:'';
+    height:100%;
+    position:absolute;
+    background:rgb(var(--borders));
+}
+
+nav.pages a{
+    position:relative;
+    padding-left:20px;
+}
+
+nav.pages a::before{
+    left:0;
+    height:0;
+    width:2px;
+    content:'';
+    position:absolute;
+    transition:height .25s;
+    background:rgb(var(--accent));
+}
+
+nav.pages a:hover::before{height:100%;}
+
+.update-text{
+    padding:10px;
+    color:rgb(var(--update-text));
+    box-shadow:var(--small-shadow);
+    border-radius:var(--border-radius);
+    background-color:rgb(var(--update-box));
+}
+
+.obsessions{
+    gap:10px;
+    padding:0;
+    display:grid;
+    margin-top:20px;
+    list-style:none;
+    align-items:start;
+}
+
+.obsessions li{
+    gap:10px;
+    align-items:center;
+    display:inline-flex;
+}
+
+.obsessions li svg{color:rgb(var(--accent));}
+.obsessions li:hover svg{color:rgb(var(--details));}
+
+/*-============================== posts ==============================-*/
+
+.post:not(:last-of-type){margin-bottom:125px;}
+
+.post.contained #entry,
+.pagenotes.contained,
+.result.contained{
+    overflow:hidden;
+    box-shadow:var(--boxes-shadow);
+    border-radius:var(--border-radius);
+    background-color:rgb(var(--main-boxes));
+}
+
+.result.contained{padding:25px;}
+
+.result{
+    display:flex;
+    align-items:center;
+}
+
+.result::before{margin-right:15px;}
+
+.result span{
+    margin-left:5px;
+    font-weight:700;
+    transition:color .5s;
+    color:rgb(var(--accent));
+}
+
+.result + .post{margin-top:var(--gap);}
+
+.result:hover span{color:rgb(var(--details));}
+
+.result-tag span::before{
+    content:'#';
+    font-weight:700;
+}
+
+/*captions*/
+
+.post.contained .caption:not(:empty){padding:25px}
+
+.post.not-contained .media + .captions:has(.caption),
+.post.not-contained .caption + .caption,
+.post.not-contained .npf-photos + .caption{margin-top:35px}
+
+.post.contained .reblogs + .reblogs{padding-top:0;}
+
+.post.has-tags.show-tags .caption:last-of-type{padding-bottom:0;}
+
+.reblog-header{
+    gap:20px;
+    display:flex;
+    align-items:center;
+}
+
+.reblog-header img{
+    width:30px;
+    height:30px;
+    border-radius:var(--icon-radius);
+}
+
+a.read_more,
+.reblog-header a,
+.reblog-header span{
+    line-height:1;
+    padding:7px 10px;
+    border-radius:3px;
+    box-shadow:var(--small-shadow);
+    background-color:rgb(var(--inner-boxes));
+}
+
+.reblog-content{margin-top:20px}
+
+.post-title{
+    gap:15px;
+    display:flex;
+    font-size:1em;
+    font-weight:700;
+    align-items:center;
+    color:rgb(var(--title));
+}
+
+.post.contained .post-title{
+    margin-bottom:0;
+    padding:25px 25px 0;
+}
+
+.post.not-contained .post-title{margin-bottom:25px;}
+
+/*photo*/
+
+.post.not-contained .photo,
+.post.not-contained .npf-photos,
+.post.not-contained .reblog-content .npf_inst{
+    overflow:hidden;
+    box-shadow:var(--boxes-shadow);
+    border-radius:var(--border-radius);
+}
+
+.photo {
+    overflow:hidden;
+    position:relative;
+}
+
+.photo img{width:100%;}
+
+.npf_inst{overflow:hidden;}
+
+/*link*/
+
+div.npf-link-block{
+    padding:20px;
+    margin:0!important;
+    border:0!important;
+    color:rgb(var(--link));
+    background-color:rgb(var(--inner-boxes));
+}
+
+.post.contained div.npf-link-block{border-radius:0!important;}
+
+.post.contained.link-post.npf-post div.npf-link-block{border-radius:var(--border-radius)!important}
+
+.post.not-contained div.npf-link-block{
+    box-shadow:var(--boxes-shadow);
+    border-radius:var(--border-radius)!important;
+}
+
+div.npf-link-block:not(.media).has-poster a{border-bottom:0;}
+
+div.npf-link-block:not(.media).has-poster a:hover{box-shadow:none;}
+
+/*answer*/
+
+.answer-content{
+    gap:25px;
+    display:grid;
+}
+
+.post.contained .answer-content{padding:20px;}
+
+.post.answer-post.show-tags .answer-content{padding-bottom:0;}
+
+.answer,
+.question{position:relative;}
+
+.post.not-contained .question,
+.post.not-contained .answer:not(.original){
+    padding:20px;
+    box-shadow:var(--boxes-shadow);
+    border-radius:var(--border-radius);
+    background-color:rgb(var(--main-boxes));
+}
+
+.question{margin-left:85px;}
+
+.answer:not(.original){margin-right:85px;}
+
+.ask-icon{
+    top:0;
+    width:60px;
+    height:60px;
+    padding:5px;
+    position:absolute;
+    border-radius:var(--icon-radius);
+    background-image:var(--gradient);
+}
+
+.question .ask-icon{left:-85px;}
+
+.answer .ask-icon{right:-85px;}
+
+.ask-icon img{
+    z-index:1;
+    width:100%;
+    height:100%;
+    position:relative;
+    border-radius:calc(var(--icon-radius)/2);
+}
+
+.ask-user{
+    line-height:1;
+    padding:7px 10px;
+    border-radius:3px;
+    display:inline-block;
+    text-transform:lowercase;
+    box-shadow:var(--small-shadow);
+    background-color:rgb(var(--inner-boxes));
+}
+
+.question .ask-body,
+.answer:not(.original) .ask-body{
+    gap:15px;
+    display:grid;
+}
+
+.question .ask-body{justify-items:start;}
+.answer:not(.original) .ask-body{justify-items:end;}
+
+.post[post-type="answer"] .caption{margin-top:25px;}
+
+/*audio*/
+
+.post.contained .audio{padding:25px;}
+
+.post.audio-post.contained.has-tags #entry:not(:has(.caption)) .audio{padding-bottom:0;}
+
+.post.contained .audio + .captions:has(.caption){border-top:var(--border);}
+
+.post.not-contained .audio{
+    padding:20px;
+    box-shadow:var(--boxes-shadow);
+    border-radius:var(--border-radius);
+    background-color:rgb(var(--main-boxes));
+}
+
+.album-art{
+    width:90px;
+    height:90px;
+    box-shadow:var(--boxes-shadow);
+    border-radius:var(--border-radius);
+}
+
+.album-art + .audio_info{margin-top:25px;}
+
+.audio_info > span{display:block;}
+
+span.track,
+.npf-audio-title{
+    font-weight:700;
+    font-size:1.15em;
+    color:rgb(var(--title));
+}
+
+.audio-player{
+    gap:20px;
+    display:flex;
+    line-height:1;
+    margin-top:25px;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.audio-time{
+    gap:5px;
+    width:90px;
+    display:grid;
+    font-size:.85em;
+    color:rgb(var(--text),.75);
+    grid-template-columns:1fr 5px 1fr;
+}
+
+.audio_player{flex-grow:1}
+
+.current_time{text-align:right;}
+
+.seekbar{
+    height:4px;
+    overflow:hidden;
+    border-radius:10px;
+    background-color:rgb(var(--borders));
+}
+
+.seekbar_progress{
+    width:0;
+    height:100%;
+    border-radius:10px;
+    transition:background-color .5s;
+}
+
+.post.audio_paused .seekbar_progress,
+.post.audio_paused .player,
+.npf-audio-buttons{background-color:rgb(var(--accent));}
+
+.post.audio_playing .seekbar_progress,
+.post.audio_playing .player{background-color:rgb(var(--details));}
+
+.player,
+.npf-audio-buttons{
+    width:40px;
+    height:40px;
+    display:grid;
+    line-height:1.3;
+    border:3px solid;
+    border-radius:100%;
+    place-items:center;
+    color:rgb(var(--title));
+    transition:background-color .5s;
+}
+
+.player svg,
+.npf-audio-buttons svg{
+    width:20px;
+    height:20px;
+}
+
+.npf-audio-buttons{
+    border:0!important;
+    margin-right:0!important;
+}
+
+.post.not-contained .player{border-color:rgb(var(--background-color));}
+
+.post.contained .player{border-color:rgb(var(--main-boxes));}
+
+.post.contained .npf-audio-background {
+    padding:0;
+    background-color:transparent;
+}
+
+.npf-audio-background{
+    gap:25px;
+    align-items:start;
+}
+
+.npf-audio-title-label,
+.npf-audio-artist-label,
+.npf-audio-album-label {font-weight:700;}
+
+.npf-audio-artist,
+.npf-audio-album {color:rgb(var(--text));}
+
+figcaption.npf-audio-wrapper {
+    gap:25px;
+    padding:20px;
+    align-items:start;
+    flex-direction:column-reverse;
+}
+
+img.npf-audio-image{
+    width:90px;
+    height:90px;
+    box-shadow:var(--boxes-shadow);
+    border-radius:var(--border-radius);
+}
+
+/*chat*/
+
+.quote{}
+
+.source{}
+
+/*post info*/
+
+.pin{
+    gap:10px;
+    display:flex;
+    font-weight:700;
+    align-items:center;
+    margin-bottom:25px;
+    color:rgb(var(--accent));
+    text-transform:lowercase;
+}
+
+.post-footer{margin-top:35px;}
+
+.tags{
+    gap:15px;
+    display:flex;
+    flex-wrap:wrap;
+    margin-top:25px;
+    line-height:1.2;
+    align-items:center;
+}
+
+.post.contained .tags{padding:0 25px 25px;}
+
+.post.contained.has-tags.toggle-tags .tags{margin-top:0;}
+
+
+.tags::before,
+.result::before,
+.notecount::before,
+.post-title::before,
+li.note.more_notes_link_container::before{
+    width:10px;
+    content:'';
+    height:10px;
+    flex-shrink:0;
+    border-radius:3px;
+    transition:background .5s;
+    background-color:rgb(var(--accent));
+}
+
+.tags:hover::before,
+.result:hover::before,
+.notecount:hover::before,
+.post-title:hover::before,
+li.note.more_notes_link_container:hover::before{background-color:rgb(var(--details));}
+
+.notecount{
+    gap:10px 15px;
+    font-weight:700;
+    align-items:center;
+    margin-bottom:20px;
+    display:inline-grid;
+    grid-template-columns:10px 1fr;
+}
+
+.notecount::after{
+    width:30px;
+    height:3px;
+    content:'';
+    grid-column:span 2;
+    background:rgb(var(--accent));
+}
+
+.post-info{
+    display:flex;
+    justify-content:space-between;
+}
+
+.date{
+    font-weight:700;
+    color:rgb(var(--accent));
+}
+
+.info-buttons{
+    gap:10px;
+    display:flex;
+}
+
+.info-buttons svg{
+    width:18px;
+    height:18px;
+}
+
+.info-buttons a{
+    width:30px;
+    height:30px;
+    display:grid;
+    position:relative;
+    border-radius:3px;
+    place-items:center;
+    background-color:rgb(var(--inner-boxes));
+}
+
+.like-button{overflow:hidden;}
+
+.like-button .like_button{
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    position:absolute;
+}
+
+.like-button .like_button iframe {
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index:2;
+    opacity:0;
+    position:absolute;
+}
+
+.liked ~ svg{
+    fill:rgb(var(--accent));
+    color:rgb(var(--accent));
+}
+
+.perma-info{
+    gap:5px;
+    display:grid;
+    margin-top:35px;
+    padding-top:15px;
+    border-top:var(--border);
+}
+
+.perma-info a{
+    gap:10px;
+    line-height:1.2;
+    align-items:center;
+    display:inline-flex;
+}
+
+.perma-info svg{
+    width:1em;
+    height:1em;
+    transition:color .45s;
+    color:rgb(var(--accent));
+}
+
+.perma-info a:hover svg{color:rgb(var(--details));}
+
+.perma-info span{
+    transition:ease-in-out .45s;
+    -moz-transition:ease-in-out .45s;
+    -webkit-transition:ease-in-out .45s;
+}
+
+/*notes*/
+
+.pagenotes.contained{padding:25px;}
+
+ol.notes{
+    gap:15px;
+    margin:0;
+    padding:0;
+    display:grid;
+    list-style:none;
+}
+
+ol.notes li.note {
+    display:flex;
+    flex-wrap:wrap;
+    align-items:start;
+    padding-bottom:15px;
+    border-bottom:var(--border);
+}
+
+ol.notes li.note:last-of-type{
+    border-bottom:0;
+    padding-bottom:0;
+}
+
+a.avatar_frame {display:none}
+
+
+ol.notes span.action{flex:1;}
+
+ol.notes blockquote{
+    width:100%;
+    margin:15px 0 0 35px!important;
+}
+
+li.note::before{
+    margin-right:15px;
+    transition:color .5s;
+    color:rgb(var(--accent));
+    font-family:"tabler-icons";
+}
+
+li.note:hover::before,
+a.more_notes_link:hover::before{color:rgb(var(--details));}
+
+li.note.reblog::before{content:'\eb72';}
+
+li.note.like::before{content:'\eabe';}
+
+li.note.reply::before{content:'\eaec';}
+
+li.note.reblog.original_post::before{content: "\eb4d";}
+
+li.note.more_notes_link_container{
+    line-height:1.2;
+    text-transform:lowercase;
+    align-items:center!important;
+}
+/*-============================== footer ==============================-*/
+
+footer{margin:var(--gap) 0;}
+
+/*pagination*/
+
+#pagination{
+    gap:20px;
+    display:grid;
+    place-items:center;
+}
+
+#pagination > div{
+    gap:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+#pagination .divider{
+    width:1px;
+    height:15px;
+    transform:rotate(15deg);
+    background-color:rgb(var(--text));
+}
+
+.current{
+    width:30px;
+    height:30px;
+    display:grid;
+    font-weight:700;
+    border-radius:3px;
+    place-content:center;
+    color:rgb(var(--background-color));
+    background-color:rgb(var(--accent));
+}
+
+.pag-buttons,
+#pagination a.back{
+    line-height:1.2;
+    text-transform:lowercase;
+}
+
+.pag-buttons a:not(.active){
+    opacity:.65;
+    cursor:not-allowed;
+}
+
+/*----- credits -----*/
+
+#credits{
+    display:none;
+    font-size:.85em;
+    text-align:center;
+    margin-top:calc(var(--gap)/2);
+}
+
+/*-============================== top menu ==============================-*/
+
+#top{
+    gap:25px;
+    bottom:0;
+    width:100%;
+    z-index:99;
+    height:55px;
+    display:none;
+    padding:15px;
+    line-height:2;
+    position:fixed;
+    place-content:center;
+    box-shadow:var(--boxes-shadow);
+    background-color:rgb(var(--top-menu));
+}
+
+#top a{
+    height:18px;
+    color:rgb(var(--top-menu-link));
+}
+
+#top svg{
+    width:18px;
+    height:18px;
+}
+
+/*-============================== responsive menus ==============================-*/
+
+.resp{
+    z-index:9;
+    width:100%;
+    bottom:55px;
+    padding:30px;
+    position:fixed;
+    overflow-y:auto;
+    backdrop-filter:blur(1px);
+    max-height:calc(100vh - 55px);
+    box-shadow:var(--boxes-shadow);
+    background-color:rgb(var(--background-color),.95);
+}
+
+#menu .menu{
+    gap:10px;
+    display:grid;
+    counter-reset:lista;
+}
+/*-============================== queries ==============================-*/
+
+@media (max-width:1024px){
+    
+    a.credits,
+    main aside .menu,
+    #pagination a.back,
+    iframe.tmblr-iframe{display:none!important;}
+    
+    main{
+        width:90vw;
+        display:block;
+        margin-top:5vw;
+    }
+    
+    main aside{
+        position:static;
+        margin-bottom:var(--gap);
+    }
+    
+    #top{display:flex;}
+    
+    .post:not(:last-of-type){margin-bottom:var(--gap);}
+    
+    #credits{display:block;}
+    
+    .question,
+    .answer:not(.original){
+        gap:25px;
+        display:grid;
+        margin:0!important;
+    }
+    
+    .ask-icon{
+        top:0;
+        width:50px;
+        height:50px;
+        left:0!important;
+        right:0!important;
+        position:relative;
+    }
+    
+    .answer:not(.original) .ask-icon{order:2}
+    
+    .question{grid-template-columns:50px 1fr;}
+    
+    .answer:not(.original){grid-template-columns:1fr 50px;}
+}
+
+{CustomCSS}
+</style>    
+</head>
+
+<body class="{block:homepage}home{/block:homepage}{block:tagpage}tag{/block:tagpage}{block:searchpage}search{/block:searchpage}{block:submitpage}submit{/block:submitpage}{block:AskPage}ask{/block:AskPage}-page">
+
+<!--============================== top menu ==============================-->
+
+<nav id="top">
+    <a href="{blogurl}" title="{text:home link title}">
+        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-home-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M10 12h4v4h-4z" /></svg>
+    </a>
+    
+    {block:AskEnabled}
+        <a href="/ask" title="{text:ask link title}">
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-message-question"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 9h8" /><path d="M8 13h6" /><path d="M14 18h-1l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v4.5" /><path d="M19 22v.01" /><path d="M19 19a2.003 2.003 0 0 0 .914 -3.782a1.98 1.98 0 0 0 -2.414 .483" /></svg>
+        </a>
+    {/block:AskEnabled}
+    
+    <a href="/archive" title="{text:archive link title}">
+        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-history"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 8l0 4l2 2" /><path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5" /></svg>
+    </a>
+    
+    {block:ifMenuTab}
+        <a data-section="menu" title="menu">
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-menu-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 6l16 0" /><path d="M4 12l16 0" /><path d="M4 18l16 0" /></svg>
+            
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
+        </a>
+    {/block:ifMenuTab}
+    
+    {block:ifUpdateTab}
+        <a data-section="r-update" title="update">
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-bell"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" /><path d="M9 17v1a3 3 0 0 0 6 0v-1" /></svg>
+            
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-bell-off"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9.346 5.353c.21 -.129 .428 -.246 .654 -.353a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3m-1 3h-13a4 4 0 0 0 2 -3v-3a6.996 6.996 0 0 1 1.273 -3.707" /><path d="M9 17v1a3 3 0 0 0 6 0v-1" /><path d="M3 3l18 18" /></svg>
+        </a>
+    {/block:ifUpdateTab}
+    
+    {block:ifDarkMode}
+        <a class="night" onclick="themeToggle()" title="dark mode">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-sun sun" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <circle cx="12" cy="12" r="4"></circle>
+                <path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"></path>
+            </svg>
+
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-moon-stars moon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path>
+                <path d="M17 4a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2"></path>
+                <path d="M19 11h2m-1 -1v2"></path>
+            </svg>
+        </a>
+    {/block:ifDarkMode}
+    
+    <a class="back" title="{lang:Back to top}">
+        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-up"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M18 11l-6 -6" /><path d="M6 11l6 -6" /></svg>
+    </a>
+</nav>
+
+<!--============================== content ==============================-->
+<main layout="{select:sidebar position}">
+
+<!--------------------------------- sidebar ---------------------------------> 
+<aside>
+    <div class="header">
+        <img src="{image:sidebar image}" class="sidebar-image">
+        <img src="{image:sidebar icon}" class="sidebar-icon"/>
+    </div>
+    
+    <a href="{blogurl}" class="blog-title">{title}</a>
+    
+    <div class="sidebar-info">
+        {block:ShowDescription}
+            {block:description}
+                <div class="blog-description {block:ifCustomDescription}hide{/block:ifCustomDescription}">
+                    {description}
+                </div>
+            {/block:description}
+        {/block:ShowDescription}
+        
+        {block:ifCustomDescription}
+            <div class="blog-description">
+                {text:custom description}
+            </div>
+        {/block:ifCustomDescription}
+        
+        <form action="/search" method="get" class="search" {block:HideFromSearchEnabled}style="display:none;"{/block:HideFromSearchEnabled}>
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-search"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg>
+            
+            <input type="text" name="q" id="search" value="{SearchQuery}" placeholder="{lang:Search} {name}"/>
+        </form>
+    </div>
+    
+    <nav class="menu">
+        <a href="{blogurl}" title="{text:home link title}">
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-home-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M10 12h4v4h-4z" /></svg>
+        </a>
+        
+        {block:AskEnabled}
+            <a href="/ask" title="{text:ask link title}">
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-message-question"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 9h8" /><path d="M8 13h6" /><path d="M14 18h-1l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v4.5" /><path d="M19 22v.01" /><path d="M19 19a2.003 2.003 0 0 0 .914 -3.782a1.98 1.98 0 0 0 -2.414 .483" /></svg>
+            </a>
+        {/block:AskEnabled}
+        
+        <a href="/archive" title="{text:archive link title}">
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-history"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 8l0 4l2 2" /><path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5" /></svg>
+        </a>
+        
+        {block:ifMenuTab}
+            <a data-section="dropdown" title="menu">
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-menu-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 6l16 0" /><path d="M4 12l16 0" /><path d="M4 18l16 0" /></svg>
+                
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
+            </a>
+        {/block:ifMenuTab}
+        
+        {block:ifUpdateTab}
+            <a data-section="update" title="update">
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-bell"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" /><path d="M9 17v1a3 3 0 0 0 6 0v-1" /></svg>
+                
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-bell-off"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9.346 5.353c.21 -.129 .428 -.246 .654 -.353a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3m-1 3h-13a4 4 0 0 0 2 -3v-3a6.996 6.996 0 0 1 1.273 -3.707" /><path d="M9 17v1a3 3 0 0 0 6 0v-1" /><path d="M3 3l18 18" /></svg>
+            </a>
+        {/block:ifUpdateTab}
+        
+        {block:ifDarkMode}
+            <a class="night" onclick="themeToggle()" title="dark mode">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-sun sun" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"></path>
+                </svg>
+    
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-moon-stars moon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path>
+                    <path d="M17 4a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2"></path>
+                    <path d="M19 11h2m-1 -1v2"></path>
+                </svg>
+            </a>
+        {/block:ifDarkMode}
+    </nav>
+    
+    {block:ifMenuTab}
+        <section id="dropdown" style="display:none;"> 
+            <nav class="dropdown">
+                {block:ifLinkOneTitle}<a href="{text:link one url}">{text:link one title}</a>{/block:ifLinkOneTitle}
+                {block:ifLinkTwoTitle}<a href="{text:link two url}">{text:link two title}</a>{/block:ifLinkTwoTitle}
+                {block:ifLinkThreeTitle}<a href="{text:link three url}">{text:link three title}</a>{/block:ifLinkThreeTitle}
+                {block:ifLinkFourTitle}<a href="{text:link four url}">{text:link four title}</a>{/block:ifLinkFourTitle}
+                {block:ifLinkFiveTitle}<a href="{text:link five url}">{text:link five title}</a>{/block:ifLinkFiveTitle}
+                
+                {block:HasPages}
+                    <a data-section="pages">{lang:More}</a>
+                {/block:HasPages}
+            </nav>
+            
+            {block:HasPages}
+                <nav class="pages" style="display:none;">
+                    <div>
+                        {block:Pages}
+                            <a href="{URL}">{Label}</a>
+                        {/block:Pages}
+                    </div>
+                </nav>
+            {/block:HasPages}
+        </section>
+    {/block:ifMenuTab}
+    
+    {block:ifUpdateTab}
+        <section id="update" style="display:none;">
+            {block:ifUpdateText}<div class="update-text">{text:update text}</div>{/block:ifUpdateText}
+            
+            <ul class="obsessions">
+                {block:ifCurrentlyWatching}
+                    <li>
+                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-device-tv-old"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" /><path d="M16 3l-4 4l-4 -4" /><path d="M15 7v13" /><path d="M18 15v.01" /><path d="M18 12v.01" /></svg>
+                        <span>{text:currently watching}</span>
+                    </li>
+                {/block:ifCurrentlyWatching}
+                
+                {block:ifCurrentlyPlaying}
+                    <li>
+                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-device-gamepad"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M2 6m0 2a2 2 0 0 1 2 -2h16a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-16a2 2 0 0 1 -2 -2z" /><path d="M6 12h4m-2 -2v4" /><path d="M15 11l0 .01" /><path d="M18 13l0 .01" /></svg>
+                        <span>{text:currently playing}</span>
+                    </li>
+                {/block:ifCurrentlyPlaying}
+                
+                {block:ifCurrentlyListening}
+                    <li>
+                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-music"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 17a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /><path d="M13 17a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /><path d="M9 17v-13h10v13" /><path d="M9 8h10" /></svg>
+                        <span>{text:currently listening}</span>
+                    </li>
+                {/block:ifCurrentlyListening}
+                
+                {block:ifCurrentlyReading}
+                    <li>
+                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-book"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /><path d="M3 6l0 13" /><path d="M12 6l0 13" /><path d="M21 6l0 13" /></svg>
+                        <span>{text:currently reading}</span>
+                    </li>
+                {/block:ifCurrentlyReading}
+            </ul>
+        </section>
+    {/block:ifUpdateTab}
+</aside>
+
+<!--------------------------------- posts --------------------------------->  
+<section id="posts">
+
+{block:SearchPage}
+    <article class="result{block:ifContainedPosts} contained{/block:ifContainedPosts}{block:ifNotContainedPosts} not-contained{/block:ifNotContainedPosts} result-search">
+        <!----- no search result callback -----> 
+        {block:NoSearchResults}
+            {lang:No search results for SearchQuery 2}
+        {/block:NoSearchResults}
+ 
+        <!----- search result ----->
+        {lang:SearchResultCount results for SearchQuery 2}
+    </article>
+{/block:SearchPage}
+ 
+<!----- no posts callback -----> 
+{block:NoPosts}
+    <article class="result{block:ifContainedPosts} contained{/block:ifContainedPosts}{block:ifNotContainedPosts} not-contained{/block:ifNotContainedPosts} result-post">
+        {lang:This minimalist Tumblr has no posts}
+    </article>
+{/block:NoPosts}
+ 
+<!----- tag counter result -----> 
+{block:TagPage}
+    <article class="result{block:ifContainedPosts} contained{/block:ifContainedPosts}{block:ifNotContainedPosts} not-contained{/block:ifNotContainedPosts} result-tag">
+        {lang:TagResultCount posts tagged Tag 2}
+    </article>
+{/block:TagPage}
+ 
+<!----- day page result -----> 
+{block:DayPage}
+    <article class="result{block:ifContainedPosts} contained{/block:ifContainedPosts}{block:ifNotContainedPosts} not-contained{/block:ifNotContainedPosts} result-day">
+        {lang:Posted on DayOfWeek DayOfMonth Month Year 2}
+    </article>
+{/block:DayPage}
+
+{block:Posts inlineMediaWidth="1280" inlineNestedMediaWidth="1280"}
+<article post-type="{posttype}" id="post-{PostID}" class="{posttype}-post post{block:ifContainedPosts} contained{block:ifToggleTags} toggle-tags{/block:ifToggleTags}{block:ifNotToggleTags} show-tags{block:ifNotToggleTags}{/block:ifContainedPosts}{block:ifNotContainedPosts} not-contained{/block:ifNotContainedPosts}{block:HasTags} has-tags{/block:HasTags}{block:PinnedPostLabel} pinned{/block:PinnedPostLabel}">
+    {block:PinnedPostLabel}
+        <div class="pin">
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="currentColor"  class="icon icon-tabler icons-tabler-filled icon-tabler-pin"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15.113 3.21l.094 .083l5.5 5.5a1 1 0 0 1 -1.175 1.59l-3.172 3.171l-1.424 3.797a1 1 0 0 1 -.158 .277l-.07 .08l-1.5 1.5a1 1 0 0 1 -1.32 .082l-.095 -.083l-2.793 -2.792l-3.793 3.792a1 1 0 0 1 -1.497 -1.32l.083 -.094l3.792 -3.793l-2.792 -2.793a1 1 0 0 1 -.083 -1.32l.083 -.094l1.5 -1.5a1 1 0 0 1 .258 -.187l.098 -.042l3.796 -1.425l3.171 -3.17a1 1 0 0 1 1.497 -1.26z" /></svg>
+            {PinnedPostLabel}
+        </div>
+    {/block:PinnedPostLabel}
+    
+    <div id="entry">
+        <!----- media posts ----->
+        {block:Photo}
+            <div class="photo legacy-photo media">
+                {linkopentag}
+                    <a href="#" onclick="Tumblr.Lightbox.init([{ width: {PhotoWidth-HighRes}, height: {PhotoHeight-HighRes}, low_res: '{PhotoURL-500}', high_res: '{PhotoURL-HighRes}' }]); $('body').toggleClass('tumblr_lightbox_active'); return false">
+                        <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}">
+                    </a>
+                {linkclosetag}
+            </div>
+        {/block:Photo}
+        
+        {block:Photoset}
+            <div class="photo legacy-photoset media">
+                <div class="photo-slideshow" id="photoset_{PostID}" data-layout="{PhotosetLayout}">
+                {block:Photos}
+                    <div class="photo-data">
+                        <div class="pxu-photo">
+                            <img src="{PhotoURL-500}" width="{PhotoWidth-500}" height="{PhotoHeight-500}" data-highres="{PhotoURL-HighRes}" data-width="{PhotoWidth-HighRes}" data-height="{PhotoHeight-HighRes}" alt="{PhotoAlt}">
+                       </div>
+                       <a class="tumblr-box" rel="post-{PostID}" href="{PhotoURL-HighRes}"></a>
+                    </div>
+                {/block:Photos}
+                    
+                </div>
+            </div> 
+        {/block:Photoset}
+            
+        {block:Panorama}
+            <div class="photo legacy-photo media">
+                {LinkOpenTag}
+                    <a href="#" onclick="Tumblr.Lightbox.init([{ width: {PhotoWidth-HighRes}, height: {PhotoHeight-HighRes}, low_res: '{PhotoURL-500}', high_res: '{PhotoURL-HighRes}' }]); $('body').toggleClass('tumblr_lightbox_active'); return false">
+                        <img src="{PhotoURL-Panorama}" alt="{PhotoAlt}" />
+                    </a>
+                {LinkCloseTag}
+            </div>
+        {/block:Panorama}
+        
+        {block:Video}
+            <div class="photo video media"></div>{Video-500}
+        {/block:Video}
+        
+        {block:Audio}
+            <div class="audio media">
+                {block:AudioPlayer}
+                    {block:AlbumArt}
+                        <img src="{AlbumArtURL}" class="album-art">
+                    {/block:AlbumArt}
+                
+                    <div class="audio_info">
+                        {block:TrackName}
+                            <span class="track">
+                                {TrackName}
+                            </span>
+                        {/block:TrackName}
+                        
+                        {block:Artist}
+                            <span class="artist">
+                                {Artist}
+                            </span>
+                        {/block:Artist}
+                    </div>
+                    
+                    <div class="audio-player">
+                        <div class="player">
+                            {AudioPlayer}
+                            {audio:AudioButtons}
+                        </div>
+                        
+                        <div class="audio_player">
+                            {audio:Seekbar}
+                        </div>
+                        
+                        <div class="audio-time">
+                            {audio:CurrentPlayTime}/
+                            {audio:PlayTimeLeft}
+                        </div>
+                    </div>
+            	{/block:AudioPlayer}
+            </div>
+        {/block:Audio}  
+                
+        <!----- quote posts ----->            
+        {block:Quote}
+            <div class="quote">
+                "{Quote}"
+            </div>
+            <div class="source">
+                {Source}
+            </div>
+        {/block:Quote}
+        
+        <!----- chat posts ----->            
+        {block:Chat}
+            <ul class="chat">
+                {block:Lines}
+                    <li>
+                        {block:Label}{Label}{/block:Label} 
+                        {Line}
+                    </li>
+                {/block:Lines}
+            </ul>
+        {/block:Chat}
+        
+        <!----- link posts ----->  
+        {block:link}
+            <div class="npf-link-block media">
+                <a href="{URL}">
+                    {Name}
+                </a>
+            </div>
+        {/block:link}   
+        
+        <!----- answer posts ----->  
+        {block:Answer}
+            <div class="answer-content">
+                <div class="question">
+                    <div class="ask-icon">
+                        <img src="{askerportraiturl-128}"/>
+                    </div>
+                    
+                    <div class="ask-body">
+                        <span class="ask-user">{Asker}</span>
+                        <div class="question-body">{Question}</div>
+                    </div>
+                </div>
+                
+                {block:Answerer}
+                    <div class="answer">
+                        <div class="ask-icon">
+                            <img src="{answererportraiturl-128}"/>
+                        </div>
+                        
+                        <div class="ask-body">
+                            <span class="ask-user">{Answerer}</span>
+                            <div class="answer-body">{Answer}</div>
+                        </div>
+                    </div>
+                {/block:Answerer}
+                
+               {block:NotReblog}
+                    <div class="answer original">
+                        {Replies}
+                    </div>
+               {/block:NotReblog}
+            </div>
+        {/block:Answer}
+        
+        <!----- captions -----> 
+        <div class="captions">
+            {block:Text}
+                {block:Title}<h2 class="post-title">{Title}</h2>{/block:Title}
+            {/block:Text}
+            
+            {block:notreblog}
+                {block:caption}<div class="original caption">{Caption}</div>{/block:caption}
+                {block:Text}<div class="original caption">{body}</div>{/block:Text}
+            {/block:notreblog}
+            
+            {block:Rebloggedfrom}
+                {block:Reblogs}
+                    <div class="reblogs caption">
+                        <div class="reblog-header">
+                            <img src="{portraiturl-64}"/>
+                            {block:IsActive}
+                                <a href="{permalink}">
+                                    {username}
+                                </a>
+                            {/block:IsActive}
+                            
+                            {block:IsDeactivated}
+                                <span class="deactivated">
+                                    {username}
+                                </span>
+                            {/block:IsDeactivated}
+                        </div>
+                        <div class="reblog-content">
+                            {Body}
+                        </div>
+                    </div>
+                {/block:Reblogs}
+            {/block:RebloggedFrom}
+        </div>
+        
+        <!----- post info -----> 
+        {block:Date}
+            {block:Hastags}
+                <div class="tags"{block:ifToggleTags} style="display:none;"{/block:ifToggleTags}>
+                    {block:Tags}
+                    <a href="{TagURL}">#{Tag}</a>
+                    {/block:Tags}
+                </div>
+            {/block:Hastags}
+        {/block:Date}
+    </div>
+    
+    {block:Date}
+            <div class="post-footer">
+                <a href="{permalink}" class="notecount">{NoteCountWithLabel}</a>
+                
+                <div class="post-info">
+                    <span title="{ShortMonth} {DayofMonth}, {Year}" class="date">{timeago}</span>
+                
+                    <div class="info-buttons"> 
+                        {block:ifToggleTags}
+                            {block:Hastags}
+                                <a href="#" title="open tags" class="tag-button">
+                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-tags"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 8v4.172a2 2 0 0 0 .586 1.414l5.71 5.71a2.41 2.41 0 0 0 3.408 0l3.592 -3.592a2.41 2.41 0 0 0 0 -3.408l-5.71 -5.71a2 2 0 0 0 -1.414 -.586h-4.172a2 2 0 0 0 -2 2z" /><path d="M18 19l1.592 -1.592a4.82 4.82 0 0 0 0 -6.816l-4.592 -4.592" /><path d="M7 10h-.01" /></svg>
+                                </a>
+                            {/block:Hastags}
+                        {/block:ifToggleTags}
+            
+                        <a href="#" title="like" class="like-button">
+                            {LikeButton size="100"}
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-heart" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                               <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path>
+                            </svg>
+                        </a>
+                        
+                         <a href="{ReblogURL}" title="reblog" target="_blank" class="reblog-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-repeat" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                               <path d="M4 12v-3a3 3 0 0 1 3 -3h13m-3 -3l3 3l-3 3"></path>
+                               <path d="M20 12v3a3 3 0 0 1 -3 3h-13m3 3l-3 -3l3 -3"></path>
+                            </svg>
+                        </a>
+                        
+                        {block:ContentSource}
+                            <a href="{SourceURL}" title="source" target="_blank" class="source-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-external-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                   <path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"></path>
+                                   <path d="M11 13l9 -9"></path>
+                                   <path d="M15 4h5v5"></path>
+                                </svg>
+                            </a>
+                        {/block:ContentSource}
+                    </div>
+                </div>
+                
+                {block:permalinkpage}
+                    {block:RebloggedFrom}
+                        <div class="perma-info">
+                            <a href="{reblogparenturl}">
+                                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-repeat"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 12v-3a3 3 0 0 1 3 -3h13m-3 -3l3 3l-3 3" /><path d="M20 12v3a3 3 0 0 1 -3 3h-13m3 3l-3 -3l3 -3" /></svg>
+                                
+                                <span>{reblogparentname}</span>
+                            </a> 
+                            <a href="{reblogrooturl}">
+                               <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-map-pin"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /><path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" /></svg>
+                               
+                               <span>{reblogrootname}</span> 
+                            </a>
+                        </div>
+                    {/block:RebloggedFrom}
+                {/block:permalinkpage}
+            </div>
+        {/block:Date}
+</article>
+<!----- post notes -----> 
+{block:PostNotes}
+    <article class="pagenotes{block:ifContainedPosts} contained{/block:ifContainedPosts}{block:ifNotContainedPosts} not-contained{/block:ifNotContainedPosts}">
+        {PostNotes-64}
+    </article>
+{/block:PostNotes}
+{/block:Posts}
+</section> 
+
+</main>
+
+<!--============================== pagination ==============================-->
+<footer>
+    <div id="pagination" {block:daypagination}class="daypage"{/block:daypagination}>
+        {block:Pagination}
+             <span class="current">{currentpage}</span>
+        
+            <div class="pag-buttons">
+                <a {block:PreviousPage}class="active" href="{PreviousPage}"{/block:PreviousPage}>
+                    {lang:Previous}
+                </a>
+                
+                <span class="divider"></span>
+                
+                <a {block:NextPage}class="active" href="{NextPage}"{/block:NextPage}>
+                    {lang:Next}
+                </a>
+            </div>
+        {/block:Pagination}
+    
+        {block:daypagination}
+            <div class="pag-buttons">
+                <a {block:PreviousPage}class="active" href="{PreviousPage}"{/block:PreviousPage}>
+                    {lang:Previous day}
+                </a>
+                
+                <span class="divider"></span>
+                
+                <a {block:NextPage}class="active" href="{NextPage}"{/block:NextPage}>
+                    {lang:Next day}
+                </a>
+            </div>
+        {/block:daypagination}
+        
+        <a class="back">
+            {lang:Back to top}
+        </a>
+    </div>
+    
+    <div id="credits">
+        <span>Sirius</span> by <a href="//kosmique.tumblr.com">kosmique themes</a>.
+    </div>
+</footer>
+
+<!--============================== responsive menus ==============================-->
+{block:ifMenuTab}
+    <nav id="menu" class="resp" style="display:none;">
+        <nav class="menu">
+            {block:ifLinkOneTitle}<a href="{text:link one url}">{text:link one title}</a>{/block:ifLinkOneTitle}
+            {block:ifLinkTwoTitle}<a href="{text:link two url}">{text:link two title}</a>{/block:ifLinkTwoTitle}
+            {block:ifLinkThreeTitle}<a href="{text:link three url}">{text:link three title}</a>{/block:ifLinkThreeTitle}
+            {block:ifLinkFourTitle}<a href="{text:link four url}">{text:link four title}</a>{/block:ifLinkFourTitle}
+            {block:ifLinkFiveTitle}<a href="{text:link five url}">{text:link five title}</a>{/block:ifLinkFiveTitle}
+            
+            {block:HasPages}
+                <a data-section="pages">{lang:More}</a>
+            {/block:HasPages}
+        </nav>
+        
+        {block:HasPages}
+            <nav class="pages" style="display:none;">
+                <div>
+                    {block:Pages}
+                        <a href="{URL}">{Label}</a>
+                    {/block:Pages}
+                </div>
+            </nav>
+        {/block:HasPages}
+    </nav>
+{/block:ifMenuTab}
+
+{block:ifUpdateTab}
+    <nav id="r-update" class="resp" style="display:none;">
+        {block:ifUpdateText}<div class="update-text">{text:update text}</div>{/block:ifUpdateText}
+            
+            <ul class="obsessions">
+                {block:ifCurrentlyWatching}
+                    <li>
+                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-device-tv-old"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" /><path d="M16 3l-4 4l-4 -4" /><path d="M15 7v13" /><path d="M18 15v.01" /><path d="M18 12v.01" /></svg>
+                        <span>{text:currently watching}</span>
+                    </li>
+                {/block:ifCurrentlyWatching}
+                
+                {block:ifCurrentlyPlaying}
+                    <li>
+                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-device-gamepad"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M2 6m0 2a2 2 0 0 1 2 -2h16a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-16a2 2 0 0 1 -2 -2z" /><path d="M6 12h4m-2 -2v4" /><path d="M15 11l0 .01" /><path d="M18 13l0 .01" /></svg>
+                        <span>{text:currently playing}</span>
+                    </li>
+                {/block:ifCurrentlyPlaying}
+                
+                {block:ifCurrentlyListening}
+                    <li>
+                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-music"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 17a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /><path d="M13 17a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /><path d="M9 17v-13h10v13" /><path d="M9 8h10" /></svg>
+                        <span>{text:currently listening}</span>
+                    </li>
+                {/block:ifCurrentlyListening}
+                
+                {block:ifCurrentlyReading}
+                    <li>
+                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-book"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /><path d="M3 6l0 13" /><path d="M12 6l0 13" /><path d="M21 6l0 13" /></svg>
+                        <span>{text:currently reading}</span>
+                    </li>
+                {/block:ifCurrentlyReading}
+            </ul>
+    </nav>
+{/block:ifUpdateTab}
+
+<!--============================== credits / don't touch ==============================-->
+<a href="//kosmique.tumblr.com" target="_blank" class="credits" title="by kosmique">
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-star" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+       <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
+    </svg>
+</a>
+
+<!--============================== scripts ==============================-->
+<script>
+$(document).ready(function(){
+    //shorten notes counter - modified by kosmique
+    $('article').find('.notecount').each(function(){
+       var title = $(this).html().split(' ')[0];
+       var n = title.replace(/,/g, '');
+       if (n > 999 && n <= 999999) {
+           n = Math.floor(n / 100) / 10;
+           $(this).text(n + 'k notes');
+           $(this).attr("title", title)
+       }
+       
+       if (n > 999999) {
+           n = Math.floor(n / 100000) / 10;
+           $(this).text(n + 'kk notes');
+           $(this).attr("title", title)
+       }
+    });
+    
+    $(".back").click(function() {
+        $("html, body").animate({scrollTop: 0}, 2500);
+        return false;
+    });
+    
+    // photoset
+    $('.photo-slideshow').pxuPhotoset({
+        lightbox: true,
+        rounded: false,
+        gutter: '1px',
+        borderRadius: '0px',
+        photoset: '.photo-slideshow',
+        photoWrap: '.photo-data',
+        photo: '.pxu-photo'
+    });
+    
+    // tooltips
+    $("[title]").style_my_tooltips({ 
+    	tip_follows_cursor:true,
+    	tip_delay_time:100,
+    	tip_fade_speed:100
+    });
+    
+    // flexible frames
+    function flexFrame() {
+       $(".captions").each(function() {
+            $(this).find("iframe").wrap("<div class='capframe'></div>"); // wrap iframe 
+            flexibleFrames($(".capframe"));
+        });
+        flexibleFrames($(".video"));
+    }
+    
+    $(document).ready(flexFrame);
+    
+    $('.sidebar-image').each(function(){
+        if ($(this).attr('src') === 'https://assets.tumblr.com/images/x.gif?v=1') {
+            $(this).hide();
+            $('aside').addClass('no-image')
+        }
+        else{$('aside').addClass('has-image')}
+        
+        var sidebarImage = $(this).height();
+        $('aside:not(.no-image)').css('top', -sidebarImage + 45);
+    });
+    
+    $('.sidebar-icon').each(function() {
+        if ($(this).attr('src') === 'https://assets.tumblr.com/images/x.gif?v=1') {$(this).hide();}
+        if ($(this).css('display') == 'none') {$('aside').addClass('no-icon');}else{$('aside').addClass('has-icon')}
+    });
+     
+    // custom audio
+    customAudio({
+    	post: ".post",
+    	default: false,
+    	pauseAll: true,
+    	playButton: "<svg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-player-play' width='24' height='24' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><path d='M7 4v16l13 -8z'></path></svg>",
+    	pauseButton: "<svg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-player-pause' width='24' height='24' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><rect x='6' y='5' width='4' height='14' rx='1'></rect><rect x='14' y='5' width='4' height='14' rx='1'></rect></svg>",
+    	errorIcon: "<svg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-ban' width='24' height='24' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><circle cx='12' cy='12' r='9'></circle><line x1='5.7' y1='5.7' x2='18.3' y2='18.3'></line></svg>",
+    	hideInfoIfError: true,
+    });
+    
+    $('.captions,.caption').each(function() {
+        if($(this).html().replace(/\s|&nbsp;/g, '').length == 0){$(this).remove();}  
+    });
+    
+    $('a[data-section]').click(function() {
+        var targetId = '#' + $(this).attr('data-section');
+    
+        $(this).toggleClass('active');
+        $('a[data-section]').not(this).removeClass('active');
+        
+        $(targetId).siblings('aside section[id],nav.resp[id]').slideUp(500);
+        $(targetId).delay(500).slideToggle(500);
+        
+        return false;
+    });
+    
+    $('a[data-section="pages"]').click(function() {
+        var targetId = 'nav.' + $(this).attr('data-section');
+        $(this).toggleClass('active');
+        $(targetId).slideToggle(500);
+        
+        return false;
+    });
+    
+    {block:ifToggleTags}
+        $('.tag-button').click(function() {
+            $(this).toggleClass('active');
+            $(this).parents('.post').find('.tags').slideToggle();
+            if ($(this).hasClass('active')) {$(this).attr("title", "close tags");}
+            else{$(this).attr("title", "open tags");}
+            return false;
+        });
+    {/block:ifToggleTags}
+    
+    tumblr_npf_audio({
+        emptyTitleText: "Untitled track",
+        emptyArtistText: "Untitled artist",
+        emptyAlbumText: "",
+        
+        titleLabel: "",
+        artistLabel: "",
+        albumLabel: ""
+    });
+
+});
+
+// remove empty p tags
+for (const p of document.querySelectorAll('p')) {
+    if (p.innerHTML.trim() === '') {
+       p.remove()
+    }
+}
+
+// remove empty .caption
+for (const cap of document.querySelectorAll('.caption')) {
+    if (cap.innerHTML.trim() === '') {
+       cap.remove()
+    }
+}
+
+// create posts array
+let posts = []
+{block:Posts} 
+    posts.push({ npf: JSON.parse({JSNPF}), id: {JSPostId}}) 
+{/block:Posts}
+
+//function for updating post types 
+function updateTypes(type, article) {
+    article.classList.remove('text-post')
+    article.classList.add(`${ type }-post`, 'npf-post')
+}
+
+// loop through array to get each post
+for (const post of posts) {
+   let npf = post.npf
+   let article = document.getElementById(`post-${post.id}`)
+   // select captions that have something in them
+   let caption = article.querySelector('.captions:is(:not(:empty))')
+   if (caption != null && article.classList.contains('text-post')) {
+      // if content exists
+      if (npf.trail.length || npf.content.length) {
+          // assign various post types based on NPF data
+            switch (npf.trail[0]?.content[0]?.type ?? npf.content[0].type) {
+            case 'image':
+               updateTypes('photos', article)
+               if (article.querySelector('.npf_row') == null) {
+                  caption.prepend(article.querySelector('figure'))
+               }
+               break
+            case 'video':
+               updateTypes('video', article)
+               let video = article.querySelector('figure')
+               caption.prepend(video)
+               break
+            case 'link':
+              updateTypes('link', article)
+            case 'audio':
+               updateTypes('audio', article)
+                break
+            case 'quote':
+                updateTypes('quote', article)
+            }
+          
+         // if there are photos
+         if (article.classList.contains('photos-post')) {
+            let photoset = document.createElement('div')
+            photoset.classList.add('npf-photos')
+            caption.prepend(photoset)
+            // find where a photoset would be split up by another content block
+            let photoBreak = article.querySelector('.reblog-content p, .reblog-content h1, .reblog-content h2')
+            let elements = []
+            if (photoBreak) {
+               let prevElement = photoBreak.parentNode.firstElementChild
+               while (prevElement !== photoBreak) {
+                  elements.push(prevElement)
+                  prevElement = prevElement.nextElementSibling
+               }
+            }
+            // if there is nothing that breaks up the photoset, select all rows
+            else {
+               elements = article.querySelectorAll('.npf_row')
+            }
+            // move each row to the top
+            for (const el of elements) {
+               photoset.append(el)
+            }
+            if (article.querySelectorAll('.npf_row').length > 1) {
+                updateTypes('photoset', article)
+            }
+            else {
+                updateTypes('photo', article)
+            }
+         }
+         
+         // clean up any potential stray reblog headers
+         let reblogHeader = article.querySelector('.reblog-header')
+         let reblogContent = article.querySelector('.reblog-content')
+         if (reblogHeader?.nextElementSibling === reblogContent && reblogContent?.childElementCount === 0) {
+            reblogHeader.remove()
+            reblogContent.remove()
+         }
+      }
+   }
+}
+
+{block:ifDarkMode}
+    // dark mode
+    (function() {
+        let onpageLoad = localStorage.getItem("body") || "";
+        let element = document.body;
+        element.classList.add(onpageLoad);
+        let nightLink = document.querySelector("a.night");
+    
+        // Define o título inicial com base no tema carregado
+        if (onpageLoad === "dark-mode") {
+            nightLink.setAttribute("title", "light mode");
+        } else {
+            nightLink.setAttribute("title", "dark mode");
+        }
+    })();
+    
+    function themeToggle() {
+        let element = document.body;
+        let nt = document.querySelector("a.night");
+    
+        element.classList.toggle("dark-mode");
+    
+        let theme = localStorage.getItem("body");
+        if (theme && theme === "dark-mode") {
+            localStorage.setItem("body", "");
+            nt.setAttribute("title", "dark mode");
+        } else {
+            localStorage.setItem("body", "dark-mode");
+            nt.setAttribute("title", "light mode");
+        }
+    }
+{/block:ifDarkMode}
+</script>
+</html>
