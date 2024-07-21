@@ -349,7 +349,8 @@ ol.notes a,
 #pagination a.back,
 .blog-description a,
 .pag-buttons a.active,
-.reblog-content a:not(.read_more):not(.post_media_photo_anchor){border-bottom:1px solid rgb(var(--accent));}
+.reblog-content a:not(.read_more):not(.post_media_photo_anchor),
+.original.caption a:not(.read_more):not(.post_media_photo_anchor){border-bottom:1px solid rgb(var(--accent));}
 
 .tags a:hover,
 ol.notes a:hover,
@@ -360,7 +361,8 @@ ol.notes a:hover,
 .perma-info a:hover span,
 .blog-description a:hover,
 .pag-buttons a.active:hover,
-.reblog-content a:not(.read_more):not(.post_media_photo_anchor):hover{
+.reblog-content a:not(.read_more):not(.post_media_photo_anchor):hover,
+.original.caption a:not(.read_more):not(.post_media_photo_anchor):hover{
     border-color:rgb(var(--details));
     box-shadow:inset 0 -1.2em 0 0 rgb(var(--details));
 }
